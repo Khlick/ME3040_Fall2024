@@ -34,6 +34,11 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install
+      - name: Extract version number
+        id: version
+        run: |
+          VERSION=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Build and package macOS
         run: |
           export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
@@ -46,8 +51,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.setup-release.outputs.upload_url }}
-          asset_path: ./dist/ME3040_F24-${{ github.ref_name }}-darwin64.dmg
-          asset_name: ME3040_F24-${{ github.ref_name }}-darwin64.dmg
+          asset_path: ./dist/ME3040_F24-${{ env.VERSION }}-darwin64.dmg
+          asset_name: ME3040_F24-${{ env.VERSION }}-darwin64.dmg
           asset_content_type: application/octet-stream
 
   build-win:
