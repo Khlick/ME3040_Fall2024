@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package-win": "electron-builder --win --x64 --ia32",
+    "package-win": "electron-builder --win",
     "package-mac": "electron-builder --mac",
     "package-all": "electron-builder --win --mac",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,17 +27,25 @@
       "main.js"
     ],
     "win": {
-      "target": "nsis",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "ia32"]
+        }
+      ],
       "icon": "assets/icons/win/icon.ico",
-      "artifactName": "ME3040_F24-${version}-win-${arch}.exe",
-      "arch": ["x64", "ia32"]
+      "artifactName": "ME3040_F24-${version}-win-${arch}.exe"
     },
     "mac": {
-      "target": "dmg",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64", "universal"]
+        }
+      ],
       "icon": "assets/icons/mac/icon.icns",
       "minimumSystemVersion": "10.12",
       "artifactName": "ME3040_F24-${version}-mac-${arch}.dmg",
-      "arch": ["x64", "arm64", "universal"],
       "hardenedRuntime": true,
       "gatekeeperAssess": false
     },
