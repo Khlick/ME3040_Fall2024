@@ -16,7 +16,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref_name }}
@@ -31,21 +31,21 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20.12.2"
+          node-version: "20"
       - name: Install dependencies
         run: npm install
       - name: Build and package macOS
         run: npm run package-mac
-      - name: List output in release-installers
-        run: ls -l release-installers/
+      - name: List output in dist directory
+        run: ls -l dist/
       - name: Upload macOS Installer
         uses: actions/upload-release-asset@v1.0.2
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.setup-release.outputs.upload_url }}
-          asset_path: ./release-installers/ME3040_F24.dmg
-          asset_name: ME3040_F24.dmg
+          asset_path: ./dist/ME3040_F24-${{ github.ref_name }}-darwin64.dmg
+          asset_name: ME3040_F24-${{ github.ref_name }}-darwin64.dmg
           asset_content_type: application/octet-stream
 
   build-win:
@@ -56,7 +56,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20.12.2"
+          node-version: "20"
       - name: Install dependencies
         run: npm install
       - name: Extract package version
@@ -69,14 +69,14 @@ jobs:
         shell: pwsh
       - name: Build and package Windows
         run: npm run package-win
-      - name: List output in release-installers
-        run: dir release-installers
+      - name: List output in dist directory
+        run: dir dist
       - name: Upload Windows Installer
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.setup-release.outputs.upload_url }}
-          asset_path: ./release-installers/ME3040_F24-${{ env.VERSION }}-setup.exe
-          asset_name: ME3040_F24-${{ env.VERSION }}-setup.exe
+          asset_path: ./dist/ME3040_F24-${{ env.VERSION }}-win64.exe
+          asset_name: ME3040_F24-${{ env.VERSION }}-win64.exe
           asset_content_type: application/vnd.microsoft.portable-executable
