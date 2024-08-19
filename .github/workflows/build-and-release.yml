@@ -34,10 +34,11 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install
-      - name: Extract version number
+      - name: Extract version without `v` prefix
         id: version
         run: |
-          VERSION=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+          VERSION=${GITHUB_REF##*/}
+          VERSION=${VERSION#v}
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Build and package macOS
         run: |
@@ -45,15 +46,22 @@ jobs:
           npm run package-mac
       - name: List output in dist directory
         run: ls -l dist/
-      - name: Upload macOS Installer
+      - name: Upload macOS Installers
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.setup-release.outputs.upload_url }}
-          asset_path: ./dist/ME3040_F24-${{ env.VERSION }}-darwin64.dmg
-          asset_name: ME3040_F24-${{ env.VERSION }}-darwin64.dmg
+          asset_path: |
+            ./dist/ME3040_F24-${{ env.VERSION }}-mac-x64.dmg
+            ./dist/ME3040_F24-${{ env.VERSION }}-mac-arm64.dmg
+            ./dist/ME3040_F24-${{ env.VERSION }}-mac-universal.dmg
+          asset_name: |
+            ME3040_F24-${{ env.VERSION }}-mac-x64.dmg
+            ME3040_F24-${{ env.VERSION }}-mac-arm64.dmg
+            ME3040_F24-${{ env.VERSION }}-mac-universal.dmg
           asset_content_type: application/octet-stream
+
 
   build-win:
     needs: setup-release
@@ -81,12 +89,17 @@ jobs:
         shell: pwsh
       - name: List output in dist directory
         run: dir dist
-      - name: Upload Windows Installer
+      - name: Upload Windows Installers
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.setup-release.outputs.upload_url }}
-          asset_path: ./dist/ME3040_F24-${{ env.VERSION }}-win64.exe
-          asset_name: ME3040_F24-${{ env.VERSION }}-win64.exe
+          asset_path: |
+            ./dist/ME3040_F24-${{ env.VERSION }}-win-x64.exe
+            ./dist/ME3040_F24-${{ env.VERSION }}-win-ia32.exe
+          asset_name: |
+            ME3040_F24-${{ env.VERSION }}-win-x64.exe
+            ME3040_F24-${{ env.VERSION }}-win-ia32.exe
           asset_content_type: application/vnd.microsoft.portable-executable
+
