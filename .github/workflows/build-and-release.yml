@@ -35,7 +35,9 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build and package macOS
-        run: npm run package-mac
+        run: |
+          export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          npm run package-mac
       - name: List output in dist directory
         run: ls -l dist/
       - name: Upload macOS Installer
@@ -68,7 +70,9 @@ jobs:
         run: echo "Extracted version is ${{ env.VERSION }}"
         shell: pwsh
       - name: Build and package Windows
-        run: npm run package-win
+        run: |
+          export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          npm run package-win
       - name: List output in dist directory
         run: dir dist
       - name: Upload Windows Installer
