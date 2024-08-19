@@ -21,9 +21,9 @@ jobs:
       run: |
         git config --global user.name "Khlick"
         git config --global user.email "khrisgriffis@gmail.com"
-        git worktree add ../gh-pages gh-pages
-        rsync -a --delete src/ ../gh-pages/
-        cd ../gh-pages
+        git worktree add ../site site
+        rsync -a --delete src/ ../site/
+        cd ../site
         git add --all
         git commit -m "Deploy to GitHub Pages"
-        git push origin gh-pages
+        git push origin site
