@@ -1,0 +1,13 @@
+{
+  "productName": "ME3040_F24",
+  "productDescription": "ME3040 Interactive Lectures",
+  "version": "1.0.1",
+  "authors": "Khris Griffis, Ph.D",
+  "exe": "ME3040_F24.exe",
+  "setupIcon": "assets/icons/win/icon.ico",
+  "noMsi": true,
+  "dest": "release-installers/",
+  "setupExe": "ME3040_F24Installer.exe",
+  "noShortcut": false,
+  "runAfterFinish": false
+}

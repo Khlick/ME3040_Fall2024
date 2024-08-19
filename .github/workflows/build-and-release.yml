@@ -1,0 +1,82 @@
+name: Build and Release Electron App
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  setup-release:
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+  build-mac:
+    needs: setup-release
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.12.2"
+      - name: Install dependencies
+        run: npm install
+      - name: Build and package macOS
+        run: npm run package-mac
+      - name: List output in release-installers
+        run: ls -l release-installers/
+      - name: Upload macOS Installer
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        with:
+          upload_url: ${{ needs.setup-release.outputs.upload_url }}
+          asset_path: ./release-installers/ME3040_F24.dmg
+          asset_name: ME3040_F24.dmg
+          asset_content_type: application/octet-stream
+
+  build-win:
+    needs: setup-release
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.12.2"
+      - name: Install dependencies
+        run: npm install
+      - name: Extract package version
+        run: |
+          $version = (Get-Content package.json -Raw | ConvertFrom-Json).version
+          echo "VERSION=$version" >> $env:GITHUB_ENV
+        shell: pwsh
+      - name: Print extracted version
+        run: echo "Extracted version is ${{ env.VERSION }}"
+        shell: pwsh
+      - name: Build and package Windows
+        run: npm run package-win
+      - name: List output in release-installers
+        run: dir release-installers
+      - name: Upload Windows Installer
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        with:
+          upload_url: ${{ needs.setup-release.outputs.upload_url }}
+          asset_path: ./release-installers/ME3040_F24-${{ env.VERSION }}-setup.exe
+          asset_name: ME3040_F24-${{ env.VERSION }}-setup.exe
+          asset_content_type: application/vnd.microsoft.portable-executable

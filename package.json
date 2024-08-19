@@ -1,0 +1,23 @@
+{
+  "name": "ME3040_F24",
+  "version": "1.0.1",
+  "description": "ME3040 Interactive Lectures",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-packager . ME3040_F24 --overwrite --platform=win32 --arch=x64 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds && npm run make-installer-win",
+    "package-mac": "electron-packager . ME3040_F24 --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds && npm run make-installer-mac",
+    "make-installer-win": "electron-installer-windows --src release-builds/ME3040_F24-win32-x64/ --config ins-config-win.json",
+    "make-installer-mac": "electron-installer-dmg --config ins-config-mac.json release-builds/ME3040_F24-darwin-x64/ME3040_F24.app ME3040_F24 --out=release-installers",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Khris Griffis, Ph.D",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^31.0.2",
+    "electron-packager": "^18.3.3",
+    "electron-installer-windows": "^3.0.0",
+    "electron-installer-dmg": "^4.0.0"
+  }
+}
