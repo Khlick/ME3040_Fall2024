@@ -34,12 +34,6 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install
-      - name: Extract version without `v` prefix
-        id: version
-        run: |
-          VERSION=${GITHUB_REF##*/}
-          VERSION=${VERSION#v}
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Build and package macOS
         run: |
           export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
@@ -47,21 +41,14 @@ jobs:
       - name: List output in dist directory
         run: ls -l dist/
       - name: Upload macOS Installers
-        uses: actions/upload-release-asset@v1.0.2
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ./dist/ME3040_F24-${{ github.ref_name }}-mac-x64.dmg
+            ./dist/ME3040_F24-${{ github.ref_name }}-mac-arm64.dmg
+            ./dist/ME3040_F24-${{ github.ref_name }}-mac-universal.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.setup-release.outputs.upload_url }}
-          asset_path: |
-            ./dist/ME3040_F24-${{ env.VERSION }}-mac-x64.dmg
-            ./dist/ME3040_F24-${{ env.VERSION }}-mac-arm64.dmg
-            ./dist/ME3040_F24-${{ env.VERSION }}-mac-universal.dmg
-          asset_name: |
-            ME3040_F24-${{ env.VERSION }}-mac-x64.dmg
-            ME3040_F24-${{ env.VERSION }}-mac-arm64.dmg
-            ME3040_F24-${{ env.VERSION }}-mac-universal.dmg
-          asset_content_type: application/octet-stream
-
 
   build-win:
     needs: setup-release
@@ -74,32 +61,18 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install
-      - name: Set GH_TOKEN for Windows
+      - name: Build and package Windows
         run: |
           $env:GH_TOKEN="${{ secrets.GITHUB_TOKEN }}"
           npm run package-win
         shell: pwsh
-      - name: Extract package version
-        run: |
-          $version = (Get-Content package.json -Raw | ConvertFrom-Json).version
-          echo "VERSION=$version" >> $env:GITHUB_ENV
-        shell: pwsh
-      - name: Print extracted version
-        run: echo "Extracted version is ${{ env.VERSION }}"
-        shell: pwsh
       - name: List output in dist directory
         run: dir dist
       - name: Upload Windows Installers
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ./dist/ME3040_F24-${{ github.ref_name }}-win-x64.exe
+            ./dist/ME3040_F24-${{ github.ref_name }}-win-ia32.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.setup-release.outputs.upload_url }}
-          asset_path: |
-            ./dist/ME3040_F24-${{ env.VERSION }}-win-x64.exe
-            ./dist/ME3040_F24-${{ env.VERSION }}-win-ia32.exe
-          asset_name: |
-            ME3040_F24-${{ env.VERSION }}-win-x64.exe
-            ME3040_F24-${{ env.VERSION }}-win-ia32.exe
-          asset_content_type: application/vnd.microsoft.portable-executable
-
