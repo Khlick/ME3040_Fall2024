@@ -61,6 +61,11 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install
+      - name: Set GH_TOKEN for Windows
+        run: |
+          $env:GH_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          npm run package-win
+        shell: pwsh
       - name: Extract package version
         run: |
           $version = (Get-Content package.json -Raw | ConvertFrom-Json).version
@@ -69,10 +74,6 @@ jobs:
       - name: Print extracted version
         run: echo "Extracted version is ${{ env.VERSION }}"
         shell: pwsh
-      - name: Build and package Windows
-        run: |
-          export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          npm run package-win
       - name: List output in dist directory
         run: dir dist
       - name: Upload Windows Installer
