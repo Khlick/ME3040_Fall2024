@@ -34,7 +34,7 @@
         }
       ],
       "icon": "assets/icons/win/icon.ico",
-      "artifactName": "ME3040_F24-${version}-win-${arch}.exe"
+      "artifactName": "ME3040_F24-v${version}-win-${arch}.exe"
     },
     "mac": {
       "target": [
@@ -45,7 +45,7 @@
       ],
       "icon": "assets/icons/mac/icon.icns",
       "minimumSystemVersion": "10.12",
-      "artifactName": "ME3040_F24-${version}-mac-${arch}.dmg",
+      "artifactName": "ME3040_F24-v${version}-mac-${arch}.dmg",
       "hardenedRuntime": true,
       "gatekeeperAssess": false
     },
