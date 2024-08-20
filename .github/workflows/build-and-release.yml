@@ -75,4 +75,4 @@ jobs:
             ./dist/ME3040_F24-${{ github.ref_name }}-win-x64.exe
             ./dist/ME3040_F24-${{ github.ref_name }}-win-ia32.exe
         env:
-          GITHUB_TOKEN: ${ secrets.GITHUB_TOKEN }
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
