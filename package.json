@@ -3,21 +3,33 @@
   "version": "1.0.1",
   "description": "ME3040 Interactive Lectures",
   "main": "main.js",
+  "authors": [
+    "Khris Griffis, Ph.D <khris.griffis.phd@gmail.com"
+  ],
+  "author": "Khris Griffis, Ph.D.",
+  "license": "MIT",
   "scripts": {
     "start": "electron .",
     "package-win": "electron-builder --win",
     "package-mac": "electron-builder --mac",
-    "package-all": "electron-builder --win --mac",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests specified\" && exit 1"
   },
-  "author": "Khris Griffis, Ph.D",
-  "license": "Proprietary",
+  "keywords": [
+    "reveal.js",
+    "statistics",
+    "stats lectures",
+    "engineering",
+    "mechanical engineering",
+    "uncertainty quantification",
+    "probabilty",
+    "experimental methods"
+  ],
   "devDependencies": {
     "electron": "^31.4.0",
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.me3040.f24",
+    "appId": "com.me3040_f24",
     "productName": "ME3040_F24",
     "directories": {
       "output": "dist"
@@ -30,7 +42,10 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64", "ia32"]
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         }
       ],
       "icon": "assets/icons/win/icon.ico",
@@ -40,7 +55,11 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64", "arm64", "universal"]
+          "arch": [
+            "x64",
+            "arm64",
+            "universal"
+          ]
         }
       ],
       "icon": "assets/icons/mac/icon.icns",

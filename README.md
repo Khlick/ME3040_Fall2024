@@ -1,5 +1,5 @@
-# ME3040 Fall Lectures
+# ME3040 Fall 2024
 
 ---
 
-* See releases for current standalone versions of the lectures.
+See releases for the current version for MacOS and Windows operating systems.
