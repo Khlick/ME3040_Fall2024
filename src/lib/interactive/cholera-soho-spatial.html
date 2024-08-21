@@ -52,17 +52,19 @@
 
       setSVGDimensions();
 
-      svg.attr("viewBox", "30 50 1900 1700");
+      //svg.attr("viewBox", "30 50 1900 1700");
+      svg.attr("viewBox", "50 160 1676 1500");
     });
 
     function zoomout() {
-      svg.transition().duration(500).attr("viewBox", "30 50 1900 1700");
+      //svg.transition().duration(500).attr("viewBox", "30 50 1900 1700");
+      svg.transition().duration(500).attr("viewBox", "50 160 1676 1500");
 
       svg.selectAll("#workhouse, #brewery").style("fill", "#BFBFBF");
     }
 
     function zoomin() {
-      svg.transition().duration(500).attr("viewBox", "730 500 600 600");
+      svg.transition().duration(500).attr("viewBox", "775 460 600 600");
 
       svg.selectAll("#workhouse, #brewery").style("fill", "#BFBFBF");
     }

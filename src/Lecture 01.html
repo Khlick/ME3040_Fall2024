@@ -550,7 +550,7 @@ grid-column-gap: 5vw;
 
 <div class="content">
 
-<div class="grid-generic" style="grid-template-columns:1fr 1.25fr;grid-auto-rows:auto;gap:5vw;align-items:end">
+<div class="grid-generic" style="grid-template-columns:1fr 1.35fr;grid-auto-rows:auto;gap:5vw;align-items:end">
 
 <div> <!-- left -->
 
@@ -558,23 +558,41 @@ grid-column-gap: 5vw;
 
 </div>
 
-<div> <!-- right -->
+<div class="smaller"> <!-- right -->
 
 <p>
 
-Getting an answer is very different from knowing <span class="fragment highlight-bg-success" data-fragment-index="1">WHY</span>
+Getting an answer is one thing, but knowing <span class="fragment highlight-bg-success" data-fragment-index="1">WHAT</span> the question is
 
-we get this answer.</p>
-
-<p style="margin-bottom: 0;">
-
-Understanding statistics implies understanding the
-
-<span class="fragment highlight-bg-success" data-fragment-index="2">underlying process</span> leading to the answer we get.
+and <span class="fragment highlight-bg-success" data-fragment-index="2">WHY</span> we get this answer is crucial.
 
 </p>
 
-<img src="lib/img/push-button.svg" class="fragment" style="width:45%;justify-self:center;" data-fragment-index="3">
+<p style="margin-bottom: 0;" class="fragment" data-fragment-index="3">
+
+Understanding statistics means understanding the
+
+<span class="fragment highlight-bg-success" data-fragment-index="4">underlying process</span> that leads to the answer, not just the
+
+result itself.
+
+</p>
+
+<p class="fragment quoted small" data-fragment-index="5">
+
+The answer to the great question of life, the universe, and everything is 42. But the real challenge is to
+
+know what the question is.
+
+</p>
+
+<p class="fragment right-justify smaller" data-fragment-index="5">
+
+- Douglas Adams, <span class="em">The Hitchhiker's Guide To The Galaxy</span>
+
+</p>
+
+<img src="lib/img/push-button.svg" class="fragment" style="width:45%;justify-self:center;" data-fragment-index="6">
 
 </div>
 
@@ -626,9 +644,9 @@ Formula have been developed for a certain kind of data.
 
 <div style="display: grid; grid-template-rows: 1fr; grid-template-columns: 1fr 1fr; grid-column-gap: 5vmin;align-items:start;">
 
-<img src="lib/img/data.svg" style="max-height:25vh;justify-self:end;">
+<img src="lib/img/data.svg" style="max-height:25vh;justify-self:end;height:100%;">
 
-<img src="lib/img/statistics-wordcloud.svg" style="max-height:25vh;justify-self:start">
+<img src="lib/img/statistics-wordcloud.svg" style="max-height:25vh;justify-self:start;height:100%;">
 
 </div>
 
@@ -907,7 +925,7 @@ Cholera's mortality rate was about 20 percent, and the nature of how it spread w
 
 <div class="content">
 
-<div style="display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr;align-items:start;">
+<div style="display: grid; grid-template-columns: 2fr 1fr; grid-auto-rows: auto;align-items:start;">
 
 <div style="grid-row: 1 / 3; grid-column: 1 / 2;">
 
@@ -917,13 +935,9 @@ Cholera's mortality rate was about 20 percent, and the nature of how it spread w
 
 <li class="fragment emoji-exclamation" style="padding-left:2em;" data-fragment-index="1">Prevailing dogma of the 19th century was that all disease and epidemics stemmed from <span class="u-danger">"Bad Air"</span>.</li>
 
-<li class="fragment emoji-exclamation" style="padding-left:2em;" data-fragment-index="1">"Bad Air", called miasmata, is a poisonous vapor with suspended particles of decaying matter and a foul smell.</span></li>
-
-<li class="fragment emoji-exclamation" style="padding-left:2em;" data-fragment-index="2">It made sense as poor, filthy, and foul-smelling areas had miasmata <span class="strong">AND</span> they had Cholera.</li>
+<li class="fragment emoji-exclamation" style="padding-left:2em;" data-fragment-index="2">"Bad Air", called miasmata, is a poisonous vapor with suspended particles of decaying matter and a foul smell.</span></li>
 
 </ul>
-
-<hr class="fragment" data-fragment-index="3">
 
 <ul>
 
@@ -951,7 +965,7 @@ Cholera's mortality rate was about 20 percent, and the nature of how it spread w
 
 <div class="fragment" data-fragment-index="3" style="grid-row: 2 / 3; grid-column: 2 / 3;">
 
-<img class="framed" src="lib/img/cholera-john-snow.jpg" style="max-height:30vh;margin:0;padding:0;">
+<img class="framed" src="lib/img/cholera-john-snow.jpg" style="max-height:25vh;margin:0;padding:0;">
 
 </div>
 
@@ -1962,9 +1976,9 @@ background-color: lightgray;
 
 <tr>
 
-<th>Type</th>
+<th>Category</th>
 
-<th>Phrase/Word</th>
+<th>Term</th>
 
 <th>Definition</th>
 
@@ -1976,51 +1990,49 @@ background-color: lightgray;
 
 <tr>
 
-<td>Experiment</td>
+<td>Study Type</td>
 
-<td>Experimental</td>
+<td>Experimental Study</td>
 
-<td class="">A study where a researcher <span class="em info">actively controls one or more <span class="strong">explanatory</span> variables</span>.</td>
-
-</tr>
-
-<tr>
-
-<td>Experiment</td>
-
-<td>Observational</td>
-
-<td>A study where a researcher <span class="em orange">records observations as the <span class="strong">naturally exist</span></span>.</td>
+<td>A study where the researcher <span class="em info">actively controls one or more <span class="strong">explanatory</span> variables</span>.</td>
 
 </tr>
 
 <tr>
 
-<td>Factor</td>
+<td>Study Type</td>
+
+<td>Observational Study</td>
+
+<td>A study where the researcher <span class="em orange">records observations as they <span class="strong">naturally exist</span></span>.</td>
+
+</tr>
+
+<tr>
+
+<td>Study Component</td>
 
 <td>Observational Unit</td>
 
-<td>An individual entity of interest about which data are recorded. Recorded characteristics of the observational unit are the <span class="info">variables</span> of interest.</td>
-
-</tr>
-
-</tr>
-
-<tr>
-
-<td>Metric</td>
-
-<td>Categorical</td>
-
-<td>Divides the observational units into <span class="em info">groups</span> for higher level analysis.</td>
+<td>An individual entity of interest about which data are recorded. The recorded characteristics of the observational unit are the <span class="info">variables</span> of interest.</td>
 
 </tr>
 
 <tr>
 
-<td>Metric</td>
+<td>Variable Type</td>
 
-<td>Quantitative</td>
+<td>Categorical Variable</td>
+
+<td>Divides the observational units into <span class="em info">groups</span> for higher-level analysis.</td>
+
+</tr>
+
+<tr>
+
+<td>Variable Type</td>
+
+<td>Quantitative Variable</td>
 
 <td>Measures a value for each observational unit as a <span class="em orange">numerical quantity</span>.</td>
 
@@ -2033,8 +2045,6 @@ background-color: lightgray;
 </div>
 
 </div>
-
-
 
 
 
@@ -3364,9 +3374,9 @@ transitionSpeed: "default",
 viewDistance: 3,
 width: 1920,
 height: 1080,
-margin: 0.125,
+margin: 0.11,
 minScale: 0.1,
-maxScale: 1.25,
+maxScale: 1.56,
 plugins: [RevealNotes, RevealHighlight, RevealMath, Splash, Vizzy],
 mathjax3: {
 mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
@@ -3411,7 +3421,7 @@ onSlideChangedDelay: 0,
 splash: {
 splashImage: "lib/img/ME3040_splash.png",
 text: "Welcome to ME3040!",
-minimumDisplay: 5,
+minimumDisplay: 3,
 },
 });
     </script>
