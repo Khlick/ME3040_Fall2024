@@ -2605,11 +2605,15 @@ text-align: center;
 
 <aside class="notes">
 
+<p>
+
 Data from London Registrar office.
 
 <br>
 
 Gathered all the weekly deaths data by district.
+
+</p>
 
 </aside>
 
@@ -2893,6 +2897,8 @@ New prevention and control measures developed to prevent cholera outbreaks
 
 <aside class="notes">
 
+<p>
+
 Data lead to concrete actions/decisions
 
 <br>
@@ -2910,6 +2916,8 @@ Cartoon presents John Edwards, owner of the Southwark Water Company.
 <br>
 
 He is seen crowned with a chamber-pot, seated on a stool on top of a cesspool which doubles as the water-intake for the Southwark Water Company customers in south London.
+
+</p>
 
 </aside>
 
@@ -3349,12 +3357,14 @@ a <span class="u-danger">piece of this population</span> (<span class="danger">s
     </script>
     <script>
       Reveal.initialize({
+autoSlide: 0,
+center: true,
 controls: true,
 controlsBackArrows: "faded",
 controlsLayout: "bottom-right",
 display: "block",
 fragments: true,
-fragmentsInURL: false,
+fragmentInURL: true,
 hash: true,
 hideCursorTime: 5000,
 keyboard: true,
@@ -3364,14 +3374,34 @@ navigationMode: "linear",
 overview: true,
 pdfMaxPagesPerSlide: 1,
 pdfSeparateFragments: false,
-preloadIframes: false,
+preloadIframes: null,
 progress: false,
+showNotes: false,
 showSlideNumber: "print",
 sortFragmentsOnSync: true,
 touch: true,
 transition: "fade",
 transitionSpeed: "default",
 viewDistance: 3,
+autoPlayMedia: null,
+autoSlideMethod: "Reveal.navigateNext",
+autoSlideStoppable: true,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideAddressBar: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+parallaxBackgroundHorizontal: null,
+parallaxBackgroundImage: "",
+parallaxBackgroundSize: "",
+parallaxBackgroundVertical: null,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
 width: 1920,
 height: 1080,
 margin: 0.11,
@@ -3421,7 +3451,7 @@ onSlideChangedDelay: 0,
 splash: {
 splashImage: "lib/img/ME3040_splash.png",
 text: "Welcome to ME3040!",
-minimumDisplay: 3,
+minimumDisplay: 2,
 },
 });
     </script>
