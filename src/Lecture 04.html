@@ -1,0 +1,2548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Lecture 04
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/hybrid.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/statistics_5.png" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Probability 3
+              </h2>
+              <h3>
+                Probability Distributions And Data
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                September 04, 2024
+              </p>
+              <p class="byinfo">
+                CSULA: ME3040 Fall 2024
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic box-width left-justify big"
+
+style="
+
+grid-template-columns: 1fr;
+
+grid-auto-rows: 1fr;
+
+row-gap: 2vmin;
+
+"
+
+>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p><i class="target"></i> Review probability definitions</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="target"></i> Properties of discrete and continuous probability distributions.</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p><i class="target"></i> Relate probability distributions to data distributions</p>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Our main goal today is to gain an understanding in how to convert this idea of probability
+
+into a description of an experiment. We will revisit some terminology from last lectures and introduce some new terms.
+
+</p>
+
+<p>Let's start with some definitions for the day.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Definitions -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probabilty (Definitions)</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width left-justify small" style="
+
+grid-template-columns: 2.5fr 7.5fr;
+
+grid-auto-rows: auto;
+
+row-gap: 1vmin;
+
+column-gap: 0;
+
+">
+
+<div class="small border-bottom fragment" data-fragment-index="1" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-file-contract"></i> Probability
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="1" style="height: 100%; align-items: center">
+
+<p>
+
+The measure of the likelihood that an event will occur. Probability is quantified as a number between \(0\) and \(1\), where \(0\) indicates impossibility and \(1\) indicates certainty.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="2" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-file-contract"></i> Sample Space (\(S\))
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="2" style="height: 100%; align-items: center">
+
+<p>
+
+The set of all possible outcomes of a probabilistic experiment. For example, in a quality test of a car engine, the sample space might include outcomes like 'Pass' and 'Fail'.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="3" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-file-contract"></i> Event
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="3" style="height: 100%; align-items: center">
+
+<p>
+
+A subset of the sample space (\(S\)) that consists of one or more outcomes. An event can be something like 'Engine Fails' in a quality test.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="4" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-file-contract"></i> Classical Probability
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="4" style="height: 100%; align-items: center">
+
+<p>
+
+A probability approach where all outcomes in the sample space are assumed to be equally likely. The probability of an event \(A\) is calculated as:
+
+\[
+
+P(A) = \frac{\text{Number of outcomes in event}}{\text{Number of outcomes in sample space}}
+
+\]
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="5" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-file-contract"></i> Empirical Probability
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="5" style="height: 100%; align-items: center">
+
+<p>
+
+Probability based on observed data or past experiences, calculated by dividing the number of observed occurrences by the total number of observations.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="6" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-file-contract"></i> Set Theory
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="6" style="height: 100%; align-items: center">
+
+<p>
+
+A branch of mathematics focused on the study of sets, collections of distinct objects. Set theory underpins probability by defining events as sets and exploring relationships through operations like union, intersection, and complement.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Probability Types -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Review: Probability Concepts</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width left-justify small" style="
+
+grid-template-columns: 2.5fr 7.5fr;
+
+grid-auto-rows: auto;
+
+row-gap: 1vmin;
+
+column-gap: 0;
+
+">
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="1" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Combinatorics (General)
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="1" style="height: 100%; align-items: center">
+
+<p>
+
+Combinatorics deals with counting, arranging, and grouping objects. It forms the basis for calculating probabilities of events.
+
+Example: Counting the number of ways to arrange 3 objects: $3! = 6$.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="2" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Permutations
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="2" style="height: 100%; align-items: center">
+
+<p>
+
+Permutations consider the order of arrangement. For $n$ objects arranged in $r$ positions,
+
+permutations are calculated as $P(n, r) = \frac{n!}{(n-r)!}$.
+
+Example: Arranging 3 out of 5 items: $P(5, 3) = \frac{5!}{(5-3)!} = 60$.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="3" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> N Choose K Combinations
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="3" style="height: 100%; align-items: center">
+
+<p>
+
+Combinations focus on selection without regard to order. The formula is
+
+$C(n, k) = \frac{n!}{k!(n-k)!}$.
+
+Example: Choosing 2 items from 4: $C(4, 2) = \frac{4!}{2!(4-2)!} = 6$.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="4" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Probability of a Simple Event
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="4" style="height: 100%; align-items: center">
+
+<p>
+
+The probability of a simple event is the ratio of favorable outcomes to the total outcomes, $P(A) = \frac{\text{Number of favorable outcomes}}{\text{Total outcomes}}$.
+
+Example: Probability of rolling a 3 on a die: $P(3) = \frac{1}{6}$.
+
+</p>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>This recap covers the essential concepts in probability, laying the foundation for our next topic: Probability Distributions.</p>
+
+</aside>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Review: Probability Concepts</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width left-justify small" style="
+
+grid-template-columns: 2.5fr 7.5fr;
+
+grid-auto-rows: auto;
+
+row-gap: 1vmin;
+
+column-gap: 0;
+
+">
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="1" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Probability of Union of Two Events
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="1" style="height: 100%; align-items: center">
+
+<p>
+
+The probability of the union of two events, $A$ or $B$, is $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+
+Example: Rolling a die, probability of rolling a 1 or a 2: $P(1 \cup 2) = \frac{1}{6} + \frac{1}{6} = \frac{1}{3}$.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="2" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Probability of Intersection of Two Independent Events
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="2" style="height: 100%; align-items: center">
+
+<p>
+
+For two independent events, the probability of both occurring is $P(A \cap B) = P(A) \times P(B)$.
+
+Example: Flipping a coin and rolling a die, probability of heads and rolling a 4: $P(H \cap 4) = \frac{1}{2} \times \frac{1}{6} = \frac{1}{12}$.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="3" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Conditional Probability of Two Dependent Events
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="3" style="height: 100%; align-items: center">
+
+<p>
+
+The conditional probability of event $B$ given event $A$ is $P(B \mid A) = \frac{P(A \cap B)}{P(A)}$, assuming $P(A) > 0$.
+
+Example: Drawing 2 aces from a deck without replacement:
+
+$P(A_2 \mid A_1) = \frac{3}{51}$.
+
+</p>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>This recap covers the essential concepts in probability, laying the foundation for our next topic: Probability Distributions.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Review: Probability Concepts</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width left-justify small" style="
+
+grid-template-columns: 2.5fr 7.5fr;
+
+grid-auto-rows: auto;
+
+row-gap: 1vmin;
+
+column-gap: 0;
+
+">
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="1" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Probability
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="1" style="height: 100%; align-items: center">
+
+<p>
+
+Probability measures how likely an event is to occur, quantified between 0 (impossible) and 1 (certain).
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="4" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Classical vs Empirical Probability
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="4" style="height: 100%; align-items: center">
+
+<p>
+
+Classical assumes all outcomes are equally likely, while empirical probability is based on observed data.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="5" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Set Theory & Events
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="5" style="height: 100%; align-items: center">
+
+<p>
+
+Set theory explores relationships between events, using operations like union, intersection, and complement.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="6" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Union & Intersection of Events
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="6" style="height: 100%; align-items: center">
+
+<p>
+
+The union (\(A \cup B\)) represents either or both events occurring, while the intersection (\(A \cap B\)) represents both events happening simultaneously.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="7" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Conditional Probability
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="7" style="height: 100%; align-items: center">
+
+<p>
+
+The probability of an event occurring given that another event has already occurred, expressed as \(P(B \mid A)\).
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="8" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Law of Total Probability
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="8" style="height: 100%; align-items: center">
+
+<p>
+
+Used to calculate the probability of an event by considering all possible scenarios leading to it.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom fragment" data-fragment-index="9" style="height: 100%; align-items: center">
+
+<p>
+
+<i class="fa-solid fa-lightbulb"></i> Permutations & Combinations
+
+</p>
+
+</div>
+
+<div class="small border-bottom fragment" data-fragment-index="9" style="height: 100%; align-items: center">
+
+<p>
+
+Permutations consider the order of arrangement, while combinations focus on selection without regard to order.
+
+</p>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>This recap covers the essential concepts in probability, laying the foundation for our next topic: Probability Distributions.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/faded_orbital.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Probability Distributions
+                </h2>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+
+<p>Now we've covered the basics of probability, let's start using some of these principles in the field of statistics.</p>
+
+<p>From here on out, we will be strictly sticking to the realm of statistics and statistical analysis as a means to collect, analyze, interpret, and communicate data.</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Random Variables -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Random Variables</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;">
+
+<p class="bg-success-alpha-02 em small quoted">
+
+A <span class="strong">random variable $X$</span> is a function that maps outcomes from
+
+a sample space $\Omega$ to real numbers.
+
+</p>
+
+<div class="no-hang">
+
+<p>
+
+Mathematically, we write this as:
+
+</p>
+
+$$X: \Omega \rightarrow \mathbb{R}$$
+
+</div>
+
+<p class="fragment">There are two types:</p>
+
+</div>
+
+<div class="fragment framed"> <!-- Left: Discrete Random Variables -->
+
+<h4>Discrete Random Variables</h4>
+
+<p>Discrete random variables measure outcomes at distinct or finite points.</p>
+
+<p>Examples include the count of defects in a product or errors in data transmission.</p>
+
+</div>
+
+<div class="fragment framed"> <!-- Right: Continuous Random Variables -->
+
+<h4>Continuous Random Variables</h4>
+
+<p>Continuous random variables can assume any value within a range of real numbers.</p>
+
+<p>Examples include temperature readings, electrical current, or elapsed time.</p>
+
+</div>
+
+<p class="fragment small sided bg-info-alpha-03 border-info" style="grid-column:1/3;">Understanding random variables is crucial for analyzing data and making predictions in various fields.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>In probability theory, a random variable is a fundamental concept that helps us quantify uncertain outcomes. A random variable is essentially a function that assigns numerical values to each outcome in a sample space. This allows us to work mathematically with probabilities and outcomes, converting qualitative events into quantitative analysis.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Random Variables -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Random Variables</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid: auto rows 1fr;gap:1vmin;">
+
+<div style="height:100%;">
+
+<div class="framed left-justify small">
+
+<p>
+
+The <span class="info">expectation</span> (or expected value) of a random variable is a measure of the <span class="strong">central tendency</span> of its distribution.
+
+</p>
+
+<p class="small">For a random variable \( X \) with discrete outcomes \( x_i \) and corresponding probabilities \( P(X = x_i) \), the expectation is given by:</p>
+
+<div class="no-hang small">
+
+$$E[X] = \sum_{i=1} x_i \cdot P(X = x_i)$$
+
+<span class="fragment" data-fragment-index="1"></span>
+
+</div>
+
+<div class="fragment small" data-fragment-index="2">
+
+<p>
+
+Consider a random variable with 2 equal bins: Bin $1\rightarrow 0$, Bin $2 \rightarrow 1$.
+
+</p>
+
+<div class="no-hang small">
+
+\( E[X] = 0 \cdot \frac{1}{2} + 1 \cdot \frac{1}{2} = 0 + \frac{1}{2} = \frac{1}{2} \)
+
+</div>
+
+</div>
+
+<div class="fragment small no-hang" data-fragment-index="3">
+
+<p>
+
+Now consider a scenario with 7 bins: <span class="small em">mapped to 0 through 6 values</span>
+
+</p>
+
+<div class="smaller">
+
+\( E[X] = 0 \cdot \frac{1}{7} + 1 \cdot \frac{1}{7} + 2 \cdot \frac{1}{7} + 3 \cdot \frac{1}{7} + 4 \cdot \frac{1}{7} + 5 \cdot \frac{1}{7} + 6 \cdot \frac{1}{7} \)
+
+<p>
+
+Simplifying:
+
+</p>
+
+\( E[X] = \frac{1}{7} (0 + 1 + 2 + 3 + 4 + 5 + 6) = \frac{1}{7} \cdot 21 = 3 \)
+
+</div>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="5">
+
+<p class="question smaller">How would the expectation change if the bins were unequal sizes</p>
+
+</div>
+
+</div>
+
+<vizzy data-src="lib/interactive/random-variables.html" style="height:650px;align-self:center;"></vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Expectation is defined as the weighted sum of all possible values, where the weights are the probabilities of those values occurring.</p>
+
+<p>To illustrate, let's consider splitting our sample space into bins and calculating the expectation as we increase the number of bins.</p>
+
+<p>Describe hexagon bins as sample space and imagine partitions, show the single bin and state what expected value in bin 1 maps to 0? Correct, 0.</p>
+
+<p>For 2 bins, this is like a coin flip. Each bin has an equal probability of 1/2.</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- Probability Distributions -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability Distributions</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small" style="grid-column:1/3;">
+
+<p class="sided border-info left-justify">A probability distribution is a mathematical function that describes the <span class="info">likelihood</span> of various outcomes in an experiment.</p>
+
+</div>
+
+<div class="framed fragment"  style="height:100%;">
+
+<h4 class="u">Discrete Distributions</h4>
+
+<p class="small">Discrete distributions are used when the set of possible outcomes is countable.</p>
+
+<img src="lib/img/binom_dist.svg" style="width:50%;margin-left:auto;margin-right:auto;" alt="binom dist">
+
+<p class="em small">Individual probabilities are calculated with a PMF</p>
+
+</div>
+
+<div class="framed fragment" style="height:100%;">
+
+<h4 class="u">Continuous Distributions</h4>
+
+<p class="small">Continuous distributions apply when outcomes come from a continuous random variable.</p>
+
+<img src="lib/img/norm_pdf.svg" style="width:50%;margin-left:auto;margin-right:auto;" alt="norm pdf">
+
+<p class="em small">Outcome probability is calculated by integration (PDF)</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>pop quiz: continuous variable or discrete?</p>
+
+<ul>
+
+<li>
+
+<strong>The time until a projectile returns to earth</strong> - Continuous
+
+</li>
+
+<li>
+
+<strong>The number of times a transistor in a computer memory changes state in one operation</strong> - Discrete
+
+</li>
+
+<li>
+
+<strong>The outside diameter of a machined shaft</strong> - Continuous
+
+</li>
+
+</ul>
+
+<p>Let's look at the 2 most encountered distributions in most experimental analyses, and how we can relate them to data</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/binom_dist.svg" data-background-repeat="no-repeat" data-background-size="contain" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Probability Distributions
+                </h2>
+                <h3>
+                  Discrete Probability
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Coin Flips as an Experiment -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Discrete Example: Coin Flips</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 720px;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="smaller left-justify no-hang">
+
+<p class="question fragment" class="fragment" data-fragment-index="0">How many times must I flip a "fair" coin to get $P(H)=0.5$</p>
+
+<p class="fragment small" data-fragment-index="4">
+
+As the number of trials in an experiment increases, the average of the results gets closer to the expected value (recall LLN).
+
+For a "fair" coin, this means that with enough flips, the proportion of heads ($P(H)$) approaches 0.5.
+
+</p>
+
+<span class="fragment" data-fragment-index="5"></span>
+
+<span class="fragment" data-fragment-index="6"></span>
+
+<p class="fragment strong left-justify" data-fragment-index="7">Assumptions:</p>
+
+<ul class="fragment" data-fragment-index="7">
+
+<li>Each flip is <span class="warning">independent</span> of previous flips.</li>
+
+<li>The probability of heads, P(H), is constant, or <span class="warning">identical</span> at 0.5 for each flip.</li>
+
+<li>The coin is "fair" $\therefore P(H) = P(T) \Rightarrow 1=P(H \cup T)=2P(H)\, \text{or}\, P(H) = \frac{1}{2}$</li>
+
+</ul>
+
+<p class="fragment em small" data-fragment-index="9">
+
+The Strong Law of Large Numbers ensures that $E[P(X=H)]=\lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^{n} X_i = \mu
+
+$.
+
+</p>
+
+<p class="fragment em small" data-fragment-index="10">
+
+In the case of the "fair" coin, $\mu = 0.5$.
+
+</p>
+
+<p class="fragment small" data-fragment-index="10">
+
+That is the expected probability is $E[P(H)] = 0.5$ for a $H$ in each flip.
+
+</p>
+
+<p class="fragment danger center-justify" data-fragment-index="11">
+
+So, what's the problem?
+
+</p>
+
+</div>
+
+<!-- <div class="fig-container" data-file="lib/interactive/coin-flip-short-run.html" style="width:100%;height:80vh;"></div> -->
+
+<vizzy class="fragment" data-fragment-index="1" data-src="lib/interactive/coin-flip-short-run.html"></vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<aside class="notes">
+
+<p>Make sure to flip back and forth for the first simulations</p>
+
+<p>We need to understand the assumptions we make when asking our question, or positing our hypothesis.</p>
+
+<p>There are two problems here:</p>
+
+<ol>
+
+<li>
+
+The question is aimed at the fairness of the coin, that is as the number of
+
+trials approaches infinity, the empirical probability will
+
+converge on the theoretical probability.
+
+This is impractical in experimental design, your CEO or finance department
+
+will laugh in your face if you ask for, near infinity samples.
+
+</li>
+
+<li>
+
+Lack of outcome specificity. Without a clear goal, or specified number of
+
+outcomes (say of heads), the question is too vague for practical experimentation.
+
+</li>
+
+</ol>
+
+<p>
+
+What if we want to know, "Is the coin fair?". How can we rephrase the question? Redesign the experiment? How do we test if the coin is fair? Ideas?
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+
+
+<!-- Discrete Example: Coin Flips -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Discrete Example: Coin Flips</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2.2fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Left Column: Calculation and Lead into "At Least 19 Heads" -->
+
+<div class="framed small" style="height:100%;">
+
+<p class="em left-justify no-margin">
+
+<span class="u">Scenario</span>: a coin is flipped <span class="info">28</span> times, resulting
+
+in <span class="danger">19</span> heads.
+
+</p>
+
+<p class="question fragment" data-fragment-index="1">
+
+If the coin is "fair", how likely is this
+
+</p>
+
+<div class="full-width smaller fragment" data-fragment-index="5">
+
+<ul class="two-column-list">
+
+<li><span class="info">$P(X=k)$</span>: probability of exactly $k$ successes in $n$ trials.</li>
+
+<li><span class="info">$\binom{n}{k}$</span>: the number of ways to choose $k$ successes out of $n$ trials. <span class="smallest">$\frac{n!}{k!(n-k)!}$</span></li>
+
+<li><span class="success">$p$</span>: probability of <span class="success">success</span> in a trial.</li>
+
+<li><span class="danger">$1-p$</span>: probability of <span class="danger">failure</span> in a trial (compliment).</li>
+
+<li><span class="info">$n$</span>: total number of trials.</li>
+
+<li><span class="pop">$k$</span>: number of successes tested.</li>
+
+</ul>
+
+</div>
+
+<p class="left-justify fragment" data-fragment-index="7">Using the binomial distribution formula:</p>
+
+<p class="fragment" data-fragment-index="7">$P(X = 19) = \binom{28}{19} (0.5)^{19} (0.5)^{9}=\class{info}{0.0257}$</p>
+
+<p class="question fragment" data-fragment-index="8">Is this evidence of an "unfair" coin</p>
+
+<p class="left-justify fragment" data-fragment-index="9">
+
+Assess how <span class="excited-text">extreme</span> our result is:
+
+</p>
+
+<div class="smallest no-hang">
+
+<span class="fragment" data-fragment-index="10">$$P(X\geq 19) =P(X=19) + P(X=20) + \ldots + P(X=28)$$</span>
+
+<span class="fragment" data-fragment-index="11">$$= \sum_{x=19}^{28} \binom{28}{x} p^x (1-p)^{28-x}$$</span>
+
+<span class="fragment" data-fragment-index="21">$$= \class{danger}{0.044}$$</span>
+
+</div>
+
+</div>
+
+<div data-id="danim" style="height:100%;align-items:center;"> <!-- Right Column: Placeholder for Graphic -->
+
+<div class="small no-hang">
+
+<p class="u strong center-justify fragment" data-fragment-index="2">Model</p>
+
+<p class="smallest no-margin center-justify"><span class="fragment" data-fragment-index="2">{<span class="as-code tiny">HHHHHHHHHHHHHHHHHHHTTTTTTTTTT</span></span>
+
+<span class="fragment" data-fragment-index="3">, <span class="as-code tiny">HHHHHHHHHHHHHHHHHHTHTTTTTTTTT</span>,$\ldots$}</span></p>
+
+<p class="smallest no-margin fragment" data-fragment-index="4"><span class="u">Binomial Probability Distribution:</span>$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$ for $k={1,\ldots,28}$:</p>
+
+</div>
+
+<!-- <img src="lib/img/binomial-coinflip.svg" alt="coinflip" style="width:100%;margin-left:auto;margin-right:auto;"> -->
+
+<svg width="100%" viewBox="-5 0 460 320" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#PolyCollection_1" class="fragment" data-fragment-index="11"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#matplotlib.axis_1" class="fragment" data-fragment-index="6"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#matplotlib.axis_2" class="fragment" data-fragment-index="6"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_2" class="fragment" data-fragment-index="6"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_3" class="fragment" data-fragment-index="7"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_4" class="fragment" data-fragment-index="12" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_5" class="fragment" data-fragment-index="13" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_6" class="fragment" data-fragment-index="14" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_7" class="fragment" data-fragment-index="15" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_8" class="fragment" data-fragment-index="16" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_9" class="fragment" data-fragment-index="17" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_10" class="fragment" data-fragment-index="18" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_11" class="fragment" data-fragment-index="19" data-autoslide="250"></use>
+
+<use xlink:href="lib/img/coinflip_binom-19_28.svg#axes_12" class="fragment" data-fragment-index="20" data-autoslide="500"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<div style="font-size:90%;">
+
+<p>
+
+Your CEO is suspicious of a quarter he uses to make decisions for the company, he thinks it's unfair.
+
+He says, 'in the last 28 flips, I the landed heads up way too often, and now everyone has paid time off, 10% pay increase, and 4 day work weeks!'
+
+</p>
+
+<p>You run the experiment, the question you ask is: "if the coin were perfectly fair, how likely is this outcome?"</p>
+
+<p>How do we test this? Build a model which looks like our experiment, 19H, in different combinations. (describe binomial)</p>
+
+<p>Poll class, is evidence enough? How strong is this evidence?</p>
+
+<p>To get at the strength of our evidence, we ask the question: how "extreme" is my result? Extreme means unlikely.</p>
+
+<p>Show equation, talk over the summation. "So our evidence suggests that getting a value at least as extreme as ours happens about 4.4% of the time."</p>
+
+<p>Is that a meaningful result? As Frequentists, what would we really want to do? Replicate the results many times.</p>
+
+<p>What is our assumption we are testing? Our model says p(h)=p(t)=0.5 so it's a model of the fair coin probability flipped 28 times. Is 28</p>
+
+</div>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/norm_pdf.svg" data-background-repeat="no-repeat" data-background-size="contain" id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Probability Distributions
+                </h2>
+                <h3>
+                  Continuous Probability
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-3.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Normal Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Normal Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2fr 1.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small" style="height:100%;"> <!-- Left Column: Definition and Example -->
+
+<p class="quoted">The normal (or Gaussian) distribution is a continuous probability distribution characterized by a symmetric, bell-shaped curve.</p>
+
+<div class="left-justify">
+
+<div class="fragment no-hang" data-fragment-index="2"><p class="strong">PDF:</p> $$f(\class{warning}{x}; \class{info}{\mu}, \class{info}{\sigma}) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$</div>
+
+<div class="full-width small fragment" data-fragment-index="2">
+
+<ul class="two-column-list no-hang">
+
+<li><span class="info">$\mu$</span> = Central Tendency</li>
+
+<li class="smaller fragment" data-fragment-index="3">
+
+68% of the observations lie within 1 standard "distance" of the central tendency
+
+</li>
+
+<li><span class="info">$\sigma$</span> = Spread (like width)</li>
+
+<li class="smaller fragment" data-fragment-index="4">
+
+95% lie within 1.96 standard "distance" of the central tendency
+
+</li>
+
+<li><span class="warning">$x$</span> = Specific value of the continuous variable</li>
+
+<li class="smaller fragment" data-fragment-index="5">
+
+99% lie within 2.58 standard "distance" of the central tendency
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div style="height:100%;align-items:center;"> <!-- Right Column: Placeholder for Graphic -->
+
+<!-- <img src="lib/img/normal-distribution-standardized-distances.svg" alt="coinflip" width="100%;"> -->
+
+<svg width="100%"  viewBox="0 0 468 288" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_1" class="fragment current-visible" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_2" class="fragment current-visible" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_3" class="fragment current-visible" data-fragment-index="4"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_4" class="fragment current-visible" data-fragment-index="4"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_5" class="fragment current-visible" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_6" class="fragment current-visible" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#matplotlib.axis_1" class="fragment" data-fragment-index="0"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_3" class="fragment" data-fragment-index="0"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_8" class="fragment" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_9" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_10" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_11" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_12" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_13" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_14" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_4" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_9" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_5" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_10" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_6" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_11" class="fragment" data-fragment-index="5"></use>
+
+</svg>
+
+</div>
+
+<div class="full-width" style="grid-column:1/3;">
+
+<p class="fragment sided border-success small" data-fragment-index="6">
+
+Often denoted $\mathcal{N}(\mu, \sigma^2)$, the normal distribution is
+
+special as it underscores the <span class="strong info">Central Limit Theorem</span>'s revelation
+
+that sums of independent variables universally converge to this form,
+
+regardless of their initial distributions.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+The normal distribution stands as a fundamental pillar in statistics,
+
+shaping our understanding of natural phenomena, from distributions of
+
+heights to test score with its iconic "bell curve".
+
+</p>
+
+<p>
+
+We talk about the x values in terms of
+
+</p>
+
+<p>fragment 1, equation. While it looks quite complicated, there are 2 parameters we are concerned with, mu and sigma, farg2 explain central tend and spread</p>
+
+<p>
+
+The symmetry and shape of this distribution allows us to think about how
+
+extreme data might be. The weights of data lie in the central bell shape,
+
+while the probability of taking a value further and further away from 0,
+
+in this case, becomes increasingly unlikely.
+
+</p>
+
+<p>
+
+It turns out that the normal distribution describes the distribution of many
+
+natural phenomena. Let's see why that is.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Central Limit Theorem -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Central Limit Theorem</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<vizzy class="full-width" style="height:850px;" data-style="margin-top:-150px;" data-src="https://seeing-theory.brown.edu/probability-distributions/index.html#section3"></vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+In the 18th century, a few mathematicians, abraham de moivre, and later
+
+Pierre-Simon Laplace then Carl Gauss and others, observed that if you looked
+
+at the averages of many samples, the distribution of those averages converged
+
+on the normal distribution. Even when the samples were taken from a underlying
+
+distribution which was not normally shaped.
+
+</p>
+
+<p>
+
+Adjust parameters, run simulations.
+
+</p>
+
+<p>
+
+The Central Limit Theorem (CLT) states that the distribution of the sum (or average) of a large number of independent, identically distributed random variables, each with a finite mean and variance, will approximate a normal distribution, regardless of the original distribution of the variables. This convergence towards normality occurs as the sample size increases, underscoring the normal distribution's significance in probability and statistics.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Example: Normal Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Example: Normal Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:4.5fr 5.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="framed small left-justify">
+
+<p>
+
+<span class="strong">Example:</span> In a mechanical system, the stress endurance limit of a material is normally distributed with a mean ($\mu$) of 300 MPa and a standard deviation ($\sigma$) of 50 MPa. What is the probability that a randomly selected material has a stress endurance limit greater than 350 MPa?
+
+</p>
+
+<p class="fragment" data-fragment-index="2">Calculation: $P(X > 350) = 1 - P(X \leq 350) = 1 - \int_{-\infty}^{350} f(x)\,dx$</p>
+
+<p class="fragment" data-fragment-index="3">Where $f(x)\,dx$ is the PDF ($f(x;\mu,\, \sigma)$), then $\int_{-\infty}^{\infty} f(x)\,dx = 1$ is the <span class="info">cumulative density distribution</span>.</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="-5 5 432 280" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/stress_prob.svg#axes_1" class="fragment" data-fragment-index="0"></use>
+
+<use xlink:href="lib/img/stress_prob.svg#axes_2" class="fragment" data-fragment-index="2"></use>
+
+<use xlink:href="lib/img/stress_prob.svg#axes_3" class="fragment" data-fragment-index="1"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>This is just a skim on the surface, the rest of the semester will be spent exploring various version of this.</p>
+
+<p>This integral of the probability density function is call the cumulative density function.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Cumulative Density Function -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Cumulative Density Function</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:6.5fr 3.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify"> <!-- LEFT -->
+
+<p>A Cumulative Density Function (CDF) is a function that indicates the probability that a random variable takes on a value less than or equal to a given point. It's a way to describe the distribution of random variables, providing a complete picture of the probability distribution.</p>
+
+<p>The CDF starts at 0 and increases to 1 as you move along the x-axis, with the rate of increase depending on the distribution of the variable. It gives insights into the percentiles and probabilities of the underlying distribution, making it a fundamental tool in statistics and probability theory.</p>
+
+</div>
+
+<div> <!-- RIGHT -->
+
+<img src="lib/img/stress_prob_cdf.svg" width="100%">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Again, we will revisit this idea of cumulative probability over and over. The specific CDF can be calculated easily in matlab and depends on the pdf of the distribution of interest.</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- Probability Distributions -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability Distributions</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small" style="grid-column:1/3;">
+
+<p class="sided border-info left-justify">A probability distribution is a mathematical function that describes the <span class="info">likelihood</span> of various outcomes in an experiment.</p>
+
+</div>
+
+<div class="framed"  style="height:100%;">
+
+<h4 class="u">Discrete Distributions</h4>
+
+<p class="small">Discrete distributions are used when the set of possible outcomes is countable.</p>
+
+<img src="lib/img/binom_dist.svg" style="width:50%;margin-left:auto;margin-right:auto;" alt="binom dist">
+
+<p class="em small">Individual probabilities are calculated with a PMF</p>
+
+</div>
+
+<div class="framed" style="height:100%;">
+
+<h4 class="u">Continuous Distributions</h4>
+
+<p class="small">Continuous distributions apply when outcomes come from a continuous random variable.</p>
+
+<img src="lib/img/norm_pdf.svg" style="width:50%;margin-left:auto;margin-right:auto;" alt="norm pdf">
+
+<p class="em small">Outcome probability is calculated by integration (PDF)</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Let's  </p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Lecture 4Wrap up -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Lecture 4 Wrap up</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify"
+
+style="
+
+grid-template-columns: 2.5fr 7.5fr;
+
+grid-auto-rows: auto;
+
+row-gap: 1vmin;
+
+column-gap: 0;
+
+"
+
+>
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="2"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Expected Value</p>
+
+</div>
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="2"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+The <span class="info">mean outcome of a random variable</span> over
+
+a large number of experiments or trials
+
+</p>
+
+</div>
+
+
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="3"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Statistical Model</p>
+
+</div>
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="3"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+A mathematical representation
+
+<span class="info"
+
+>that approximates the generation of observed data</span
+
+>
+
+</p>
+
+</div>
+
+
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="4"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Statistical Evidence</p>
+
+</div>
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="4"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+Data that
+
+<span class="info"
+
+>supports or refutes a statistical hypothesis</span
+
+>
+
+</p>
+
+</div>
+
+
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="5"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Central Limit Theorem</p>
+
+</div>
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="5"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+States that the
+
+<span class="info"
+
+>distribution of sample means approximates a normal
+
+distribution</span
+
+>
+
+as the sample size becomes large
+
+</p>
+
+</div>
+
+
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="6"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Sample Statistic</p>
+
+</div>
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="6"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+A numerical measure
+
+<span class="info">that describes an aspect of a sample</span>
+
+</p>
+
+</div>
+
+
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="7"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+<i class="fa-solid fa-file-contract"></i> Probability Mass/Density
+
+Function
+
+</p>
+
+</div>
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="7"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+A function that
+
+<span class="info"
+
+>gives the probabilities of discrete outcomes</span
+
+>
+
+(mass function) or
+
+<span class="info">the likelihood of continuous outcomes</span>
+
+(density function)
+
+</p>
+
+</div>
+
+
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="8"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+<i class="fa-solid fa-file-contract"></i> Cumulative Density
+
+Function
+
+</p>
+
+</div>
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="8"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+A function that
+
+<span class="info"
+
+>gives the probability that a random variable is less than or
+
+equal to a certain value</span
+
+>
+
+</p>
+
+</div>
+
+
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="9"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+<i class="fa-solid fa-file-contract"></i> Central Tendency
+
+(distribution)
+
+</p>
+
+</div>
+
+<div
+
+class="small border-bottom fragment"
+
+data-fragment-index="9"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+The measure that
+
+<span class="info"
+
+>indicates the central or <span class="strong">expected</span> value in a dataset</span
+
+>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Definitions -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Definitions</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify small"
+
+style="
+
+grid-template-columns: 2.5fr 7.5fr;
+
+grid-auto-rows: auto;
+
+row-gap: 1vmin;
+
+column-gap: 0;
+
+"
+
+>
+
+<div class="small border-bottom" data-fragment-index="1" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Random Variable</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="2" style="height:100%;align-items:center;">
+
+<p>
+
+A function that <span class="info">assigns a real number to each outcome</span> in the probability space
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom" data-fragment-index="2" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Discrete Variable</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="3" style="height:100%;align-items:center;">
+
+<p>
+
+Random variable that measures outcomes at <span class="danger">distinct or finite points</span>
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom" data-fragment-index="3" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Continuous Variable</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="4" style="height:100%;align-items:center;">
+
+<p>
+
+Random variable that measures outcomes at <span class="danger">any value within a range</span> of real numbers
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom" data-fragment-index="4" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Probability Distribution</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="5" style="height:100%;align-items:center;">
+
+<p>
+
+A <span class="danger">statistical function</span> that describes <span class="info">all the possible values and likelihoods</span> that a random variable can take within a given range
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom" data-fragment-index="5" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Discrete Probability Distribution</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="6" style="height:100%;align-items:center;">
+
+<p class="small">
+
+Used for discrete random variables. The probability of <span class="success">each possible outcome</span> is specified by a probability mass function (PMF), with the probability of an outcome being exactly one ($x$) of the set ($S$) is calculated as $\sum_{x\in S}P(X=x)$
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom" data-fragment-index="6" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Continuous Probability Distribution</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="7" style="height:100%;align-items:center;">
+
+<p class="small">
+
+Applies to continuous random variables. The probabilities of specific outcomes are described by a probability density function (PDF), with the probability of an outcome <span class="success">within a certain range</span> ($[a,\, b]$) calculated as the <span class="warning">area under the curve</span>: $P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx$
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom" data-fragment-index="7" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Permutations</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="8" style="height:100%;align-items:center;">
+
+<p class="small">
+
+<span class="info">Rearrangement</span> of members of a set into an ordered sequence: $^n\!P_r = \frac{n!}{(n-r)!}$.
+
+</p>
+
+</div>
+
+
+
+<div class="small border-bottom" data-fragment-index="8" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Combinations</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="9" style="height:100%;align-items:center;">
+
+<p class="small">
+
+The selection of objects from a set where the <span class="danger">order of selection does not matter</span>: $^nC_r = \binom{n}{r} = \frac{n!}{r!(n-r)!}$.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Note that we say statistical function, this mostly convention for statisticians and mathematicians to produce "proofs" and publish papers.
+
+In the real world, these functions are used as <em>models</em> to describe the probability behavior of the data.
+
+</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 04
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2024</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+autoPlayMedia: null,
+autoSlideMethod: "Reveal.navigateNext",
+autoSlideStoppable: true,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideAddressBar: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+parallaxBackgroundHorizontal: null,
+parallaxBackgroundImage: "",
+parallaxBackgroundSize: "",
+parallaxBackgroundVertical: null,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.1,
+maxScale: 1.56,
+plugins: [RevealNotes, RevealHighlight, RevealMath, Splash, Vizzy],
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ME3040_splash.png",
+text: "Welcome to ME3040!",
+minimumDisplay: 2,
+},
+});
+    </script>
+  </body>
+</html>
