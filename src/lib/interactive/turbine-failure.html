@@ -22,10 +22,6 @@
         stroke-width: 3px;
         stroke-dasharray: 5, 2;
       }
-      svg {
-        display: block;
-        margin: auto;
-      }
       html, body {
         height: 100%;
         margin: 0;
@@ -34,6 +30,7 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        font-size: 16pt;
       }
       svg {
         width: calc(100% - 10px); /* 5px margin on each side */
@@ -57,9 +54,9 @@
 
       const margin = {
         topLine: 50,
-        bottomLine: 50,
+        bottomLine: 70,
         topBar: 50,
-        bottomBar: 50,
+        bottomBar: 70,
         leftLine: 60,
         rightLine: 30,
         leftBar: 50,
@@ -82,7 +79,7 @@
         widthBar = width * (1 - xRatioLine) - margin.leftBar - margin.rightBar,
         heightBar = height - margin.topBar - margin.bottomBar;
 
-      let xlimMax = 300;
+      let xlimMax = 20;
 
       const xScaleLine = d3
         .scaleLinear()
@@ -113,8 +110,8 @@
       // Simulation data
       const data = {
         prob: [
-          { p: 0.8701 }, // No Failure
           { p: 1-0.8701 }, // Failure
+          { p: 0.8701 }, // No Failure
         ],
         count: [0, 0],
         dataSim: [],
@@ -293,7 +290,7 @@
       
           // Update the simulation counter with the current probability
           simulationText.text(
-            `${data.simResults.length} simulations (P(F) = ${currentProbability.toFixed(4)})`
+            `${data.simResults.length} simulations (P(Fail) = ${currentProbability.toFixed(4)})`
           );
         }
       }
@@ -319,13 +316,13 @@
           .attr(
             "x",
             (d, i) =>
-              xScaleBar(i ? "No Failure" : "Failure") -
+              xScaleBar(i ? "Failure" : "No Failure") -
               (xScaleBar.step() * 0.85) / 2
           )
           .attr("y", (d) => yScaleBar(d))
           .attr("width", xScaleBar.step() * 0.85)
           .attr("height", (d) => heightBar - yScaleBar(d))
-          .attr("fill", (d, i) => (i ? "steelblue" : "#D98880"))
+          .attr("fill", (d, i) => (i ? "#D98880" : "steelblue"))
           .merge(bars)
           .attr("y", (d) => yScaleBar(d))
           .attr("height", (d) => heightBar - yScaleBar(d));
@@ -337,9 +334,9 @@
           .enter()
           .append("text")
           .attr("class", "textBars")
-          .attr("x", (d, i) => xScaleBar(i ? "No Failure" : "Failure"))
+          .attr("x", (d, i) => xScaleBar(i ? "Failure" : "No Failure"))
           .attr("y", (d) => yScaleBar(d) - 10)
-          .attr("fill", (d, i) => (i ? "steelblue" : "#D98880"))
+          .attr("fill", (d, i) => (i ? "#D98880" : "steelblue"))
           .style("text-anchor", "middle")
           .style("font-family", "Raleway")
           .style("font-size", "1em")
@@ -369,7 +366,7 @@
               const remainingSimulations = n - i;
               for (let j = 0; j < remainingSimulations; j++) {
                 const result = Math.random() < data.prob[1].p ? 1 : 0;
-                data.simResults.push(result);
+                data.simResults.push(1-result);
                 data.count[result] += 1;
               }
               updateProbabilities();
@@ -488,7 +485,7 @@
         runBatch();
       }
 
-      var _fragments = [
+      window._fragments = [
         {
           activate: () => simulate(50, 1500), // Run 100 simulations over 3 seconds
           reverse: () => undoSimulate(50, 200), // Undo 100 simulations over 0.5 seconds
@@ -511,22 +508,25 @@
         },
       ];
 
+      window.simulate = simulate;
+      window.undoSimulate = undoSimulate;
+
       // Example usage: Run simulations in sequence
-      let currentFragment = 0;
+      // let currentFragment = 0;
 
-      function nextFragment() {
-        if (currentFragment < _fragments.length) {
-          _fragments[currentFragment].activate();
-          currentFragment += (currentFragment+1) <= _fragments.length ? 1 : 0;
-        }
-      }
+      // function nextFragment() {
+      //   if (currentFragment < _fragments.length) {
+      //     _fragments[currentFragment].activate();
+      //     currentFragment += (currentFragment+1) <= _fragments.length ? 1 : 0;
+      //   }
+      // }
 
-      function previousFragment() {
-        if (currentFragment >= 0) {
-          currentFragment -= (currentFragment-1) < 0 ? 0 : 1;
-          _fragments[currentFragment].reverse();
-        }
-      }
+      // function previousFragment() {
+      //   if (currentFragment >= 0) {
+      //     currentFragment -= (currentFragment-1) < 0 ? 0 : 1;
+      //     _fragments[currentFragment].reverse();
+      //   }
+      // }
 
       // Attach event listeners for advancing/reversing fragments
       // document.addEventListener("keydown", (event) => {

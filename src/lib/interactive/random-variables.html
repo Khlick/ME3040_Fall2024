@@ -131,7 +131,7 @@
       .style('fill', (d, i) => possibleColors[i]);
 
     // Create axes
-    const xAxis = d3.axisBottom(xScale).tickFormat((d, i) => `Bin ${i}`);
+    const xAxis = d3.axisBottom(xScale).tickFormat((d, i) => `${i}`);
     const yAxis = d3.axisLeft(yScale).ticks(5);
 
     // Append axes
@@ -278,7 +278,7 @@
       histogramSVG.g.select('.x-axis')
         .transition()
         .duration(300)
-        .call(d3.axisBottom(xScale).tickFormat((d, i) => `Bin ${i + 1}`));
+        .call(d3.axisBottom(xScale).tickFormat((d, i) => `${i}`));
 
       // Adjust the y-axis ticks to avoid duplicates and ensure pretty values
       const tickValues = displayMode === 'counts' && maxCount <= 1 ? [0, 1] : null; // Set specific ticks when counts are low
@@ -384,69 +384,105 @@
     // Initialize hexagons as belonging to group 0 (all white)
     divideHexagonsIntoGroups(0); // Start with all hexagons in 'group0'
 
+    // Adjusts the drop speed based on a slider value
+    function adjustDropSpeed(sliderValue) {
+      dropSpeed = mapSliderValueToInterval(sliderValue);
+      if (simulationRunning) {
+        restartSimulationInterval();
+      }
+    }
+
+    // Starts the simulation
+    function startSimulation() {
+      if (!simulationRunning) {
+        intervalID = setInterval(function () {
+          dropRandomPoints();
+          clearInterval(intervalID);
+          intervalID = setInterval(arguments.callee, getRandomizedInterval(dropSpeed));
+        }, getRandomizedInterval(dropSpeed));
+        simulationRunning = true;
+      }
+    }
+
+    // Stops the simulation
+    function stopSimulation() {
+      clearInterval(intervalID);
+      simulationRunning = false;
+    }
+
+    // Adjusts the number of bins and updates relevant components
+    function adjustNumberOfBins(binCount) {
+      numBins = Math.min(Math.max(binCount, 1), 7); // Ensure bins are between 1 and 7
+      divideHexagonsIntoGroups(numBins);
+      updateHistogram();
+    }
+
+    // Toggles the display mode between 'counts' and 'probability'
+    function toggleDisplayMode(mode = 'counts') {
+      if (displayMode === mode) {
+        return
+      }
+      displayMode = mode;
+      yAxisLabel.text(displayMode.charAt(0).toUpperCase() + displayMode.slice(1)); // Updates y-axis label
+      updateHistogram();
+    }
+
+    // Resets the animation, clearing counts but keeping the number of bins and drop speed
+    function resetAnimation() {
+      stopSimulation(); // Stop the simulation
+      bins.fill(0); // Clear bin counts
+      totalSimulations = 0; // Reset total simulation count
+      updateHistogram(); // Update histogram to reflect cleared data
+    }
+
+    // Helper function to restart the simulation interval with the current drop speed
+    function restartSimulationInterval() {
+      clearInterval(intervalID);
+      intervalID = setInterval(function () {
+        dropRandomPoints();
+        clearInterval(intervalID);
+        intervalID = setInterval(arguments.callee, getRandomizedInterval(dropSpeed));
+      }, getRandomizedInterval(dropSpeed));
+    }
+
+
     // Fragments
     window._fragments = [{
         index: 1,
         activate: () => {
           // Clear and start the simulation from the default state
-          clearInterval(intervalID); // Stop any running simulation
-          simulationRunning = false; // Set running state to false
-          bins.fill(0); // Clear bin counts
-          totalSimulations = 0; // Reset total simulation count
-          numBins = 1; // Set to default 1 bin
-          divideHexagonsIntoGroups(numBins); // Divide into 1 group
-          updateHistogram(); // Update histogram
+          resetAnimation(); // Reset without changing bins or speed
+          adjustNumberOfBins(1); // Set to default 1 bin
 
           // Delay before starting the simulation
           setTimeout(() => {
-            dropSpeed = mapSliderValueToInterval(50); // Set default drop speed
-            intervalID = setInterval(function () {
-              dropRandomPoints();
-              clearInterval(intervalID);
-              intervalID = setInterval(arguments.callee, getRandomizedInterval(dropSpeed));
-            }, getRandomizedInterval(dropSpeed));
-            simulationRunning = true;
+            adjustDropSpeed(50); // Set default drop speed
+            startSimulation(); // Start the simulation
           }, 350);
         },
         reverse: () => {
           // Stop the animation without clearing
-          clearInterval(intervalID);
-          simulationRunning = false;
+          stopSimulation();
         },
       },
       {
         index: 2,
         activate: () => {
-          // Reset, update to 3 bins, and speed up to slider value 80
-          clearInterval(intervalID);
-          simulationRunning = false;
-          bins.fill(0);
-          totalSimulations = 0;
-          numBins = 2;
-          divideHexagonsIntoGroups(numBins);
-          updateHistogram();
+          // Reset, update to 2 bins, and speed up to slider value 80
+          resetAnimation();
+          adjustNumberOfBins(2); // Set to 2 bins
 
           // Delay before starting the simulation
           setTimeout(() => {
-            dropSpeed = mapSliderValueToInterval(80);
-            intervalID = setInterval(function () {
-              dropRandomPoints();
-              clearInterval(intervalID);
-              intervalID = setInterval(arguments.callee, getRandomizedInterval(dropSpeed));
-            }, getRandomizedInterval(dropSpeed));
-            simulationRunning = true;
+            adjustDropSpeed(80); // Set drop speed
+            startSimulation(); // Start the simulation
           }, 350);
         },
         reverse: () => {
           // Slow the simulation down to slider value 40
-          dropSpeed = mapSliderValueToInterval(40);
+          adjustDropSpeed(40);
           if (simulationRunning) {
-            clearInterval(intervalID);
-            intervalID = setInterval(function () {
-              dropRandomPoints();
-              clearInterval(intervalID);
-              intervalID = setInterval(arguments.callee, getRandomizedInterval(dropSpeed));
-            }, getRandomizedInterval(dropSpeed));
+            restartSimulationInterval(); // Restart with the new speed
           }
         },
       },
@@ -454,89 +490,58 @@
         index: 3,
         activate: () => {
           // Reset, update to 7 bins, and speed up to slider value 90
-          clearInterval(intervalID);
-          simulationRunning = false;
-          bins.fill(0);
-          totalSimulations = 0;
-          numBins = 7;
-          divideHexagonsIntoGroups(numBins);
-          updateHistogram();
+          resetAnimation();
+          adjustNumberOfBins(7); // Set to 7 bins
 
           // Delay before starting the simulation
           setTimeout(() => {
-            dropSpeed = mapSliderValueToInterval(90);
-            intervalID = setInterval(function () {
-              dropRandomPoints();
-              clearInterval(intervalID);
-              intervalID = setInterval(arguments.callee, getRandomizedInterval(dropSpeed));
-            }, getRandomizedInterval(dropSpeed));
-            simulationRunning = true;
+            adjustDropSpeed(90); // Set drop speed
+            startSimulation(); // Start the simulation
           }, 350);
         },
         reverse: () => {
           // Update to 3 bins, slow down slider to 70, and reset
-          clearInterval(intervalID);
-          simulationRunning = false;
-          bins.fill(0);
-          totalSimulations = 0;
-          numBins = 2;
-          divideHexagonsIntoGroups(numBins);
-          updateHistogram();
+          resetAnimation();
+          adjustNumberOfBins(2); // Set to 2 bins
 
           // Delay before starting the simulation
           setTimeout(() => {
-            dropSpeed = mapSliderValueToInterval(70);
-            intervalID = setInterval(function () {
-              dropRandomPoints();
-              clearInterval(intervalID);
-              intervalID = setInterval(arguments.callee, getRandomizedInterval(dropSpeed));
-            }, getRandomizedInterval(dropSpeed));
-            simulationRunning = true;
+            adjustDropSpeed(70); // Set drop speed
+            startSimulation(); // Start the simulation
           }, 350);
         },
       },
       {
         index: 4,
         activate: () => {
-          if (displayMode === 'counts') {
-            clearInterval(intervalID);
-            yAxisLabel.text("Probability");
-            displayMode = 'probability';
-            updateHistogram();
-          }
+          toggleDisplayMode('probability'); // Toggle to 'probability'
           // Increase speed to 99, toggle the y-axis to probability
-          dropSpeed = mapSliderValueToInterval(99);
+          adjustDropSpeed(99);
           if (simulationRunning) {
-            clearInterval(intervalID);
-            intervalID = setInterval(function () {
-              dropRandomPoints();
-              clearInterval(intervalID);
-              intervalID = setInterval(arguments.callee, getRandomizedInterval(dropSpeed));
-            }, getRandomizedInterval(dropSpeed));
+            restartSimulationInterval(); // Restart with the new speed
           }
         },
         reverse: () => {
-          if (displayMode === 'probability') {
-            clearInterval(intervalID);
-            yAxisLabel.text("Count");
-            displayMode = 'counts';
-            updateHistogram();
-          }
+          toggleDisplayMode('counts'); // Toggle to 'counts'
           // Slow speed to 90, toggle probability to counts
           setTimeout(() => {
-            dropSpeed = mapSliderValueToInterval(90);
+            adjustDropSpeed(90); // Set drop speed
             if (simulationRunning) {
-              clearInterval(intervalID);
-              intervalID = setInterval(function () {
-                dropRandomPoints();
-                clearInterval(intervalID);
-                intervalID = setInterval(arguments.callee, getRandomizedInterval(dropSpeed));
-              }, getRandomizedInterval(dropSpeed));
+              restartSimulationInterval(); // Restart with the new speed
             }
           }, 350);
         },
-      },
+      }
     ];
+
+    // Assign functions to the iframe's window object
+    window.adjustDropSpeed = adjustDropSpeed;
+    window.startSimulation = startSimulation;
+    window.stopSimulation = stopSimulation;
+    window.adjustNumberOfBins = adjustNumberOfBins;
+    window.toggleDisplayMode = toggleDisplayMode;
+    window.resetAnimation = resetAnimation;
+    window.restartSimulationInterval = restartSimulationInterval;
   </script>
 
 </body>

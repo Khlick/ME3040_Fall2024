@@ -1,0 +1,2588 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Lecture 06
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/hybrid.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/micesci_5.png" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Describing Data
+              </h2>
+              <h3>
+                Visual Information
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                September 11, 2024
+              </p>
+              <p class="byinfo">
+                CSULA: ME3040 Fall 2024
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic box-width left-justify"
+
+style="
+
+grid-template-columns: 1fr;
+
+grid-auto-rows: auto;
+
+row-gap: 2vmin;
+
+grid-align-items: center;
+
+"
+
+>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p><i class="target"></i> Understand the properties of discrete and continuous probability distributions.</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="target"></i> Relate probability distributions to data distributions and learn methods for describing datasets.</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p><i class="target"></i> Describe the shape, central tendency, and variability of data distributions using statistical measures.</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="4">
+
+<p><i class="target"></i> Compare measures of spread, such as range, interquartile range, variance, and standard deviation.</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="5">
+
+<p><i class="target"></i> Recognize data symmetry, skewness, and understand their impact on interpreting data.</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="6">
+
+<p><i class="target"></i> Apply statistical concepts to real-world scenarios to enhance data interpretation skills.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>The learning objectives for today's lecture cover understanding key statistical measures, comparing measures of spread, and applying these concepts to real-world examples, enhancing students' ability to describe and interpret data distributions effectively.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/faded_orbital.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Last Time
+                </h2>
+                <h3>
+                  Probability Distributions
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>
+
+Recall, the data we collect represent samples from some distribution of
+
+"unknown-type", which we call the population, akin to "universal set".
+
+Each datum, e.g., a single measurement, represents an "event" found within
+
+the universal set, and a collection of samples, of some particular sample size,
+
+is a "subset" of the "universal set". With statistics, we want infer "things"
+
+about the population based on our sample.
+
+</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Normal Distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Normal Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div data-id="cont1" class="grid-generic" style="grid-template-columns:2fr 1.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small" style="height:100%;"> <!-- Left Column: Definition and Example -->
+
+<p class="quoted">The normal (or Gaussian) distribution is a continuous probability distribution characterized by a symmetric, bell-shaped curve.</p>
+
+<div class="left-justify">
+
+<div class="fragment no-hang" data-fragment-index="2"><p class="strong">PDF:</p> $$f(\class{warning}{x}; \class{info}{\mu}, \class{info}{\sigma}) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$</div>
+
+<div class="full-width small fragment" data-fragment-index="2">
+
+<ul class="two-column-list no-hang">
+
+<li><span class="info">$\mu$</span> = Central Tendency ($E[X]$)</li>
+
+<li class="smaller fragment" data-fragment-index="3">
+
+68% of the observations lie within 1 standard "distance" of the center
+
+</li>
+
+<li><span class="info">$\sigma$</span> = Spread ($E[X-E[X]]$)</li>
+
+<li class="smaller fragment" data-fragment-index="4">
+
+95% lie within 1.96 standard "distance" of the center
+
+</li>
+
+<li><span class="warning">$x$</span> = Specific value of the continuous variable</li>
+
+<li class="smaller fragment" data-fragment-index="5">
+
+99% lie within 2.58 standard "distance" of the center
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div style="height:100%;align-items:center;"> <!-- Right Column: Placeholder for Graphic -->
+
+<!-- <img src="lib/img/normal-distribution-standardized-distances.svg" alt="coinflip" width="100%;"> -->
+
+<svg width="100%"  viewBox="0 0 468 288" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_1" class="fragment current-visible" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_2" class="fragment current-visible" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_3" class="fragment current-visible" data-fragment-index="4"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_4" class="fragment current-visible" data-fragment-index="4"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_5" class="fragment current-visible" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#PolyCollection_6" class="fragment current-visible" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#matplotlib.axis_1" class="fragment" data-fragment-index="0"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_3" class="fragment" data-fragment-index="0"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_8" class="fragment" data-fragment-index="3"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_9" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_10" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_11" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_12" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_13" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#line2d_14" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_4" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_9" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_5" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_10" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#patch_6" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/normal-distribution-standardized-distances.svg#text_11" class="fragment" data-fragment-index="5"></use>
+
+</svg>
+
+</div>
+
+<div class="full-width" style="grid-column:1/3;">
+
+<p class="fragment sided border-success small" data-fragment-index="6">
+
+Often denoted $\mathcal{N}(\mu, \sigma^2)$, the normal distribution is
+
+special as it underscores the <span class="strong info">Central Limit Theorem</span>'s revelation
+
+that sums of independent variables universally converge to this form,
+
+regardless of their initial distributions.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+The normal distribution stands as a fundamental pillar in statistics. We will cover many other continuous distributions as we go along, but we start with the gaussian.
+
+</p>
+
+<p>
+
+We talk about the x values being a certain "distance" from the center, mu, in terms of HOW FREQUENT.
+
+</p>
+
+<p>
+
+Karl Pearson (dwg) called the PDF the "Frequency Curve". Just like the counting we did
+
+for discrete distributions, these smooth curves represent the relative count at
+
+any given X value. If the area under the curve sums to 1 and represents the sum
+
+of all P(X=X), then any point X_i has the probability f(x;mu,sigma).
+
+</p>
+
+<p>fragment 1, equation. While it looks quite complicated, there are 2 parameters we are concerned with, mu and sigma</p>
+
+<p>
+
+The symmetry and shape of this distribution allows us to think about how
+
+extreme data might be. The weights of data lie in the central bell shape,
+
+while the probability of taking a value further and further away from 0,
+
+in this case, becomes increasingly unlikely.
+
+</p>
+
+<p>
+
+It turns out that the normal distribution describes the distribution of many
+
+natural phenomena. Let's see why that is.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Example: Normal Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:4.5fr 5.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="framed small left-justify">
+
+<p>
+
+<span class="strong">Example:</span> In a mechanical system, the stress endurance limit of a material is <span class="success">normally distributed</span> with a mean ($\mu$) of 300 MPa and a standard deviation ($\sigma$) of 50 MPa.
+
+</p>
+
+<p>
+
+What is the probability that a randomly selected material has a stress
+
+endurance limit <span class="em">at least as great as</span> <span class="strong">350 MPa</span>?
+
+</p>
+
+<p class="small">$P(X \geq 350) = 1 - P(X < 350) =$ $$1 - \int_{-\infty}^{350} f(x)\,dx$$</p>
+
+<p class="small fragment" data-fragment-index="1">
+
+Put 350 in terms of <span class="info">Standard Distance</span> from $\mu$: $\frac{350 - 300}{50}=1$ standard distance.
+
+</p>
+
+<p class="small fragment" data-fragment-index="2">
+
+Recall 68% of values lie within 1 standard distance, so 32% are in symmetrical "extremes", thus $\approx 16\%$ in the upper extreme.
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="-5 5 432 280" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
+
+<use xlink:href="lib/img/stress_prob.svg#axes_1"></use>
+
+<use xlink:href="lib/img/stress_prob.svg#axes_2"></use>
+
+<use xlink:href="lib/img/stress_prob.svg#axes_3"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Did anyone figure out how to do this? There are more precise ways of doing this, calculations should look familiar!
+
+</p>
+
+<p>
+
+Similar to the binomial example, we add up the probabilities greater than our
+
+</p>
+
+<p>This integral of the probability density function is call the cumulative density function.</p>
+
+<p>This is just a skim on the surface, the rest of the semester will be spent exploring various version of this.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-gradient="radial-gradient(#283b95, #17b2c3)" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Descriptive Statistics
+                </h2>
+                <h3>
+                  Methods For Describing Distributions Of Data
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>
+
+Now we introduced the idea that data has some pattern if you consider the
+
+frequency of observations. Let's start building the language and mathematical
+
+tools we'll need to convey information about data.
+
+</p>
+
+<p>
+
+Here, we move out of the realm of all probability and into the realm of data.
+
+We will rely upon all the probability we already discussed, and we will continue
+
+to expand upon it.
+
+</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Goal of Statistics -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Statistical Purpose</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:5px;justify-items:center;">
+
+<div>
+
+<p>
+
+<i class="arrowr"></i> To answer a question about a population (of data).
+
+</p>
+
+<div class="bordered rounded border-dashed">
+
+<p style="text-align:justify;text-justify:inter-word;" class="small">
+
+In a perfect world, we would have access to the full
+
+<span class="info">population</span> so we would be able to answer the question
+
+based on data collected on all the <span class="u">observational units</span>
+
+of the population. We would know the value of the
+
+<span class="info">true parameter</span> we are interested in.
+
+</p>
+
+</div>
+
+<p>
+
+But usually we just have <span class="danger">one sample</span>.
+
+</p>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="left-justify">
+
+Statistics is about using a <span class="danger">sample</span>, or many samples,
+
+</p>
+
+<p class="left-justify">
+
+to make <span class="warning">inferences</span> about the <span class="info">population</span> parameters.
+
+</p>
+
+</div>
+
+<div style="justify-content:center;">
+
+<svg viewBox="0 0 864 432" class="graphic" style="height:55vh;">
+
+<use xlink:href="lib/img/inferences.svg#figure_1"></use>
+
+<use xlink:href="lib/img/inferences.svg#figure_2"></use>
+
+<use xlink:href="lib/img/inferences.svg#figure_3"></use>
+
+<use xlink:href="lib/img/inferences.svg#figure_4"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Describing A Dataset -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Describing A Dataset</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="big" style="grid-column:1/3;">
+
+<p>
+
+When describing a dataset, we generally consider the following three questions:
+
+</p>
+
+</div>
+
+<div style="height:100%;">
+
+<!-- LEFT -->
+
+<ul class="normal down-2">
+
+<li>What is the general <span class="danger">shape</span> of the data?</li>
+
+<li>Where are the data values <span class="danger">centered</span>?</li>
+
+<li>How do the data <span class="danger">vary</span>?</li>
+
+</ul>
+
+<p class="sided border-orange">These are all aspects of what we call the <span class="orange">distribution</span> of the data.</p>
+
+</div>
+
+<div style="height:100%">
+
+<!-- RIGHT -->
+
+<svg width="100%" viewBox="0 50 576 200">
+
+<use xlink:href="lib/img/dotplot-distribution.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<p class="sided border-info fragment" style="grid-column: 1/3;">We use some simple arithmetic, which depends (a little) on what the data distribution represents, to describe these aspects of the data.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Recall that our purpose, in statistics, is to gain some insight into the world by taking finite samples.</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- Shape -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Shape</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<svg width="75%" viewBox="0 42 576 216" style="margin-left: auto; margin-right: auto;">
+
+<use xlink:href="lib/img/dotplot-distribution.svg#axes_1"></use>
+
+<use class="fragment" xlink:href="lib/img/dotplot-distribution.svg#axes_2"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+When we talk about the shape, we generally mean the shape of the envelope, if a histogram,
+
+or the shape of the density function.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- General Shape Of A Distribution  -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>General Shape Of A Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<ul>
+
+<li>
+
+A <span class="warning strong">symmetric</span> distribution is one in which the left and right hand sides of the distribution are roughly equally balanced.
+
+</li>
+
+<li class="fragment" data-fragment-index=1>
+
+A <span class="info strong">skewed</span> (asymmetric) distribution
+
+is one in which there is no such equal balance.
+
+<span class="u-info highlight-info fragment" data-fragment-index="2">Right-skewness</span> refers to a longer right tail,
+
+while <span class="u-danger highlight-danger fragment" data-fragment-index="3">left-skewness</span> correspond to a
+
+longer left tail.
+
+</li>
+
+<li class="fragment" data-fragment-index=4>
+
+A <span class="success strong">uniform</span> distribution is a specific symmetric distribution in which all outcomes are equally likely.
+
+</li>
+
+</ul>
+
+<div class="box-width">
+
+<svg width="85%" viewBox="0 0 720 216" style="margin-top: 0;">
+
+<use xlink:href="lib/img/distribution-shape.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/distribution-shape.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index=3 xlink:href="lib/img/distribution-shape.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index=4 xlink:href="lib/img/distribution-shape.svg#axes_4"></use>
+
+<use class="fragment" data-fragment-index=5 xlink:href="lib/img/distribution-shape.svg#axes_5"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Note that I'm drawing these all as continuous examples, but the same holds true if these were histograms (discretized)</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Example: Distributions -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Example: Distributions</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="height:100%">
+
+<h4>Internet access in the world</h4>
+
+<img src="lib/img/distribution-internet-coverage.svg" width=100%>
+
+</div>
+
+<div style="height:100%">
+
+<h4>Time between Old Faithful geyser eruptions</h4>
+
+<img src="lib/img/distribution-old-faithful.svg" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Central Tendency -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Central Tendency</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<svg width="75%" viewBox="0 42 576 216" style="margin-left: auto; margin-right: auto;">
+
+<use xlink:href="lib/img/dotplot-distribution.svg#axes_1"></use>
+
+<use xlink:href="lib/img/dotplot-distribution.svg#axes_2"></use>
+
+<use class="fragment" xlink:href="lib/img/dotplot-distribution.svg#axes_3"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+When we talk about the central tendency, we refer to the point where the probability mass, or density, function is greatest.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- The Mean -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Mean</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<!-- LEFT -->
+
+<p>The arithmetic mean is generally calculated as:</p>
+
+<p class="big info">$$\bar{x}=\frac{1}{N}\sum_{i=1}^{N}x_i$$</p>
+
+<p>
+
+Calculation:
+
+$$\begin{aligned}
+
+\bar{x} &=\frac{x_{1}+x_{2}+...+x_{n}}{n} \\
+
+&=\frac{\textrm{sum of all the observations}}{\textrm{number of observations}}
+
+\end{aligned}$$
+
+</p>
+
+<p class="left-justify smaller">
+
+Read: "ex-bar", we can see that it represents the sum of a random variable
+
+when all values carry <span class="danger">equal weights</span> $(\frac{1}{N})$.
+
+</p>
+
+</div>
+
+<div class="left-justify fragment" data-fragment-index="1">
+
+<!-- RIGHT -->
+
+<p>
+
+We can generalize the function if the weights <span class="warning">are not equal</span>.
+
+</p>
+
+<p>
+
+Let $w(a)$ be an indicator of value $a$, and $\sum_{b \in S} w(b)$ is the sum of all
+
+possible outcomes in the sample space, $S$.
+
+</p>
+
+<p>
+
+Then $p(x) = \frac{w(x)}{\sum_{x \in S} w(x)}$
+
+is the <span class="info em">weight of value X</span>.
+
+</p>
+
+<p>
+
+Thus, the <span class="success">weighted Mean</span> of random variable $X$
+
+is: <span class="success">$$\bar{x}_w = \sum_{i=1}^{N}x_i p(x_i)$$</span>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>An indicator function is a function that counts the number of occurrences.</p>
+
+<p>
+
+Looks familiar! We also call this the first central moment, the expected value of the random variable.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- The Median -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Median</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p>
+
+The <span class="danger">median</span> of an <span class="u-danger">ordered</span> set of data values is:
+
+</p>
+
+<ul>
+
+<li>The average of the middle 2 values (for an even number of entries)</li>
+
+<li>The middle entry (for an odd number of entries)</li>
+
+</ul>
+
+</div>
+
+<div class="grid-generic box-width" style="grid-template-columns:6fr 4fr;grid-auto-rows:auto;gap:1vmin;align-items:center;">
+
+<svg width="100%" viewBox="0 0 239.5 54">
+
+<use xlink:href="lib/img/median.svg#median1"></use>
+
+</svg>
+
+<p class="warning" data-fragment-index=2>
+
+mean of $(\frac{n}{2})^{th}$ and $(\frac{n}{2}+1)^{th}$ observations
+
+</p>
+
+<svg width="100%" viewBox="0 54 239.5 54">
+
+<use xlink:href="lib/img/median.svg#median2"></use>
+
+</svg>
+
+<p class="warning"> $(\frac{n+1}{2})^{th}$ observation</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Note that the weight of the two values in the middle are equal.
+
+</p>
+
+<p>
+
+Sometimes referred to as a measure of location as it tells us where the data are.
+
+<br>
+
+Median is the value which occupies the middle position when all the observations are arranged in an ascending/descending order. It divides the frequency distribution exactly into two halves. Fifty percent of observations in a distribution have scores at or below the median. Hence median is the 50th percentile.[2] Median is also known as "positional average"
+
+<br>
+
+To find the median, your numbers have to be listed in numerical order from smallest to largest, so you may have to rewrite your list before you can find the median.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- The Mode -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Mode</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="left-justify em">
+
+The <span class="danger">mode</span> is the value that occurs most often in the dataset. If no value in the dataset is repeated, then there is no mode this particular dataset.
+
+</p>
+
+<p class="down-3">
+
+What is the mode in the dataset below?
+
+</p>
+
+<table class="normal">
+
+<tr>
+
+<td>4</td>
+
+<td class="fragment highlight-bg-warning" data-fragment-index=1>5</td>
+
+<td>9</td>
+
+<td class="fragment highlight-bg-warning" data-fragment-index=1>5</td>
+
+<td>11</td>
+
+<td>7</td>
+
+<td class="fragment highlight-bg-warning" data-fragment-index=1>5</td>
+
+<td>3</td>
+
+<td>7</td>
+
+<td>8</td>
+
+<td>6</td>
+
+<td class="fragment highlight-bg-warning" data-fragment-index=1>5</td>
+
+<td>12</td>
+
+</tr>
+
+</table>
+
+<div class="grid-generic fragment" style="grid: template columns 1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="justify-items:end;">
+
+<img src="lib/img/distribution-multimodal.svg" width=100%>
+
+</div>
+
+<div style="height:100%;align-content:center;">
+
+<p>
+
+<span class="u em">Note:</span> In a bimodal distribution, the taller
+
+peak is called the <span class="strong em">major mode</span> and the
+
+shorter one is referred as the <span class="strong em">minor mode</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Resistance -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Resistance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="left-justify sided border-info">
+
+<span class="danger">Resistance</span> is related to the <span class="u-danger">impact of outliers</span> on a statistic.
+
+In general, we say that a statistic is resistant if it is relatively <span class="danger">unaffected by extreme values</span>.
+
+</p>
+
+<p>The median and the mode are resistant, while the mean is not.</p>
+
+<div class="grid-generic box-width" style="grid-template-columns:7fr 1.5fr 1.5fr;grid-auto-rows:1ft;gap:1vmin;">
+
+<table class="fragment border-top border-bottom small down-2" data-fragment-index=0>
+
+<tr>
+
+<td>2.5</td>
+
+<td>3.2</td>
+
+<td>3.5</td>
+
+<td>3.9</td>
+
+<td>4.0</td>
+
+<td>4.4</td>
+
+<td>5.3</td>
+
+<td>5.9</td>
+
+<td>6.1</td>
+
+<td>6.4</td>
+
+<td class="fragment highlight-bg-warning" data-fragment-index=2><span class="fragment" data-fragment-index=2>30</span></td>
+
+</tr>
+
+</table>
+
+<div class="right-justify fragment" style="align-content: center;" data-fragment-index="1">
+
+<p>
+
+<span class="em u">Mean:</span> 4.52 <br>
+
+<span class="em u">Median:</span> 4.2
+
+</p>
+
+</div>
+
+<div class="right-justify fragment" style="align-content: center;" data-fragment-index="3">
+
+<p>
+
+<span class="em u">Mean:</span> <span class="fragment highlight-bg-warning" data-fragment-index=3>6.84</span> <br>
+
+<span class="em u">Median:</span> <span class="fragment highlight-bg-warning" data-fragment-index=3>4.4</span>
+
+</p>
+
+</div>
+
+</div>
+
+<div class="box-width">
+
+<img width="100%" src="lib/img/mean-median-mode.svg">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+In positively skewed distributions, the mean is greater than the median
+
+<br>
+
+In negatively skewed distributions, the mean is smaller than the median
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Averages Can Be Misleading -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Averages Can Be Misleading</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<svg width="60%" viewBox="0 0 432 432" style="margin-top: 1%;">
+
+<use xlink:href="lib/img/map-usa-ship.svg#map"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/map-usa-ship.svg#panama"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/map-usa-ship.svg#caphorn"></use>
+
+<use class="fragment" data-fragment-index=3 xlink:href="lib/img/map-usa-ship.svg#average"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Not only mean is not resistant, but sometimes it doesn't represent the data very well.
+
+</p>
+
+<p>
+
+The Panama Canal shortens the trip from New York to San Francisco by 7,872 nautical miles. Without the canal, ships would need to travel around Cape Horn at the tip of South America, making the journey roughly 13,000 miles.
+
+</p>
+
+<p>
+
+The average distance, by boat, from New York to San Francisco is 10,436, right through the middle of South America. Make sure your statements pass logic!
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Pick The Central Tendency Descriptor Wisely -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Pick The Central Tendency Descriptor Wisely</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p>Number of children per household in China (2012)</p>
+
+<p class="normal"><span class="fragment" data-fragment-index=1>Mean: <span class="warning">1.55</span></span><br>
+
+<span class="fragment" data-fragment-index=2>Median: <span class="info">1</span></span></p>
+
+<p class="fragment down-5" data-fragment-index=3>
+
+<i class="fas fa-arrow-circle-right"></i> More representative of the "typical" 2012 family
+
+(<span class="u-info">One Child Policy</span>)
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="0 0 300 225">
+
+<use xlink:href="lib/img/family.svg#family"></use>
+
+<use class="fragment current-visible" data-fragment-index=1 xlink:href="lib/img/family.svg#childrenhalf"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/family.svg#childrenfull"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Spread: The "Variation" Of Points Within -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Central Variability:</h2>
+
+<h4>"Spread" or "Variation" of Data Points</h4>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="justify-items:center;">
+
+<svg width="75%" viewBox="0 42 576 216">
+
+<use xlink:href="lib/img/dotplot-distribution.svg#axes_1"></use>
+
+<use xlink:href="lib/img/dotplot-distribution.svg#axes_2"></use>
+
+<use xlink:href="lib/img/dotplot-distribution.svg#axes_3"></use>
+
+<use class="fragment" xlink:href="lib/img/dotplot-distribution.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We've talked about the general shape, and the general </p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Variance and Standard Deviation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Variance and Standard Deviation</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="framed border-pop">A common measure of data variability is the <span class="orange">variance</span>, which measures the squared distance each data point is from the mean, on average.</p>
+
+<div class="grid-generic left-justify" style="grid-template-columns:6fr 4fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="big">
+
+<p>
+
+$s^2 = \frac{\sum(x_{i}-\bar{x})^2}{n-1}$ <span class="info fragment" data-fragment-index="1">Variance</span>
+
+</p>
+
+<p>
+
+$s^2 = \frac{(x_{1}-\bar{x})^2+(x_{2}-\bar{x})^2+...+(x_{n}-\bar{x})^2}{n-1}$
+
+</p>
+
+<p>
+
+$s^2 = \frac{\textrm{sum of observed squared distance from sample mean}}{\textrm{number of observations - 1}}$
+
+</p>
+
+</div>
+
+<div>
+
+<p>
+
+<span class="warning">$s^2$</span> for a sample <br>
+
+<span class="warning">$\sigma^2$</span> for a population
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+<span class="strong">For standard deviation, we use:</span><br />
+
+<span class="info">$s = \sqrt{s^2}$</span> and <span class="info">$\sigma = \sqrt{\sigma^2}$</span>.
+
+</p>
+
+</div>
+
+<div class="sided border-info fragment" style="grid-column: 1/3;" data-fragment-index="2">
+
+<p>
+
+The standard deviation puts the variance into the same units as the data,
+
+providing a measure of how large the average standardized distance from the center is.
+
+</p>
+
+<p class="small">
+
+<span class="em">Note:</span> The use of $n-1$ in calculating variance helps
+
+to ensure that our estimate of the population variance is <span class="warning">unbiased</span> and accounts for the
+
+extra uncertainty introduced by estimating the population mean from the sample itself.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>The larger the variance, the more spread out the data are. However, since variance is in squared units, we often use standard deviation to interpret variability in the original units of the data.</p>
+
+<p>Standard deviation measures the average distance from the mean, in the same units as the data. This makes it easier to understand how spread out the values are around the mean.</p>
+
+<p><strong>QUESTION:</strong> Can you think of an assumption or two we have to make if we report the standard deviation?</p>
+
+<ul>
+
+<li><strong>Bias Correction</strong>: Dividing by <i>n-1</i> corrects for the bias of underestimating the population variance when using the sample mean, making the sample variance an unbiased estimator.</li>
+
+<li><strong>Degrees of Freedom</strong>: Accounting for the loss of one degree of freedom (due to estimating the mean from the sample itself) requires dividing by <i>n-1</i> instead of <i>n</i>.</li>
+
+<li><strong>Increased Accuracy</strong>: This adjustment increases the accuracy of the variance estimate, reflecting the true variability in the population more accurately.</li>
+
+</ul>
+
+<p>But what is "bias"?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Bias -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Bias</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="bigger left-justify">
+
+<p>
+
+<span class="u em warning">Sampling bias:</span>
+
+when a sampling method systematically yields results that are either too high or too low.
+
+</p>
+
+<p class="small">
+
+<i class="fas fa-arrow-circle-right warning"></i>
+
+can be avoided by using good sampling technique (<span class="warning">randomized</span>).
+
+</p>
+
+<p class="small">
+
+<span class="u em info">Sampling variation:</span>
+
+natural variation in results from one random sample to next.
+
+</p>
+
+<p class="small">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+can be reduced by using a <span class="info">larger sample</span>.
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/bias-variance.svg" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Example: Standard Deviation -->
+
+<!-- Standard Deviation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Standard Deviation</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="sided small" style="grid-column:1/3;">Let's consider 2 sets of data, both have a mean of 100</p>
+
+<div style="height:100%;">
+
+<!-- left -->
+
+<table style="border-collapse: collapse;">
+
+<thead>
+
+<th class="bg-muted">Numbers</th>
+
+<th class="bg-muted">Mean</th>
+
+<th class="bg-muted">SD</th>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>100, 100, 100, 100, 100</td>
+
+<td>100</td>
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>90, 90, 100, 110, 110</td>
+
+<td>100</td>
+
+<td>10</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="left-justify" style="height:100%;">
+
+<!-- right -->
+
+<p><span class="em u">
+
+Set 1:</span> all values are equal to the mean, so there is no variability at all
+
+</p>
+
+<p><span class="em u">
+
+Set 2:</span> one value equals the mean and
+
+other four values are about 10 points away from the mean. So the
+
+<span class="danger">average distance away from the
+
+mean</span> is about 10
+
+</p>
+
+</div>
+
+<div class="small" style="grid-column: 1/3;;"> <!-- bottom -->
+
+<p class="u em fragment" data-fragment-index=1 style="margin-bottom: 0;">Example, procedure for Set 2:</p>
+
+<ol class="two-column-list fragment" data-fragment-index=1>
+
+<li>1. Calculate the sample mean: $\bar{x}=100$</li>
+
+<li>4. Sum result of step 3 divide by $(n-1)$: $s^2=\frac{400}{5-1}=\frac{400}{4}=100$</li>
+
+<li>2. Calculate the difference between each value and the mean:
+
+[-10, -10, 0, 10, 10]</li>
+
+<li>5. Square root result in step 4: $s=\sqrt{100}=10$</li>
+
+<li>3. Square each difference in step 2: [100, 100, 0, 100, 100]</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+When we take the square root, we are only concerned with the positive square root,
+
+but given the assumption of symmetry (normal distribution), we can think of it as
+
+plus or minus some variability.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Use SD With Caution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Use SD With Caution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1.18fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;">
+
+<p class="sided border-danger">
+
+Like the mean, the standard deviation does not cope well with skewed distributions.
+
+</p>
+
+</div>
+
+<div style="height:100%;">
+
+<img class="framed" src="lib/img/sd-bad-use-cell-paper-title.png" width="100%">
+
+</div>
+
+<div style="height:100%;">
+
+<svg width="100%" viewBox="0 0 199.92 129.601" class="bordered">
+
+<use xlink:href="lib/img/sd-bad-use-cell-paper-fig.svg#figure"></use>
+
+<use class="fragment" xlink:href="lib/img/sd-bad-use-cell-paper-fig.svg#circle"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- SD Misuse Is Everywhere -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>SD Misuse Is Everywhere</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<svg width="90%" viewBox="0 0 813.114 458.502">
+
+<use xlink:href="lib/img/sd-barplot.svg#fig"></use>
+
+<use class="fragment" xlink:href="lib/img/sd-barplot.svg#inset"></use>
+
+<use class="fragment" xlink:href="lib/img/sd-barplot.svg#range"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+What have I used bar plots similar to these for thus far? COUNTS, as in HISTOGRAMS!
+
+</p>
+
+<p>
+
+We will discuss data visualization over and over in different contexts throughout the semester.
+
+You will find I hold the misuse of bar charts, or dynamite plunger plots as I call them,
+
+in extreme contempt.
+
+</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/dataviz.png" id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Extended Measures Of Spread
+                </h2>
+                <h3>
+                  Ways To Describe Intervals And Ranges
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-3.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Aside from Variance and Standard Deviation, we can use other measures of spread to communicate properties of the data distribution.</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- The Range -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Range</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="quoted">
+
+The <span class="danger">range</span> gives you the most basic information about the spread of a dataset. It is calculated by the (arithmetic) <span class="u-danger">difference between the lowest and highest data value</span>.
+
+</p>
+
+<svg width="75%" viewBox="0 0 239.5 81" style="margin-top: 1%;">
+
+<use xlink:href="lib/img/min-max-range.svg#minmax"></use>
+
+<use class="fragment" xlink:href="lib/img/min-max-range.svg#range"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Percentiles -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Percentiles</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="quoted just-justify">
+
+The <span class="danger">$k^{th}$ percentile</span> is a value in
+
+the dataset that has $k\%$ of the data values at or below it and $(100 - k)\%$
+
+of the data values at or above it.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:5.5fr 4.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<svg width="100%" viewBox="0 0 576 252">
+
+<use xlink:href="lib/img/quartiles.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<div class="small left-justify">
+
+<p>
+
+<span class="u em">Note:</span> <br>
+
+Here our dataset contains 40 data points.
+
+So each data point correspond to $\frac{100}{40}=2.5\%$ of the data.
+
+</p>
+
+<p class="sided border-info">A "quantile" is simply the fractional position, i.e., $\frac{k}{100\%}$.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Percentiles and Quantiles -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Quantiles and Percentiles</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<!-- Bullet points explaining quantiles and percentiles calculation -->
+
+<ul>
+
+<li><span class="strong">Sort the data</span>: Arrange all observations in ascending order.</li>
+
+<li><span class="strong">Determine the quantile position</span>: Use $Q = \frac{(n+1) \times p}{100}$ for percentiles, where $n$ is the number of observations and $p$ is the percentile.</li>
+
+<li><span class="strong">Interpolate if necessary</span>: If $Q$ is <span class="em">not an integer</span>, interpolate between the two closest ranks to find the value.</li>
+
+<li><span class="strong">For quartiles</span>: Quartiles divide the data into four equal parts. Use $p = 25, 50, 75$ for the 1st, 2nd (median), and 3rd quartiles, respectively.</li>
+
+<li><span class="strong">Special case - Median</span>: The median (2nd quartile) splits the dataset in half. Use $p = 50$.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Interquartile Range -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Interquartile Range</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="quoted">
+
+The median divides the data into two equal halves (it is the $50^{th}$ percentile). If we divide each of those halves again, we obtain two additional statistics known as the <span class="danger">first (Q1) and third (Q3) quartiles</span>, which are the $25^{th}$ and $75^{th}$ percentiles.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:5.5fr 4.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify">
+
+<p>
+
+<span class="u">Interquartile range:</span> <span class="span">$\textrm{IQR} = Q3 - Q1$</span>
+
+</p>
+
+<img src="lib/img/quartiles.svg" width=100%>
+
+</div>
+
+<div>
+
+<p class="smaller">
+
+A value is considered an <span class="info">outlier</span> if it is:
+
+</p>
+
+<div class="framed border-info">
+
+<p>Smaller than $Q1-1.5\times IQR$</p>
+
+<p>or</p>
+
+<p>larger than $Q3+1.5\times IQR$</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>To objectively identify outliers in a dataset, we consider measures of location
+
+and spread to determine when a value significantly deviates from typical cases.
+
+A common approach involves using quartiles and the interquartile range (IQR).
+
+Typically, most data points fall within approximately 1.5 times the IQR from the
+
+quartiles. This method helps in assessing whether a value, such as a notably
+
+high lifespan, is an outlier by comparing it against this standard.
+
+</p>
+
+<p>Why do we care about summaries of the data? There are other kinds of ranges.</p>
+
+</aside>
+
+</section>
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Displaying the data: Boxplot</h2>
+
+</div>
+
+<div class="content">
+
+<p class="sided small left-justify">
+
+A boxplot is a graphical display of the
+
+<span class="danger">five number summary</span> for a quantitative variable.
+
+It shows the general shape of the distribution, identifies the middle 50% of
+
+the data, and highlights any outliers.
+
+</p>
+
+<div class="box-width" style="display:flex;flex-direction:row;display:flex;text-align:center;justify-content:center;">
+
+<div class="half-width">
+
+<img src="lib/img/boxplot-general.svg" width=100%>
+
+</div>
+
+<div class="half-width">
+
+<p class="u em">A boxplot includes:
+
+<ul style="font-size:80%;">
+
+<li>A box stretching from <span class="orange">Q1</span> to <span class="orange">Q3</span></li>
+
+<li>A line that divides the box drawn at the <span class="orange">median</span></li>
+
+<li>A line from each quartile to the <span class="orange">most extreme data value</span> <span class="u-orange">that is not an outlier</span>. (if no outliers minimum and maxixum)</li>
+
+<li>Each <span class="orange">outlier</span> plotted individually</li>
+
+</ul>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Displaying the data: Boxplot v. Histogram</h2>
+
+</div>
+
+<div class="content">
+
+<div class="full-width" style="display:flex;flex-direction:row;display:flex;text-align:center;justify-content:center;">
+
+<div class="half-width">
+
+<img src="lib/img/boxplot-ex.svg" width=100% />
+
+</div>
+
+<div class="half-width" />
+
+<img src="lib/img/boxplot-ex-distributions.svg" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Definitions Slide 1 -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Definitions</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width left-justify small" style="grid-template-columns: 2.5fr 7.5fr; grid-auto-rows: auto; row-gap: 1vmin; column-gap: 0;">
+
+<div class="small border-bottom" data-fragment-index="1" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Normal Distribution</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="2" style="height:100%;align-items:center;">
+
+<p>A continuous probability distribution characterized by a symmetric, bell-shaped curve. Often used due to the Central Limit Theorem.</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="3" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Mean</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="4" style="height:100%;align-items:center;">
+
+<p>The arithmetic average of a set of values. It represents the sum of all observations divided by the number of observations.</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="5" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Median</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="6" style="height:100%;align-items:center;">
+
+<p>The middle value of an ordered dataset. It is resistant to outliers and provides a central value when data is skewed.</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="1" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Mode</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="2" style="height:100%;align-items:center;">
+
+<p>The most frequently occurring value in a dataset. A dataset can be unimodal, bimodal, or have no mode if no value repeats.</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="3" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Variance</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="4" style="height:100%;align-items:center;">
+
+<p>A measure of data variability that calculates the average squared distance from the mean. It indicates how spread out the data points are.</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="5" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Standard Deviation</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="6" style="height:100%;align-items:center;">
+
+<p>The square root of the variance. It measures the average distance from the mean, in the same units as the data, making it easier to interpret variability.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Definitions Slide 2 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Definitions</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width left-justify small" style="grid-template-columns: 2.5fr 7.5fr; grid-auto-rows: auto; row-gap: 1vmin; column-gap: 0;">
+
+<div class="small border-bottom" data-fragment-index="1" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Skewness</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="2" style="height:100%;align-items:center;">
+
+<p>A measure of asymmetry in a distribution. Right-skewness refers to a longer right tail, while left-skewness corresponds to a longer left tail.</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="3" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Range</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="4" style="height:100%;align-items:center;">
+
+<p>The difference between the maximum and minimum values in a dataset. It gives the most basic measure of spread.</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="5" style="height:100%;align-items:center;">
+
+<p><i class="fa-solid fa-file-contract"></i> Interquartile Range (IQR)</p>
+
+</div>
+
+<div class="small border-bottom" data-fragment-index="6" style="height:100%;align-items:center;">
+
+<p>The range between the first quartile (Q1) and the third quartile (Q3). It measures the spread of the middle 50% of data and is resistant to outliers.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 06
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2024</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+autoPlayMedia: null,
+autoSlideMethod: "Reveal.navigateNext",
+autoSlideStoppable: true,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideAddressBar: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+parallaxBackgroundHorizontal: null,
+parallaxBackgroundImage: "",
+parallaxBackgroundSize: "",
+parallaxBackgroundVertical: null,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.1,
+maxScale: 1.56,
+plugins: [RevealNotes, RevealHighlight, RevealMath, Splash, Vizzy],
+mathjax3: {
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ME3040_splash.png",
+text: "Welcome to ME3040!",
+minimumDisplay: 2,
+},
+});
+    </script>
+  </body>
+</html>
