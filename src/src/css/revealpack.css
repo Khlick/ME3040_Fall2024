@@ -5,221 +5,223 @@
   margin: 0 !important;
   padding: 0 !important; }
 
-.reveal {
-  /*
-  .title-slide
-  - Grid layout for title slides with 4 rows, 5 columns
-  - fill-view mixin scales to fit view
+/*
+.title-slide
+- Grid layout for title slides with 4 rows, 5 columns
+- fill-view mixin scales to fit view
 
-  .image
-  - Covers full grid, background image settings, z-index 1
+.image
+- Covers full grid, background image settings, z-index 1
 
-  .headline
-  - Top right, spans 2 columns, z-index 3
-  - fill-view mixin, bold h2
+.headline
+- Top right, spans 2 columns, z-index 3
+- fill-view mixin, bold h2
 
-  .sub-header
-  - Middle right, spans 2 columns, z-index 3
-  - .by paragraph with specific font and styling
+.sub-header
+- Middle right, spans 2 columns, z-index 3
+- .by paragraph with specific font and styling
 
-  .byline
-  - Bottom right, spans 2 columns, z-index 3
-  - .byinfo paragraph with specific font and styling
+.byline
+- Bottom right, spans 2 columns, z-index 3
+- .byinfo paragraph with specific font and styling
 
-  .background
-  - Partial cover, spans 2 columns, z-index 2
-  - Gradient background, border-radius, margin adjustment
-  */
-  /*
-  Provide a generic slide layout using grid css. This is used for 
-  section title content.
-  .grid-wrapper
-  - Responsive grid layout for slides: header, content, footer
-  - fill-view mixin scales to fit view
-  - 3 rows: auto (header), 1fr (content), min-content (footer)
-  - 3 columns: 1fr each
+.background
+- Partial cover, spans 2 columns, z-index 2
+- Gradient background, border-radius, margin adjustment
+*/
+/*
+Provide a generic slide layout using grid css. This is used for 
+section title content.
+.grid-wrapper
+- Responsive grid layout for slides: header, content, footer
+- fill-view mixin scales to fit view
+- 3 rows: auto (header), 1fr (content), min-content (footer)
+- 3 columns: 1fr each
 
-  .header, h2
-  - Centered in header area
+.header, h2
+- Centered in header area
 
-  .content
-  - Centered flexbox in content area
-  - Child divs take full width
+.content
+- Centered flexbox in content area
+- Child divs take full width
 
-  .foot-left, .foot-center, .foot-right
-  - Footer areas with respective text alignment, smaller font
+.foot-left, .foot-center, .foot-right
+- Footer areas with respective text alignment, smaller font
 
-  .section-title-content
-  - Specific grid layout for section titles
-  - Areas: section-number, headlines, gap
-  - .section-number: Large, bold, stylized number
-  - .headlines: Column flexbox, custom fonts, colors
-  */ }
-  .reveal .title-slide {
-    margin: 0;
-    padding: 0;
-    height: calc(var(--slide-height) * 0.99 * var(--slide-scale));
-    width: 100%;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-columns: 10vw 1fr 1fr 1fr 1fr; }
-    .reveal .title-slide .image {
-      grid-row: 1 / 5;
-      grid-column: 1 / 6;
-      z-index: 1;
-      background-repeat: no-repeat !important;
-      background-position: center center !important;
-      background-size: contain; }
-    .reveal .title-slide .headline {
-      grid-row: 1 / 2;
-      grid-column: 4 / 6;
-      z-index: 3;
-      display: block;
-      justify-self: right;
-      align-self: center;
-      align-content: start;
-      height: calc(var(--slide-height) * 0.15 * var(--slide-scale));
-      width: 100%; }
-      .reveal .title-slide .headline h2 {
-        font-weight: bold; }
-    .reveal .title-slide .sub-header {
-      grid-row: 2 / 4;
-      grid-column: 4 / 6;
-      z-index: 3;
-      align-self: end; }
-      .reveal .title-slide .sub-header p.by {
-        margin: 0;
-        padding: 0;
-        font-family: 'Playfair Display', serif;
-        font-weight: normal;
-        text-align: end; }
-    .reveal .title-slide .byline {
-      grid-row: 4 / 6;
-      grid-column: 4 / 6;
-      align-self: start;
-      z-index: 3; }
-      .reveal .title-slide .byline p.byinfo {
-        margin: 0;
-        padding: 0;
-        font-family: 'PT Sans', sans-serif;
-        font-style: italic;
-        text-align: end; }
-    .reveal .title-slide .background {
-      grid-row: 1 / 5;
-      grid-column: 3 / 6;
-      z-index: 2;
-      border-radius: 2rem;
-      margin-right: -4vmin; }
-  .reveal footer.main-footer {
-    position: absolute;
-    width: calc(100% - 1em);
-    bottom: 0;
-    font-size: 30%;
+.section-title-content
+- Specific grid layout for section titles
+- Areas: section-number, headlines, gap
+- .section-number: Large, bold, stylized number
+- .headlines: Column flexbox, custom fonts, colors
+*/
+.reveal .title-slide {
+  margin: 0;
+  padding: 0;
+  height: calc(var(--slide-height) * 0.99 * var(--slide-scale));
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 10vw 1fr 1fr 1fr 1fr; }
+  .reveal .title-slide .image {
+    grid-row: 1 / 5;
+    grid-column: 1 / 6;
     z-index: 1;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5em; }
-  .reveal .grid-generic {
-    align-self: start;
-    justify-self: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
-    align-items: start;
-    justify-content: center;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: contain; }
+  .reveal .title-slide .headline {
+    grid-row: 1 / 2;
+    grid-column: 4 / 6;
+    z-index: 3;
+    display: block;
+    justify-self: right;
+    align-self: center;
     align-content: start;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0; }
-    .reveal .grid-generic > div {
-      display: grid;
-      width: 100%; }
-      .reveal .grid-generic > div p {
-        margin-top: 3px;
-        margin-bottom: 0;
-        padding: 0; }
-    .reveal .grid-generic > p {
-      width: 100%;
-      margin-top: 5px;
+    height: calc(var(--slide-height) * 0.15 * var(--slide-scale));
+    width: 100%; }
+    .reveal .title-slide .headline h2 {
+      font-weight: bold; }
+  .reveal .title-slide .sub-header {
+    grid-row: 2 / 4;
+    grid-column: 4 / 6;
+    z-index: 3;
+    align-self: end; }
+    .reveal .title-slide .sub-header p.by {
+      margin: 0;
+      padding: 0;
+      font-family: 'Playfair Display', serif;
+      font-weight: normal;
+      text-align: end; }
+  .reveal .title-slide .byline {
+    grid-row: 4 / 6;
+    grid-column: 4 / 6;
+    align-self: start;
+    z-index: 3; }
+    .reveal .title-slide .byline p.byinfo {
+      margin: 0;
+      padding: 0;
+      font-family: 'PT Sans', sans-serif;
+      font-style: italic;
+      text-align: end; }
+  .reveal .title-slide .background {
+    grid-row: 1 / 5;
+    grid-column: 3 / 6;
+    z-index: 2;
+    border-radius: 2rem;
+    margin-right: -4vmin; }
+
+.reveal footer.main-footer {
+  position: absolute;
+  width: calc(100% - 1em);
+  bottom: 0;
+  font-size: 30%;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em; }
+
+.reveal .grid-generic {
+  align-self: start;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: start;
+  justify-content: center;
+  align-content: start;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+  .reveal .grid-generic > div {
+    display: grid;
+    width: 100%; }
+    .reveal .grid-generic > div p {
+      margin-top: 3px;
       margin-bottom: 0;
       padding: 0; }
-  .reveal .grid-wrapper {
-    margin: 0;
-    padding: 0;
-    height: calc(var(--slide-height) * 0.95 * var(--slide-scale));
+  .reveal .grid-generic > p {
     width: 100%;
-    box-sizing: border-box;
-    display: grid;
-    grid-template-areas: "header header header" "content content content" "foot-left foot-center foot-right";
-    grid-template-rows: auto 1fr min-content;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 1vmin; }
-    .reveal .grid-wrapper .header {
-      grid-area: header;
-      align-self: center;
-      align-content: center; }
-    .reveal .grid-wrapper h2 {
-      grid-area: header;
-      align-self: center;
-      align-content: center; }
-    .reveal .grid-wrapper .content {
-      grid-area: content;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: column;
-      justify-content: center;
-      justify-items: center;
-      align-items: center;
-      align-content: center;
-      height: 100%; }
-      .reveal .grid-wrapper .content > div {
-        width: 100%; }
-    .reveal .grid-wrapper .foot-left {
-      grid-area: foot-left;
-      text-align: left;
-      font-size: 40%; }
-    .reveal .grid-wrapper .foot-center {
-      grid-area: foot-center;
-      text-align: center;
-      font-size: 40%; }
-    .reveal .grid-wrapper .foot-right {
-      grid-area: foot-right;
-      text-align: right;
-      font-size: 40%; }
-    .reveal .grid-wrapper .section-title-content {
-      grid-area: content;
-      display: grid;
-      grid-template-areas: "section-number headlines gap";
-      grid-template-columns: min-content 20fr 1fr;
-      align-items: center;
-      grid-column-gap: 6vmin;
-      height: 100%;
+    margin-top: 5px;
+    margin-bottom: 0;
+    padding: 0; }
+
+.reveal .grid-wrapper {
+  margin: 0;
+  padding: 0;
+  height: calc(var(--slide-height) * 0.95 * var(--slide-scale));
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-areas: "header header header" "content content content" "foot-left foot-center foot-right";
+  grid-template-rows: auto 1fr min-content;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1vmin; }
+  .reveal .grid-wrapper .header {
+    grid-area: header;
+    align-self: center;
+    align-content: center; }
+  .reveal .grid-wrapper h2 {
+    grid-area: header;
+    align-self: center;
+    align-content: center; }
+  .reveal .grid-wrapper .content {
+    grid-area: content;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    height: 100%; }
+    .reveal .grid-wrapper .content > div {
       width: 100%; }
-      .reveal .grid-wrapper .section-title-content .section-number {
-        grid-area: section-number;
-        display: flex;
-        place-self: start center;
-        align-items: start;
+  .reveal .grid-wrapper .foot-left {
+    grid-area: foot-left;
+    text-align: left;
+    font-size: 40%; }
+  .reveal .grid-wrapper .foot-center {
+    grid-area: foot-center;
+    text-align: center;
+    font-size: 40%; }
+  .reveal .grid-wrapper .foot-right {
+    grid-area: foot-right;
+    text-align: right;
+    font-size: 40%; }
+  .reveal .grid-wrapper .section-title-content {
+    grid-area: content;
+    display: grid;
+    grid-template-areas: "section-number headlines gap";
+    grid-template-columns: min-content 20fr 1fr;
+    align-items: center;
+    grid-column-gap: 6vmin;
+    height: 100%;
+    width: 100%; }
+    .reveal .grid-wrapper .section-title-content .section-number {
+      grid-area: section-number;
+      display: flex;
+      place-self: start center;
+      align-items: start;
+      margin: 0;
+      padding: 0;
+      transform: translateY(-6vmin); }
+      .reveal .grid-wrapper .section-title-content .section-number .large-number {
+        font-size: 8em;
+        font-weight: bold;
         margin: 0;
         padding: 0;
-        transform: translateY(-6vmin); }
-        .reveal .grid-wrapper .section-title-content .section-number .large-number {
-          font-size: 8em;
-          font-weight: bold;
-          margin: 0;
-          padding: 0;
-          text-align: top;
-          line-height: 1; }
-        .reveal .grid-wrapper .section-title-content .section-number h2 {
-          overflow-wrap: break-word; }
-      .reveal .grid-wrapper .section-title-content .headlines {
-        grid-area: headlines;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center; }
-        .reveal .grid-wrapper .section-title-content .headlines h2 {
-          align-self: center; }
+        text-align: top;
+        line-height: 1; }
+      .reveal .grid-wrapper .section-title-content .section-number h2 {
+        overflow-wrap: break-word; }
+    .reveal .grid-wrapper .section-title-content .headlines {
+      grid-area: headlines;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; }
+      .reveal .grid-wrapper .section-title-content .headlines h2 {
+        align-self: center; }
 
 .massive {
   font-size: 250% !important; }
@@ -281,16 +283,16 @@
 .box-width {
   width: 80% !important; }
 
-.center-justify, .center-justify * {
+.center-justify, .center-justify p, .center-justify div {
   text-align: center !important; }
 
-.left-justify, .left-justify * {
+.left-justify, .left-justify p, .left-justify div {
   text-align: left !important; }
 
-.right-justify, .right-justify * {
+.right-justify, .right-justify p, .right-justify div {
   text-align: right !important; }
 
-.just-justify, .just-justify * {
+.just-justify, .just-justify p, .just-justify div {
   text-align: justify !important;
   text-justify: inter-word !important;
   padding-right: 5px !important;

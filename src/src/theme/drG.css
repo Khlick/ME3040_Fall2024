@@ -813,21 +813,6 @@ hr {
 .as-code {
   font-family: "Fira Code", monospace !important; }
 
-.center-justify, .center-justify * {
-  text-align: center !important; }
-
-.left-justify, .left-justify * {
-  text-align: left !important; }
-
-.right-justify, .right-justify * {
-  text-align: right !important; }
-
-.just-justify, .just-justify * {
-  text-align: justify !important;
-  text-justify: inter-word !important;
-  padding-right: 5px !important;
-  padding-left: 5px !important; }
-
 .no-hang > * {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
