@@ -188,3 +188,38 @@ window.addEventListener("resize", updateSvgDimensions);
 document.getElementById(`z-0.5000`).classList.add('highlight-green');
 document.getElementById("p-value").classList.add('highlight-green');
 document.getElementById("z-value").classList.add('highlight-green');
+
+function setZ(z) {
+  const round = (x, n) => 
+    Number(parseFloat(Math.round(x * Math.pow(10, n)) / Math.pow(10, n)).toFixed(n));
+  barX = round(z, 2);
+  bar.attr("x", x(barX)-2.5)
+    .attr("y", y(normalDistribution(barX)))
+    .attr("height", height - y(normalDistribution(barX)));
+  updateArea();
+  previousBarX = barX;
+  document.querySelectorAll('.highlight-green, .highlight-red').forEach(cell => cell.classList.remove('highlight-green', 'highlight-red'));
+
+  const zProb = normalCDF(+barX.toFixed(2)).toFixed(4); // Using the normalCDF function to get the CDF value
+  let pcontainer = document.getElementById("p-value");
+  let zcontainer = document.getElementById("z-value");
+  if (barX >= 0 && barX < 3.5) {
+    document.getElementById(`z-${zProb}`).classList.add('highlight-green');
+    area.attr("fill", "rgba(0, 255, 0, 0.2)");
+    bar.attr("fill", "green");
+    pcontainer.innerHTML = zProb;
+    pcontainer.classList.add('highlight-green');
+    zcontainer.innerHTML = barX.toFixed(2);
+    zcontainer.classList.add('highlight-green');
+  } else if (barX < 0 && barX > -3.5) {
+    document.getElementById(`z-${(1 - zProb).toFixed(4)}`).classList.add('highlight-red');
+    area.attr("fill", "rgba(255, 0, 0, 0.2)");
+    bar.attr("fill", "red");
+    pcontainer.innerHTML = `1 - ${(1 - zProb).toFixed(4)} = ${zProb}`;
+    pcontainer.classList.add('highlight-red');
+    zcontainer.innerHTML = barX.toFixed(2);
+    zcontainer.classList.add('highlight-red');
+  }
+}
+
+window.setZ = setZ;

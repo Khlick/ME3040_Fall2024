@@ -504,9 +504,13 @@ That is, we get a location in the dataset where the pth fraction of the number o
 
 <p><strong>
 
-How does this relate to the normal distribution? Imagine you have a dataset and you want to know
+How does this relate to the normal distribution?
 
 </strong>
+
+We can use a similar approach and map our data points to the cdf values of the normal distribution.
+
+To do that, we need another function.
 
 </p>
 
@@ -592,7 +596,21 @@ How does this relate to the normal distribution? Imagine you have a dataset and 
 
 <aside class="notes">
 
-<p>Before we get to the normal distribution, we need to know how to </p>
+<p>
+
+Now we can map our sample size to the cumulative probability points in the normal distribution.
+
+More specifically, to the standard normal with mean 0 and standard deviation of 1.
+
+</p>
+
+<p>
+
+But, recall I said the standard normal distribution assumes values on the interval -infty to + infty?
+
+We have to deal with that.
+
+</p>
 
 </aside>
 
@@ -673,6 +691,24 @@ with the theoretical distribution, providing a more accurate comparison.
 </div>
 
 </div>
+
+<aside class="notes">
+
+<p>This is where the empirical cumulative density function comes in.</p>
+
+<p>
+
+If we have probability points that map directly to the sample, we would end up with a cumulative
+
+density of 1, which would correspond to the +infinity value, so our probability points formula
+
+allows us to adjust for this, making the estimates from the standard normal distribution more
+
+accurate.
+
+</p>
+
+</aside>
 
 </section>
 
@@ -1798,562 +1834,6 @@ With this information, we can put a number to how uncertain we are.
 
 </aside>
 
-</section>
-
-
-
-<!-- Confidence Intervals -->
-
-<section>
-
-<div class="grid-wrapper">
-
-<div class="header">
-
-<h2>Considering Sample Size</h2>
-
-</div>
-
-<div class="content">
-
-<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-auto-rows:auto;gap:1vmin;">
-
-<div style="align-content: center;height:100%;">
-
-<p>
-
-<span class="u">Sample Size Matters!</span> <br>
-
-Increasing <span class="danger">sample size reduces the variability of sample statistics</span>, making them more accurate (narrower sampling distribution).
-
-</p>
-
-<p class="framed border-danger">
-
-<i class="fas fa-arrow-circle-right"></i> Larger sample sizes lead to reduced uncertainty and narrower confidence intervals.
-
-</p>
-
-</div>
-
-<div class="full-width">
-
-<img src="lib/img/sampling-distribution-size-matters.svg" style="width:100%;">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<aside class="notes">
-
-<p>If the sampling distribution in narrower, what also happens to the standard Error? 95% Confidence Interval?</p>
-
-<p>Think about SE and CI calculations. sigma smaller or n larger (both too), then 1.96*se also smaller.</p>
-
-</aside>
-
-</section>
-
-
-
-<!-- Confidence Intervals -->
-
-<section>
-
-<div class="grid-wrapper">
-
-<div class="header">
-
-<h2>Confidence Intervals</h2>
-
-</div>
-
-<div class="content">
-
-<div class="grid-generic" style="grid-template-columns:9fr 4fr;grid-auto-rows:auto;gap:1vmin;">
-
-<div class="left-justify">
-
-<p class="framed border-muted">
-
-The <span class="danger">sampling distribution</span> of a statistic, normally distributed around the population parameter, allows us to quantify the <span class="success">likelihood</span> of a sample statistic's proximity to the <span class="pop">true population parameter</span>.
-
-</p>
-
-<p class="fragment small">
-
-For example, 95% of our statistics fall within $\pm 1.96\times SE$ of the parameter, indicating a 95% probability that the true parameter lies within this range from any observed statistic.
-
-</p>
-
-<p class="fragment">
-
-<i class="fas fa-arrow-circle-right danger"></i> This range is termed a <span class="danger">confidence interval</span>.
-
-</p>
-
-<p class="fragment quoted small">
-
-Confidence intervals quantify the <span class="bg-danger-light">uncertainty</span> associated with estimating the parameter.
-
-</p>
-
-<p class="fragment sided border-success smaller em">
-
-Uncertainty is expressed in "confidence intervals". It acknowledges that the exact value of the parameter (such as the mean or proportion) is unknown and might not be precisely determined from a sample.
-
-</p>
-
-</div>
-
-<div class="full-width">
-
-<img class="no-margin" src="lib/img/sampling-confidence-intervals.svg" style="width:100%;">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<aside class="notes">
-
-<p>While we typically will use 95% for our confidence intervals, it is common to see other intervals, such as 90 or 99%.</p>
-
-<p>Where does this 1.96 come from?</p>
-
-</aside>
-
-</section>
-
-
-
-<!-- Standardized Statistic -->
-
-<section>
-
-<div class="grid-wrapper">
-
-<div class="header">
-
-<h2>Standardized Statistic</h2>
-
-</div>
-
-<div class="content">
-
-<div class="grid-generic" style="display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 5vmin;">
-
-
-
-<!-- Text Description -->
-
-<div class="sided border-info left-justify">
-
-<p>The z-score, also known as a standard score, measures the number of standard deviations a data point is from the mean.</p>
-
-</div>
-
-
-
-<!-- Purpose/Overview -->
-
-<div class="fragment">
-
-<p class="em">Z-scores are utilized to identify and describe the position of a data point within a distribution, assess probabilities, and detect outliers.</p>
-
-</div>
-
-
-
-<!-- Normal Distribution Image -->
-
-<div style="width:100%;">
-
-<img src="lib/img/sd-normal.svg" class="unbordered visible" width="100%" style="margin-bottom: 0;">
-
-<p style="font-size: 0.65em; margin-top: 0;" class="em visible" >Normal Distribution</p>
-
-</div>
-
-
-
-<!-- Formula -->
-
-<div>
-
-<p class="framed border-pop small bg-info-alpha-01 fragment">
-
-The <span class="strong">Z Score</span> effectively <span class="em info">standardizes</span> observations, allowing us to make comparisons across different distributions.
-
-</p>
-
-<p class="big fragment">$$z(X) = \frac{x_i - \bar{X}}{s}$$</p>
-
-<p class="small fragment">Where $x_i$ is the data point, $\bar{X}$ is the mean of the sample, and $s$ is the standard deviation.</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- Calculating Z-Score for 95% Confidence -->
-
-<section>
-
-<div class="grid-wrapper">
-
-<div class="header">
-
-<h2>Calculating Z-Score for 95% Confidence</h2>
-
-</div>
-
-<div class="content">
-
-<div class="grid-generic" style="display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 5vmin;">
-
-
-
-<!-- Reused Normal Distribution Image -->
-
-<div>
-
-<img src="lib/img/sd-normal.svg" class="unbordered visible" width="100%" style="margin-bottom: 0;">
-
-<p style="font-size: 0.65em; margin-top: 0;" class="em visible">Normal Distribution</p>
-
-</div>
-
-
-
-<!-- Z-Score Formula and Description -->
-
-<div class="fragment">
-
-<p class="framed border-pop small bg-info-alpha-01">
-
-To understand the probability associated with a specific z-score, we calculate <span class="strong">$\Phi(z)$</span>, representing the cumulative probability up to that z-score in a standard normal distribution.
-
-</p>
-
-<p>$$\Phi(z) = F(z \mid 0, 1) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{z} e^{-\frac{t^2}{2}} \, dt, \quad \text{for } z \in \mathbb{R}.
-
-$$</p>
-
-<p class="smaller">Here, $\Phi(z)$ is the cumulative probability from the left tail of the distribution up to a z-score of $z$, $t$ is a variable of integration, and $e$ is the base of the natural logarithm.</p>
-
-</div>
-
-
-
-<!-- Highlighting Z-Score for 95% Confidence Interval -->
-
-<div style="grid-column: 1 / span 2;">
-
-<p class="smaller fragment">The area under the curve from $-\infty$ to $z$ gives us the cumulative probability, the compliment is $1 - \Phi(z)$.</p>
-
-<p class="smaller fragment">For a 95% confidence interval in a standard normal distribution, we use the z-score value of <span class="strong">$\pm 1.96$</span>, which corresponds to the critical value that marks the boundaries of the central 95% of the distribution.</p>
-
-<p class="framed small fragment border-danger bg-danger-alpha-01">This implies that approximately 95% of all <span class="danger">statistics</span> fall within $\pm 1.96$ standard deviations from the mean.</p>
-
-</div>
-
-
-
-</div>
-
-</div>
-
-</div>
-
-<aside class="notes">
-
-<p>This is the integral of the normal distribution's probability density function (PDF)</p>
-
-<p>It is actually more complicated than this, you don't just calculate this integral, there is an error function</p>
-
-<p>Here 'all statistics' means the distribution of the sampling statistic if the number of replicates goes to infinity.</p>
-
-</aside>
-
-</section>
-
-
-
-<!-- Standard Normal Distribution -->
-
-<section>
-
-<div class="grid-wrapper">
-
-<div class="header no-hang">
-
-<h2>Standard Normal Distribution</h2>
-
-<p class="small">
-
-For data <span class="danger">assumed</span> to be normally distributed: $z=\frac{x_i - \bar{x}}{s}$.
-
-</p>
-
-</div>
-
-<div class="content">
-
-<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:1vmin;height:70vh;">
-
-<vizzy class="full-width" data-src="lib/interactive/normal-z-scores.html" style="height:100%;"></vizzy>
-
-</div>
-
-</div>
-
-</div>
-
-<aside class="notes">
-
-<p>
-
-It turns out these integrals are difficult, especially before computers and computer scientists were invented.
-
-A century ago, you wouldn't just calculate the integrals out for your sample's mean and std dev, instead you would
-
-standardize your data then use a look up table to determine the probability associated with your
-
-</p>
-
-</aside>
-
-</section>
-
-
-
-<!-- Discrete Example: Coin Flips -->
-
-<section>
-
-<div class="grid-wrapper">
-
-<div class="header">
-
-<h2>Discrete Example: Coin Flips</h2>
-
-</div>
-
-<div class="content">
-
-<div data-id="cont1" class="grid-generic" style="grid-template-columns:2.3fr 2fr;grid-auto-rows:auto;gap:1vmin;">
-
-<!-- Left Column: Calculation and Lead into "At Least 19 Heads" -->
-
-<div class="framed smallest" style="height:100%;">
-
-<!-- Binomial Analysis Here -->
-
-<p>Estimate the 95% confidence interval for 19 Heads in 28 coin flips.</p>
-
-<p class="fragment small no-hang" data-fragment-index="0">$$\hat{p} = \frac{x}{n} = \frac{19}{28}\,\&\, SE = \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}$$</p>
-
-<p class="small fragment" data-fragment-index="0">Where $\hat{p}$ is the sample <span class="info">expected</span> proportion, $x$ is the number of successes (heads), and $n$ is the total number of trials (coin flips).</p>
-
-<p class="fragment" data-fragment-index="1">For a 95% confidence interval, we use the z-score corresponding to 95% confidence, which is approximately 1.96:</p>
-
-<p class="fragment smaller no-hang" data-fragment-index="2">
-
-$$\begin{aligned}
-
-CI &= \hat{p} \pm z \cdot SE \\
-
-&= \frac{19}{28} \pm 1.96 \cdot \sqrt{\frac{\frac{19}{28}(1 - \frac{19}{28})}{28}} \\
-
-&\approx \frac{19}{28} \pm 0.181 \\
-
-&\approx 19 \pm \sim 5\, \text{Heads}
-
-\end{aligned}$$
-
-</p>
-
-<p class="fragment danger" data-fragment-index="3">This means we are 95% confident that the true proportion of heads in the population from which this sample was drawn falls within this interval.</p>
-
-</div>
-
-<div data-id="danim" style="align-items:center;"> <!-- Right Column: Placeholder for Graphic -->
-
-<div class="small">
-
-<p class="smallest no-margin"><span class="u">Chance-model: Binomial Distribution</span>$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$ for $k={1,\ldots,28}$:</p>
-
-</div>
-
-<svg width="100%" viewBox="-5 0 460 320" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
-
-<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_1"></use>
-
-<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_2" class="fragment" data-fragment-index="2"></use>
-
-<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_3" class="fragment fade-out" data-fragment-index="3"></use>
-
-<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_3" class="fragment" data-fragment-index="4"></use>
-
-<use xlink:href="lib/img/coinflip_binom-19_28_sampling.svg#axes_4" class="fragment" data-fragment-index="0"></use>
-
-</svg>
-
-</div>
-
-<div class="fragment framed border-warning" data-fragment-index="4" style="grid-column:1/3;">
-
-<p class="smallest">
-
-If we <span class="em danger">assume</span> $E[H]=\hat{\pi}=0.5$, then $n\hat{\pi}=14$ is our expected count if the <span class="em info">chance-model</span> is true, <span class="info">does our 95% confidence interval include the by-chance value?</span>
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<aside class="notes">
-
-<p>Thinking about values that lie within intervals, this is the statistical evidence. Anyone remember: "If the glove don't fit, you must acquit" OJSimpson's lawyers.</p>
-
-<ul>
-
-<li>The sample proportion of heads is: \( \hat{p} = \frac{19}{28} \approx 0.679 \).</li>
-
-<li>Calculate the Standard Error (SE): \( SE = \sqrt{\frac{\hat{p} (1 - \hat{p})}{n}} = \sqrt{\frac{\frac{19}{28} \left(1 - \frac{19}{28}\right)}{28}} \approx 0.092 \).</li>
-
-<li>Calculate the 95% confidence interval for the proportion: \( CI = \hat{p} \pm z \cdot SE = 0.679 \pm 1.96 \cdot 0.092 \approx 0.679 \pm 0.181 \).</li>
-
-<li>Convert the proportion interval to the count of heads:
-
-<ul>
-
-<li><strong>Lower bound:</strong> \( (0.679 - 0.181) \times 28 \approx 0.498 \times 28 \approx 14 \).</li>
-
-<li><strong>Upper bound:</strong> \( (0.679 + 0.181) \times 28 \approx 0.860 \times 28 \approx 24 \).</li>
-
-</ul>
-
-</li>
-
-<li>Thus, the confidence interval for the number of heads is approximately: \( 19 \pm 5 \text{ heads} \) (from 14 to 24 heads).</li>
-
-</ul>
-
-</aside>
-
-</section>
-
-
-
-<section>
-
-<div class="grid-wrapper">
-
-<div class="header">
-
-<h2>Continuous Example: Material Strength</h2>
-
-</div>
-
-<div class="content">
-
-<div class="grid-generic" style="grid-template-columns:4.5fr 5.5fr;grid-auto-rows:auto;gap:1vmin;">
-
-<div class="framed small left-justify">
-
-<p>
-
-The stress endurance limit of a material is normally distributed with a mean ($\mu$) of 300 MPa and a standard deviation ($\sigma$) of 50 MPa (<span class="info">population parameters</span>).
-
-</p>
-
-<p class="fragment em smaller" data-fragment-index="1">
-
-You collect a sample of 30 pieces ($N=30$), which have a mean of 350 ($\bar{x}=350\, \text{MPa}$) and a standard deviation of 120 ($s=120\, \text{MPa}$). Calculate the 95% confidence interval.
-
-</p>
-
-<p class="fragment strong small" data-fragment-index="2">$CI = 350 \pm 1.96 \cdot (\frac{120}{\sqrt{30}}) = 350 \pm \approx 43$</p>
-
-<p class="fragment" data-fragment-index="3">What is the probability the materials (population) distribution contained our sample? <span class="fragment pink">Next Time!</span></p>
-
-</div>
-
-<div>
-
-<svg width="100%" viewBox="-5 5 432 280" style="margin-top: 0; margin-bottom: 0;margin-left:auto;margin-right:auto;">
-
-<use xlink:href="lib/img/stress_prob_sampling.svg#axes_1" class="fragment" data-fragment-index="0"></use>
-
-<use xlink:href="lib/img/stress_prob_sampling.svg#axes_2" class="fragment" data-fragment-index="1"></use>
-
-<use xlink:href="lib/img/stress_prob_sampling.svg#axes_3" class="fragment" data-fragment-index="2"></use>
-
-<use xlink:href="lib/img/stress_prob_sampling.svg#axes_4" class="fragment" data-fragment-index="3"></use>
-
-<use xlink:href="lib/img/stress_prob_sampling.svg#axes_5" class="fragment" data-fragment-index="3"></use>
-
-</svg>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<aside class="notes">
-
-<p>
-
-95% ci means that if I consider my sample statistics (mean,std),
-
-and assume my sample came from that distribution, a large number of repeated 30
-
-pieces samples would result in a distribution shaped like the blue curve.
-
-That is, probability of all possible means from the black distribution.
-
-<strong>This is sampling distribution of my sample mean!</strong>
-
-</p>
-
-<p>
-
-But if I have an expected distribution (green), I would expect to have all possible
-
-means of sample size 30 according to the red distribution.
-
-<strong>This is the sampling distribution of my population!</strong>
-
-</p>
-
-<p>Cliffhanger: What is the probability this sample came from the population distribution?</p>
-
-</aside>
-
 <!-- </section> -->
         </section>
         <section data-background-color="rgb(220,220,220)" id="section-title-4">
@@ -2403,7 +1883,7 @@ box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
 
 <div class="header">
 
-<h2>Definitions Of The Day</h2>
+<h2>Definitions Of The Week</h2>
 
 </div>
 
