@@ -153,9 +153,6 @@ class CANVAS {
     // Update the canvas dimensions
     this.canvas.width = newWidth;
     this.canvas.height = newHeight;
-
-    // Optionally, you could clear the canvas or redraw any content here
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   /**

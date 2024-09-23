@@ -2371,15 +2371,29 @@ The stress endurance limit of <span class="strong">material A</span> is normally
 
 <p class="question">What is the probability that <span class="strong">A</span> is your unknown material</p>
 
-<p class="fragment left-justify">Since $\sigma$ is unknown, our Population is $Z=\mathcal{N}(0,1)$.</p>
+<p class="left-justify">Our Population Sampling Distribution ($H_0$) is $\class{danger}{Z_{\mu}=\mathcal{N}(0,1)}$.</p>
 
-<p class="fragment left-justify" data-fragment-index="1">Calculate Z-Score: $Z_{\bar{x}} = \frac{350 - 300}{120 / \sqrt{30}}=\class{success}{2.28}$</p>
+<p class="fragment left-justify" data-fragment-index="1">Calculate Sample Z-Score: $Z_{\bar{x}} = \frac{350 - 300}{120 / \sqrt{30}}=\class{success}{2.28}$</p>
 
-<p class="fragment left-justify" data-fragment-index="3">$H_0:\, \mathcal{Z}(\bar{x}) = \mathcal{Z}(\mu)$, $H_a:\, \bar{x}\neq \mu\therefore \text{ two-tailed p-value}$.</p>
+<p class="fragment left-justify" data-fragment-index="3">$H_0:\, \mathcal{Z}(\bar{x}) = \mathcal{Z}(\mu)$, $H_a:\, \bar{x}\neq \mu$.</p>
 
-<p></p>
+<p class="fragment left-justify" data-fragment-index="4">
 
-<p class="fragment left-justify" data-fragment-index="7">Calculate the two-tailed p-value:<br>$p = \int_{-\infty}^{-|Z_{\bar{x}}|}Z_{\mu}dx + \int_{|Z_{\bar{x}}|}^{\infty}Z_{\mu}dx$</p>
+Set an <span class="strong">$\alpha$</span> level (=0.05); is $Z_{\bar{x}}$
+
+<span class="excited-text warning">more extreme</span>?
+
+<span class="fragment warning em" data-fragment-index="5">Statistically Significant!</span>
+
+</p>
+
+<p class="fragment left-justify" data-fragment-index="6">
+
+But how significant? <span class="fragment success" data-fragment-index="7">Integrate $H_0$ that are more centrally extreme than $Z_{\bar{x}}$.</span>
+
+</p>
+
+<p class="fragment left-justify" data-fragment-index="8">Calculate the two-tailed p-value:<br>$p = \int_{-\infty}^{-|Z_{\bar{x}}|}Z_{\mu}dx + \int_{|Z_{\bar{x}}|}^{\infty}Z_{\mu}dx = 0.022$</p>
 
 </div>
 
@@ -2389,15 +2403,15 @@ The stress endurance limit of <span class="strong">material A</span> is normally
 
 <use xlink:href="lib/img/stress_prob_null.svg#axes_1"></use>
 
-<use xlink:href="lib/img/stress_prob_null.svg#axes_3" class="fragment" data-fragment-index="2"></use>
+<use xlink:href="lib/img/stress_prob_null.svg#axes_3" class="fragment" data-fragment-index="4"></use>
 
-<use xlink:href="lib/img/stress_prob_null.svg#axes_4" class="fragment current-visible" data-fragment-index="3"></use>
+<use xlink:href="lib/img/stress_prob_null.svg#axes_4" class="fragment current-visible" data-fragment-index="4"></use>
 
-<use xlink:href="lib/img/stress_prob_null.svg#axes_5" class="fragment" data-fragment-index="3"></use>
+<use xlink:href="lib/img/stress_prob_null.svg#axes_5" class="fragment" data-fragment-index="7"></use>
 
 <use xlink:href="lib/img/stress_prob_null.svg#axes_6" class="fragment current-visible" data-fragment-index="2"></use>
 
-<use xlink:href="lib/img/stress_prob_null.svg#axes_7" class="fragment current-visible" data-fragment-index="2"></use>
+<use xlink:href="lib/img/stress_prob_null.svg#axes_7" class="fragment current-visible" data-fragment-index="8"></use>
 
 <use xlink:href="lib/img/stress_prob_null.svg#axes_2" class="fragment" data-fragment-index="1"></use>
 
