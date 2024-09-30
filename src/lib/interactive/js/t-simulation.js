@@ -8,7 +8,7 @@
  */
 const radius = 10; // radius for simulation
 const w_0 = 960;
-const h_0_d = 350;
+const h_0_d = 250;
 const h_0_h = 200;
 
 // histogram

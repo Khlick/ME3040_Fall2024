@@ -5,7 +5,7 @@
  * Edited from: Chen Hui Jing, https://chenhuijing.com/ (2021)
  */
 @import url("fonts/drG/drG_fonts.css");
-@import url("fonts/fontawesomev6.5.1/css/all.css");
+@import url("fonts/fontawesomev6.6.0/css/all.css");
 @use 'sass:color';
 @use 'sass:string';
 /*********************************************
@@ -307,12 +307,14 @@
 html.print-pdf .reveal img {
   max-height: 80% !important; }
 
-.reveal section ul.two-column-list, .reveal section ol.two-column-list {
+.reveal section ul.two-column-list,
+.reveal section ol.two-column-list {
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
   padding: 0; }
-  .reveal section ul.two-column-list li, .reveal section ol.two-column-list li {
+  .reveal section ul.two-column-list li,
+  .reveal section ol.two-column-list li {
     flex: 0 0 50%; }
 
 .reveal section .excited-text {
@@ -326,7 +328,8 @@ html.print-pdf .reveal img {
   text-align: left;
   line-height: 1.5;
   font-family: 'Times New Roman', Times, serif; }
-  .reveal section table.latex-style-table-row-labels th, .reveal section table.latex-style-table-row-labels td {
+  .reveal section table.latex-style-table-row-labels th,
+  .reveal section table.latex-style-table-row-labels td {
     border: 1px solid black;
     padding: 8px;
     position: relative;
@@ -350,51 +353,62 @@ html.print-pdf .reveal img {
     padding-left: 12px; }
   .reveal section table.latex-style-table-row-labels tbody tr {
     font-size: 87%; }
-  .reveal section table.latex-style-table-row-labels tbody tr:last-child td, .reveal section table.latex-style-table-row-labels tbody tr:last-child th {
+  .reveal section table.latex-style-table-row-labels tbody tr:last-child td,
+  .reveal section table.latex-style-table-row-labels tbody tr:last-child th {
     border-bottom: 1px solid black; }
 
 .reveal section table.full-grid-table {
   border-collapse: collapse;
   width: 100%;
   border: 3px solid black; }
-  .reveal section table.full-grid-table th, .reveal section table.full-grid-table td {
+  .reveal section table.full-grid-table th,
+  .reveal section table.full-grid-table td {
     border: 1px solid black;
     text-align: center;
     padding: 8px; }
 
-.reveal section table.square-grid-2x2 th, .reveal section table.square-grid-2x2 td {
+.reveal section table.square-grid-2x2 th,
+.reveal section table.square-grid-2x2 td {
   width: 50% !important;
   height: 50% !important; }
 
-.reveal section table.square-grid-3x3 th, .reveal section table.square-grid-3x3 td {
+.reveal section table.square-grid-3x3 th,
+.reveal section table.square-grid-3x3 td {
   width: 33.33333% !important;
   height: 33.33333% !important; }
 
-.reveal section table.square-grid-4x4 th, .reveal section table.square-grid-4x4 td {
+.reveal section table.square-grid-4x4 th,
+.reveal section table.square-grid-4x4 td {
   width: 25% !important;
   height: 25% !important; }
 
-.reveal section table.square-grid-5x5 th, .reveal section table.square-grid-5x5 td {
+.reveal section table.square-grid-5x5 th,
+.reveal section table.square-grid-5x5 td {
   width: 20% !important;
   height: 20% !important; }
 
-.reveal section table.square-grid-6x6 th, .reveal section table.square-grid-6x6 td {
+.reveal section table.square-grid-6x6 th,
+.reveal section table.square-grid-6x6 td {
   width: 16.66667% !important;
   height: 16.66667% !important; }
 
-.reveal section table.square-grid-7x7 th, .reveal section table.square-grid-7x7 td {
+.reveal section table.square-grid-7x7 th,
+.reveal section table.square-grid-7x7 td {
   width: 14.28571% !important;
   height: 14.28571% !important; }
 
-.reveal section table.square-grid-8x8 th, .reveal section table.square-grid-8x8 td {
+.reveal section table.square-grid-8x8 th,
+.reveal section table.square-grid-8x8 td {
   width: 12.5% !important;
   height: 12.5% !important; }
 
-.reveal section table.square-grid-9x9 th, .reveal section table.square-grid-9x9 td {
+.reveal section table.square-grid-9x9 th,
+.reveal section table.square-grid-9x9 td {
   width: 11.11111% !important;
   height: 11.11111% !important; }
 
-.reveal section table.square-grid-10x10 th, .reveal section table.square-grid-10x10 td {
+.reveal section table.square-grid-10x10 th,
+.reveal section table.square-grid-10x10 td {
   width: 10% !important;
   height: 10% !important; }
 
@@ -433,6 +447,18 @@ html.print-pdf .reveal img {
 .reveal section table.tiny tbody tr,
 .reveal section table.tiny tbody td {
   font-size: 65% !important; }
+
+.reveal section table.gpt-table-styled {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0; }
+  .reveal section table.gpt-table-styled th,
+  .reveal section table.gpt-table-styled td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left; }
+  .reveal section table.gpt-table-styled tr:hover {
+    background-color: #f1f1f1; }
 
 .reveal section .icon-left {
   display: grid;
@@ -482,13 +508,15 @@ html.print-pdf .reveal img {
   line-height: 1.6; }
 
 @keyframes wiggle {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-3deg); }
   50% {
     transform: rotate(3deg); } }
 
 @keyframes wiggleAndColorChange {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(-1px, 1px) rotate(-1deg);
     color: #cd952d; }
   25% {

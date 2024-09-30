@@ -2398,6 +2398,273 @@ Importantly, you should know that if you don't have the sample standard deviatio
 
 <!-- </section> -->
         </section>
+        <section data-background-gradient="radial-gradient(#283b95, #17b2c3)" id="section-title-4">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-4">
+              <div class="section-number">
+                <span class="large-number">
+                  4
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Midterm Questions
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-4.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Mean Calculation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Mean Calculation</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="question smaller bg-dagner-alpha-02">Calculate the mean of the dataset [16 18 16 12  4].</p>
+
+<div class="fragment small framed border-success" data-fragment-index="1">
+
+<p>The mean $\bar{x}$ is calculated as: <br>
+
+\[ \bar{x} = \frac{\sum x_i}{n} = \frac{16 + 18 + 16 + 12 + 4}{5} = \frac{66}{5} = 13.20 \]</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Permutation Calculation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Permutation Calculation</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="question smaller bg-dagner-alpha-02">Given 19 different components, how many ways can you select 4 for a prototype if the order matters?</p>
+
+<div class="fragment small framed border-success" data-fragment-index="1">
+
+<p>The number of ways to select 4 components out of 19 with order mattering is given by the permutation formula: <br>
+
+\[ P(n, r) = \frac{n!}{(n-r)!} = \frac{19!}{(19-4)!} = \frac{19!}{15!} = 93024 \]</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Z-Score Calculation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Z-Score Calculation</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="question smaller bg-dagner-alpha-02">An alloy's strength is tested with a sample mean of 324 MPa, a standard deviation of 23 MPa, and a sample size of 30. Calculate the z-score for a population mean of 282 MPa.</p>
+
+<div class="fragment small framed border-success" data-fragment-index="1">
+
+<p>The z-score is calculated as: <br>
+
+\[ z = \frac{\bar{x} - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{324 - 282}{\frac{23}{\sqrt{30}}} \approx 10.00 \] <br>
+
+This indicates the sample mean is 10.00 standard deviations above the population mean.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Binomial Probability Calculation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Binomial Probability</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="question smaller bg-dagner-alpha-02">Calculate the probability of getting exactly 4 defective items in a batch of 18, where the probability of a defect is 0.04.</p>
+
+<div class="fragment small framed border-success" data-fragment-index="1">
+
+<p>The probability is given by the binomial formula: <br>
+
+\[ P(X=k) = \binom{n}{k} p^k (1-p)^{n-k} = \binom{18}{4} (0.04)^{4} (1 - 0.04)^{14} \] <br>
+
+\[ = 0.004 \] <br>
+
+So, the probability of finding exactly 4 defective items is approximately 0.004.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Confidence Interval Calculation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Confidence Interval</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="question smaller bg-dagner-alpha-02">For a sample with a mean of 100, a standard deviation of 15, and a sample size of 35, calculate the 95% confidence interval for the population mean.</p>
+
+<div class="fragment small framed border-success" data-fragment-index="1">
+
+<p>The formula for the confidence interval is: <br>
+
+\[ \bar{x} \pm z \frac{s}{\sqrt{n}} \] <br>
+
+For a 95% confidence level, the $z$-value is approximately $1.96$. <br>
+
+\[ 100 \pm 1.96 \frac{15}{\sqrt{35}} \approx 100 \pm 4.97 \] <br>
+
+Therefore, the 95% confidence interval is approximately $ 95.03 $ to $ 104.97 $.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Expected Value Calculation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Expected Value</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="question smaller bg-dagner-alpha-02">Calculate the expected value $E(X)$ for a fair 12-sided die, where each side has an equal chance of landing and the sides are numbered from 1 to 12.</p>
+
+<div class="fragment small framed border-success" data-fragment-index="1">
+
+<p>The expected value $E(X)$ for a fair die is given by: <br>
+
+\[ E(X) = \frac{1}{n} \sum_{x=1}^{n} x \] <br>
+
+\[ E(X) = \frac{12 + 1}{2} = 6.50 \]</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
       </div>
       <footer class="main-footer">
         <span>
