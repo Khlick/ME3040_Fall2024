@@ -1,0 +1,2784 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Lecture 12
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/hybrid.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/gearbench.png" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Semester Check-In
+              </h2>
+              <h3>
+                What Have We Learned Up To Now?
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                October 7, 2024
+              </p>
+              <p class="byinfo">
+                CSULA: ME3040 Fall 2024
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify small"
+
+style="grid-template-columns: 1fr; grid-auto-rows: 1fr; row-gap: 5vmin"
+
+>
+
+<div></div>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p>
+
+<i class="target"></i> Recap of the semester so far
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p>
+
+<i class="target"></i> Review Exam Questions
+
+</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
+
+<p>
+
+<i class="target"></i> Review Analyses In Context
+
+</p>
+
+</div>
+
+<div></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/statistics_5.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Experimental Methods
+                </h2>
+                <h3>
+                  The Engineering Method
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+width: 75vw;
+
+height: 75vh;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p style="font-size:150%;">
+
+At the beginning of the semester, I said, "success or failure is not a destination".
+
+We learn by moving forward from either
+
+</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+
+
+<!-- 6 steps summary -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2 class="r-fit-text">6 Stages Of A Statistical Investigation</h2>
+
+</div>
+
+<div class="content">
+
+<svg width="75%" viewBox="0 0 381.6 244.75" style="margin-top: 0; margin-bottom: 0;">
+
+<use xlink:href="lib/img/summary-lec1.svg#investigation"></use>
+
+<use class="fragment" xlink:href="lib/img/summary-lec1.svg#population"></use>
+
+<use class="fragment" xlink:href="lib/img/summary-lec1.svg#datasample"></use>
+
+<use class="fragment" xlink:href="lib/img/summary-lec1.svg#variables"></use>
+
+<use class="fragment" xlink:href="lib/img/summary-lec1.svg#type1"></use>
+
+<use class="fragment" xlink:href="lib/img/summary-lec1.svg#type2"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- Goal of Statistics -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Statistical Purpose</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:5px;justify-items:center;">
+
+<div>
+
+<p>
+
+<i class="arrowr"></i> To answer a question about a population (of data).
+
+</p>
+
+<div class="bordered rounded border-dashed fragment" data-fragment-index="1">
+
+<p style="text-align:justify;text-justify:inter-word;" class="small">
+
+In a perfect world, we would have access to the full
+
+<span class="info">population</span> so we would be able to answer the question
+
+based on data collected on all the <span class="u">observational units</span>
+
+of the population. We would know the value of the
+
+<span class="info">true parameter</span> we are interested in.
+
+</p>
+
+</div>
+
+<p class="fragment">
+
+But usually we just have <span class="danger">one sample</span>.
+
+</p>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="fragment left-justify" data-fragment-index="2">
+
+Statistics is about using a <span class="danger">sample</span>, or many samples,
+
+</p>
+
+<p class="fragment left-justify" data-fragment-index="3">
+
+to make <span class="warning">inferences</span> about the <span class="info">population</span> parameters.
+
+</p>
+
+</div>
+
+<div style="justify-content:center;">
+
+<svg viewBox="0 0 864 432" class="graphic" style="height:55vh;">
+
+<use class="fragment" data-fragment-index="1" xlink:href="lib/img/inferences.svg#figure_1"></use>
+
+<use class="fragment" data-fragment-index="2" xlink:href="lib/img/inferences.svg#figure_2"></use>
+
+<use class="fragment" data-fragment-index="2" xlink:href="lib/img/inferences.svg#figure_3"></use>
+
+<use class="fragment" data-fragment-index="3" xlink:href="lib/img/inferences.svg#figure_4"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Refine our view of what the population is, it's more like the theoretical data space comprising
+
+all the possible values for any given measurement.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Statistical Inference -->
+
+
+
+<section>
+
+
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Statistical Inference</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:3.5fr 6.5fr;grid-template-rows:1fr 1fr;gap:5px;">
+
+<div style="grid-row: 1/2;grid-column:1/2">
+
+<p>
+
+There are 4 main inferences that
+
+we can draw from data:
+
+</p>
+
+<ul>
+
+<li>Significance</li>
+
+<li>Estimation</li>
+
+<li>Generalization</li>
+
+<li>Causation</li>
+
+</ul>
+
+</div>
+
+<div style="grid-row: 1/2;grid-column:2/3">
+
+<img src="lib/img/inferences.svg" width="100%">
+
+</div>
+
+<div style="grid-row: 2/3;grid-column:1/3">
+
+<p class="sided-no-bg left-justify">
+
+Statistics is all about <span class="warning">gaining knowledge</span> (drawing conclusions) about
+
+<span class="info">population data</span> by only using
+
+a <span class="u-danger">subset of this population</span> (<span class="danger">sample</span>).
+
+</p>
+
+<p class="fragment" data-fragment-index=1>
+
+<i class="fas fa-arrow-circle-right warning"></i> This process is called <span class="u-warning">drawing inferences</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<section>
+
+<style>
+
+.tables-wrapper {
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+gap: 5vmin;
+
+margin-top: 2vmin;
+
+}
+
+.table {
+
+background-color: #f7f7f7;
+
+border-radius: 12px;
+
+padding: 1vmin;
+
+box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
+
+width: 100%;
+
+}
+
+.table h4 {
+
+text-align: center;
+
+margin-top: 0;
+
+}
+
+.table ul {
+
+list-style-type: none;
+
+padding: 0;
+
+margin: 0;
+
+}
+
+.table ul li {
+
+margin: 0.5vmin auto;
+
+padding: 0.5vmin;
+
+background-color: #e0e0e0;
+
+border-radius: 4px;
+
+width: 98%;
+
+}
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Types of Hypotheses</h2>
+
+</div>
+
+<div class="content" style="display: grid; grid-auto-rows: auto; gap: 1vmin;">
+
+<p style="padding: 1vmin; border-radius: 4px; margin: 0;" class="left-justify fragment sided border-pop" data-fragment-index="1">
+
+A <span class="pop">scientific hypothesis</span> is a specific statement
+
+proposed as an
+
+<span style="text-decoration: underline;" class="pop">explanation for a
+
+<span class="pop">phenomenon</span></span>,
+
+regardless of truth.
+
+</p>
+
+<p style="padding: 1vmin; border-radius: 4px; margin: 0;" class="left-justify fragment big sided border-warning" data-fragment-index="2">
+
+A <span class="orange">statistical hypothesis</span> is a specific
+
+statement about a
+
+<span style="text-decoration: underline;" class="u-orange">characteristic or parameter of the
+
+<span class="orange">data</span></span>: <span class="em fragment" data-fragment-index="3">"What is your Null and Alternate hypothesis?".</span>
+
+</p>
+
+<div class="tables-wrapper fragment" data-fragment-index="4">
+
+<div class="table">
+
+<h4>Scientific</h4>
+
+<ul class="smaller">
+
+<li class="fragment" data-fragment-index="4">Can a specific drug cure a disease?<br>&nbsp;</li>
+
+<li class="fragment" data-fragment-index="6">Do plants grow faster with more sunlight?<br>&nbsp;</li>
+
+<li class="fragment" data-fragment-index="8">Does a specific lubricant reduce wear on machine components?</li>
+
+</ul>
+
+</div>
+
+
+
+<div class="table">
+
+<h4>Statistical</h4>
+
+<ul class="smallest">
+
+<!-- Drug Cure Hypothesis Example -->
+
+<li class="fragment" data-fragment-index="5">
+
+<strong>$H_0$:</strong> No difference in recovery rates.<br>
+
+<strong>$H_1$:</strong> Recovery rate with the drug is higher.
+
+</li>
+
+
+
+<!-- Sunlight and Plant Growth Hypothesis Example -->
+
+<li class="fragment" data-fragment-index="7">
+
+<strong>$H_0$:</strong> No difference in arborization area between light exposure groups.<br>
+
+<strong>$H_1$:</strong> More light exposure yields plants with more branches and leaves.
+
+</li>
+
+
+
+<!-- Lubricant and Wear Hypothesis Example -->
+
+<li class="fragment" data-fragment-index="9">
+
+<strong>$H_0$:</strong> No difference in number of stress cycles.<br>
+
+<strong>$H_1$:</strong> New lubricant increases stress cycle limit.
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<ul>
+
+<li>General: An assumption that may or may not be true.</li>
+
+<li>
+
+Scientific: A <em>specific proposal</em> as an explanation for some
+
+phenomenon.
+
+</li>
+
+<li>
+
+Statistical: A <em>specific statement</em> about some aspect of the DATA.
+
+</li>
+
+</ul>
+
+<p>
+
+These are clear distinctions. We need to be careful that we don't confuse
+
+them.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Descriptive Statistics & Visualization</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="fragment em" data-fragment-index="0">Key to understanding and summarizing data in experiments.</p>
+
+<p class="fragment framed box-width" data-fragment-index="1">Use: Assess central tendency, spread, and shape of data.</p>
+
+<div class="fragment framed bg-warning-alpha-02" data-fragment-index="2">
+
+<p class="fragment" data-fragment-index="2">Methods:</p>
+
+<ul class="fragment left-justify" data-fragment-index="2">
+
+<li>Histograms and boxplots (Lectures 4, 5)</li>
+
+<li>Quantiles & QQ Plots for normality (Lecture 9)</li>
+
+</ul>
+
+</div>
+
+<p class="fragment framed pop" data-fragment-index="3">Focus: Clear visual insights before making inferences.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Uncertainty - Standard Error & Confidence Intervals</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="fragment quoted" data-fragment-index="0">SE: Measures the accuracy of sample means (Lecture 9).</p>
+
+<p class="fragment quoted" data-fragment-index="1">Confidence Intervals (CI): Estimates the range where population parameters likely fall.</p>
+
+<p class="fragment" data-fragment-index="2">Example: 95% CI used in most engineering problems (Lecture 7).</p>
+
+<p class="fragment" data-fragment-index="3">Crucial for understanding the precision of estimates in experiments.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="fragment framed border-info bg-info-alpha-01" data-fragment-index="1">
+
+<p>Null Hypothesis (\(H_0\)): Assumes no effect/difference (Lecture 9).</p>
+
+<p>Alternative Hypothesis (\(H_A\)): Suggests significant effect/difference.</p>
+
+</div>
+
+<div class="fragment framed border-danger bg-warning-alpha-01" data-fragment-index="2">
+
+<p class="danger">P-values: Probability of obtaining results under \(H_0\).</p>
+
+<p>Two-tailed vs One-tailed tests: Choosing the right test (Lecture 10).</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>T-Tests for Independent and Paired Data</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="fragment" data-fragment-index="0">One-Sample T-Test: Compares sample mean to a known value (Lecture 9).</p>
+
+<p class="fragment" data-fragment-index="1">Two-Sample T-Test: Compares two independent groups (Lecture 10).</p>
+
+<p class="fragment" data-fragment-index="2">Paired T-Test: Compares data within the same group before/after (Lecture 11).</p>
+
+<p class="fragment" data-fragment-index="3">Used in engineering to compare material properties or performance before and after changes.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Specialized Testing - Welch's T-Test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="fragment" data-fragment-index="0">Welch's T-Test: For unequal variances between groups (Lecture 11).</p>
+
+<p class="fragment" data-fragment-index="1">Ideal for comparing two means when variances are different or sample sizes vary.</p>
+
+<p class="fragment" data-fragment-index="2">Example: Testing mechanical properties of different materials under stress.</p>
+
+<p class="fragment" data-fragment-index="3">More flexible than standard t-tests but more complex calculations.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Statistical Tests in Engineering</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="fragment" data-fragment-index="0">Why statistics matter in engineering:</p>
+
+<ul class="fragment" data-fragment-index="1">
+
+<li>Improving decision-making in mechanical design.</li>
+
+<li>Ensuring precision in biometric and biomechanical measurements.</li>
+
+</ul>
+
+<p class="fragment" data-fragment-index="2">Choosing the right test ensures the accuracy of engineering conclusions.</p>
+
+<p class="fragment" data-fragment-index="3">Real-world applications: from materials testing to human performance analysis.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Exam Review
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+</section> <!-- End section title -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Breaking Strength of Steel Samples</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<p class="left-justify">
+
+A materials testing lab is evaluating the <span class="strong">breaking strength</span> of 7 steel samples. The recorded breaking strengths (in N) are:
+
+<br>
+
+<span class="em">[114, 117, 125, 143, 149, 229, 274]</span>
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+The goal is to compute various statistical measures such as the percentiles, interquartile range (IQR), and confidence interval for the IQR.
+
+</p>
+
+<p class="fragment smaller no-hang" data-fragment-index="2">
+
+<span class="strong">Mean Calculation:</span>
+
+$$ \bar{x} = \frac{114 + 117 + 125 + 143 + 149 + 229 + 274}{7} = 164.43 \, \text{N} $$
+
+</p>
+
+<div class="smaller no-hang">
+
+<p class="fragment" data-fragment-index="3">
+
+<span class="strong">Standard Deviation Calculation:</span>
+
+<span class="fragment" data-fragment-index="4">
+
+$$ s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}} $$
+
+</span>
+
+<span class="fragment" data-fragment-index="5">
+
+$$ s = \sqrt{\frac{(114-164.43)^2 + (117-164.43)^2 + \cdots + (274-164.43)^2}{6}} = 62.2 \, \text{N} $$
+
+</span>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Calculating the 25th and 75th Percentiles</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-auto-rows:auto;gap:5px;">
+
+<div class="no-hang">
+
+<p class="left-justify">
+
+<span class="strong">Quantile Formula:</span>
+
+<br>
+
+$$ Q(p) = (1 - \gamma)x_j + \gamma x_{j+1} $$
+
+</p>
+
+<p class="danger fragment" data-fragment-index="0"></p>
+
+<p class="fragment em" data-fragment-index="1">For the 25th percentile ($p = 0.25$):</p>
+
+<div class="fragment" data-fragment-index="1">
+
+$$ k = np + \frac{p + 1}{3} = 7 \cdot 0.25 + 0.4 = 2.2 $$
+
+$$ \gamma = 0.2 $$
+
+$$ Q_1 = (1 - 0.2) \cdot 117 + 0.2 \cdot 125 = 118.3 N $$
+
+</div>
+
+</div>
+
+<div>
+
+<p class="fragment" data-fragment-index="2">
+
+Similarly, for the 75th percentile:
+
+<br>
+
+$$ k = 7 \cdot 0.75 + 0.6 = 5.8 $$
+
+$$ \gamma = 0.8 $$
+
+$$ Q_3 = (1 - 0.8) \cdot 149 + 0.8 \cdot 229 = 215.7 N $$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Interquartile Range (IQR) and Standard Error</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:auto;gap:5px;">
+
+
+
+<p class="left-justify">
+
+<span class="strong">Interquartile Range (IQR):</span>
+
+$$ IQR = Q_3 - Q_1 = 215.7 - 118.3 = 97.3 N $$
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+<span class="strong">Standard Error (SE) of IQR:</span>
+
+<br>
+
+$$ SE_{IQR} = \frac{s}{1.349 \sqrt{n}} $$
+
+$$ SE_{IQR} = \frac{62.2}{1.349 \sqrt{7}} = 17.4 N $$
+
+</p>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>95% Confidence Interval for the IQR</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+<span class="strong">95% Confidence Interval Formula:</span>
+
+$$ IQR \pm Z \cdot SE_{IQR} $$
+
+<br>
+
+$$ 97.3 \pm 1.96 \cdot 17.4 = (63.2, 131.5) N $$
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+The 95% confidence interval for the IQR is <span class="em">(63.2, 131.5) N</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Interpretation of Results</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+A new steel batch has an IQR of 132.37 N.
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+Since the new IQR <span class="em danger">falls outside</span> the 95% confidence interval (63.2 N to 131.5 N), it suggests that the new batch's material properties may differ significantly from the previous sample.
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+<span class="strong">Conclusion:</span> The new batch is inconsistent with the previous sample and may <span class="strong success">require further investigation</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Binomial Test
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-3.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+</section> <!-- End section title -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Binomial Test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column: 1/3;">
+
+<p class="fragment" data-fragment-index="0"><strong>Purpose:</strong> Test if the proportion of successes in a sample matches a specified proportion.</p>
+
+</div>
+
+<div class="small">
+
+<p class="fragment" data-fragment-index="1"><strong>Use:</strong> Applied when there are two possible outcomes (success/failure) and you want to compare the observed success proportion to a target value.</p>
+
+<p class="fragment" data-fragment-index="3"><strong>Binomial Probability Formula:</strong></p>
+
+<p class="fragment" data-fragment-index="3">
+
+$P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}$
+
+</p>
+
+<p class="fragment" data-fragment-index="4">Test statistic: $Z = \frac{p - p_0}{\sqrt{\frac{p_0(1 - p_0)}{n}}}$</p>
+
+</div>
+
+<div class="fragment framed border-info" data-fragment-index="2">
+
+<p><strong>Requirements:</strong></p>
+
+<ul>
+
+<li>Binary data (success/failure)</li>
+
+<li>Sample size $n$ is fixed</li>
+
+<li>Each trial is independent</li>
+
+<li>Constant probability of success $p$</li>
+
+</ul>
+
+</div>
+
+<p class="fragment framed border-success" data-fragment-index="5" style="grid-column:1/3;"><strong>$H_0$:</strong> The proportion of successes is equal to the specified proportion, $p_0$.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-color="#9469AD" id="section-title-4">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-4">
+              <div class="section-number">
+                <span class="large-number">
+                  4
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Z-Test
+                </h2>
+                <h3>
+                  One Sample
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-4.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+</section> <!-- End section title -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>One-Sample Z-Test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column: 1/3;">
+
+<p class="fragment" data-fragment-index="0"><strong>Purpose:</strong> Test if the mean of a sample differs from a known population mean (with known variance).</p>
+
+</div>
+
+<div class="small">
+
+<p class="fragment" data-fragment-index="1"><strong>Use:</strong> Applied when the sample size is large ($n > 30$) and population variance is known.</p>
+
+<p class="fragment" data-fragment-index="3"><strong>Test Statistic:</strong></p>
+
+<p class="fragment" data-fragment-index="3">$Z = \frac{\overline{X} - \mu_0}{\frac{\sigma}{\sqrt{n}}}$</p>
+
+</div>
+
+<div class="fragment framed border-info" data-fragment-index="2">
+
+<p><strong>Requirements:</strong></p>
+
+<ul>
+
+<li>Normally distributed data or large sample size</li>
+
+<li>Population variance is known</li>
+
+</ul>
+
+</div>
+
+<p class="fragment framed border-success" data-fragment-index="5" style="grid-column:1/3;"><strong>$H_0$:</strong> The sample mean is equal to the population mean, $H_0: \mu = \mu_0$.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- EXAMPLE: Muscle Force Study -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Muscle Force Study</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;margin-bottom:1vmin;">
+
+<div>
+
+<p class="left-justify">
+
+A biomechanics research team is studying the <span class="strong">muscle force</span> generated by elite athletes during a specific resistance training exercise. The goal is to determine whether the athletes' average muscle force differs significantly from the everyday person's average of 120 N.
+
+</p>
+
+<div class="full-width">
+
+<table style="border-collapse: collapse; border: none;" class="fragment" data-fragment-index="1">
+
+<thead>
+
+<tr class="small strong">
+
+<th style="border-bottom: double;">Metric</th>
+
+<th style="border-bottom: double;">Value</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="border-bottom: 1px solid black;">Sample Size</td>
+
+<td style="border-bottom: 1px solid black;">50 athletes</td>
+
+</tr>
+
+<tr>
+
+<td style="border-bottom: 1px solid black;">Sample Mean</td>
+
+<td style="border-bottom: 1px solid black;">118.77 N</td>
+
+</tr>
+
+<tr>
+
+<td style="border-bottom: 1px solid black;">Population $\sigma$</td>
+
+<td style="border-bottom: 1px solid black;">4.16 N</td>
+
+</tr>
+
+<tr>
+
+<td>Population Mean</td>
+
+<td>120 N</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="fragment" data-fragment-index="2">
+
+<i class="arrowr" style="font-size:150%"></i> <span class="success">Visualize the data!</span>
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/muscle-force-boxplot.svg" style="width:100%;" class="fragment" data-fragment-index="2">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Muscle Force Study</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;margin-bottom:1vmin;">
+
+<div>
+
+<p class="left-justify">
+
+Let's set up the test using the <span class="strong">One-Sample Z-Test</span> formula. We are comparing the sample mean to a known population mean (120 N).
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;align-content:center;align-items:center;">
+
+<div>
+
+$$Z = \frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}}$$
+
+</div>
+
+<p class="fragment" data-fragment-index="1">
+
+<i class="fa-solid fa-arrow-left info"></i> Plug in values from the study.
+
+</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+$$Z = \frac{118.77 - 120}{\frac{4.16}{\sqrt{50}}} = -2.083$$
+
+</div>
+
+<p class="fragment" data-fragment-index="3">
+
+The p-value is calculated as: $p = 2 \times \left(1 - \Phi( |-2.083| ) \right) = 0.037$.
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/muscle-force-null-dist.svg" style="width:100%;" class="fragment" data-fragment-index="4">
+
+</div>
+
+<div style="grid-column:1/3;">
+
+<p class="fragment small em framed bg-warning-alpha-02" data-fragment-index="4">
+
+The sample mean is <span class="strong success">significantly different</span> from the population mean based on the Z-test. Therefore, we <span class="strong">reject the null hypothesis</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Muscle Force Study: Confidence Interval</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;margin-bottom:1vmin;">
+
+<div>
+
+<p class="left-justify">
+
+To further interpret the results, we calculate the <span class="strong">95% Confidence Interval</span> of the sample mean.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+$$CI = \bar{X} \pm Z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}$$
+
+$$CI = 118.77 \pm 1.96 \times \frac{4.16}{\sqrt{50}}$$
+
+</div>
+
+<div class="grid-generic left-justify small" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<p class="fragment" data-fragment-index="1">
+
+<i class="fa-solid fa-arrow-left info"></i> Plugging in the values gives us:
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+$$CI = (117.62, 119.93) \,N$$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<img src="lib/img/muscle-force-sampling-dist.svg" style="width:100%;" class="fragment" data-fragment-index="3">
+
+</div>
+
+<div style="grid-column: 1/3;">
+
+<p class="fragment" data-fragment-index="3">
+
+The confidence interval of the mean <span class="em">excludes</span> the population mean, thus the difference between the sample mean the population mean is <span class="em success">statistically significant at the $\alpha = 0.05$ level</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-color="#fff8d0" id="section-title-5">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-5">
+              <div class="section-number">
+                <span class="large-number">
+                  5
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  T-Test
+                </h2>
+                <h3>
+                  One Sample
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-5.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+</section> <!-- End section title -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>One-Sample T-Test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column: 1/3;">
+
+<p class="fragment" data-fragment-index="0"><strong>Purpose:</strong> Test if the mean of a sample differs from a known population mean (with unknown variance).</p>
+
+</div>
+
+<div class="small">
+
+<p class="fragment" data-fragment-index="1"><strong>Use:</strong> Applied when the sample size is small ($n < 30$) or population variance is unknown.</p>
+
+<p class="fragment" data-fragment-index="3"><strong>Test Statistic:</strong></p>
+
+<p class="fragment" data-fragment-index="3">$T = \frac{\overline{X} - \mu_0}{\frac{s}{\sqrt{n}}}$</p>
+
+<p class="fragment" data-fragment-index="4">Degrees of freedom: $df = n - 1$</p>
+
+</div>
+
+<div class="fragment framed border-info" data-fragment-index="2">
+
+<p><strong>Requirements:</strong></p>
+
+<ul>
+
+<li>Normally distributed data</li>
+
+<li>Small sample size ($n < 30$)</li>
+
+<li>Population variance is unknown</li>
+
+</ul>
+
+</div>
+
+<p class="fragment framed border-success" data-fragment-index="5" style="grid-column:1/3;"><strong>$H_0$:</strong> The sample mean is equal to the population mean, $H_0: \mu = \mu_0$.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Material Strength Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="smallest no-hang framed">
+
+<h3>Sample Data:</h3>
+
+<p>Specimens: 6</p>
+
+<p>[284.29, 284.16, 288.06, 284.31, 283.08, 289.58]</p>
+
+<h3>Step 1: Calculations</h3>
+
+<p class="fragment" data-fragment-index="1">
+
+$$\bar{x} = \sum{\frac{x_i}{N}} = \frac{284.29 + 284.16 + 288.06 + 284.31 + 283.08}{6} = 285.58 \, MPa$$
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+$$s^2 = \frac{\sum{(xi=\bar{x})^2}}{N} = \frac{(284.29 - 285.58)^2 + (284.16 - 285.58)^2 + ... + (283.08 - 285.58)^2}{5} = 6.75$$
+
+</p>
+
+<p class="fragment" data-fragment-index="3">
+
+$$s = \sqrt{s^2} = \sqrt{6.75} = 2.60 \, MPa$$
+
+</p>
+
+<p class="fragment" data-fragment-index="4">
+
+$$SE = \frac{s}{\sqrt{n}} = \frac{2.60}{\sqrt{6}} = 1.06 \, MPa$$
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/material-strength-boxplot.svg" style="width:100%;" class="fragment" data-fragment-index="5">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Material Strength Testing: Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="no-hang">
+
+<h3>Step 2: T-Statistic Calculation</h3>
+
+<p class="fragment" data-fragment-index="1">
+
+$$T = \frac{\bar{X} - \mu}{SE} = \frac{285.58 - 285}{1.06} = 0.546$$
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+$$p = 2 \times \left(1 - t_{df=5}( |0.546| ) \right) = 0.609$$
+
+</p>
+
+<p class="fragment" data-fragment-index="3">
+
+Conclusion: <span class="em">Fail to reject</span> the null hypothesis. The sample mean material strength is not significantly different from the hypothesized mean.
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/material-strength-null-dist.svg" style="width:100%;" class="fragment" data-fragment-index="4">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Material Strength Testing: Confidence Interval</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;">
+
+<div>
+
+<h3>Step 3: 95% Confidence Interval</h3>
+
+<p class="fragment" data-fragment-index="1">
+
+$$CI = \bar{X} \pm t_{\alpha/2, df=5} \cdot SE$$
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+$$CI = 285.58 \pm 2.571 \cdot 1.06 = (282.85, 288.31) \, MPa$$
+
+</p>
+
+<p class="fragment" data-fragment-index="3">
+
+Conclusion: Since the population mean (285 MPa) is within the 95% CI, <span class="em">fail to reject</span> the null hypothesis.
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/material-strength-sampling-dist.svg" style="width:100%;" class="fragment" data-fragment-index="4">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-color="#f5d76e" id="section-title-6">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-6">
+              <div class="section-number">
+                <span class="large-number">
+                  6
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Z-Test
+                </h2>
+                <h3>
+                  Two Samples
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-6.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+</section> <!-- End section title -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Two-Sample Z-Test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column: 1/3;">
+
+<p class="fragment" data-fragment-index="0"><strong>Purpose:</strong> Test if the means of two independent samples differ (with known population variances).</p>
+
+</div>
+
+<div class="small">
+
+<p class="fragment" data-fragment-index="1"><strong>Use:</strong> Applied when comparing the means of two independent groups with large sample sizes ($n_1 > 30, n_2 > 30$).</p>
+
+<p class="fragment" data-fragment-index="3"><strong>Test Statistic:</strong></p>
+
+<p class="fragment" data-fragment-index="3">$Z = \frac{\overline{X}_1 - \overline{X}_2}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}$</p>
+
+</div>
+
+<div class="fragment framed border-info" data-fragment-index="2">
+
+<p><strong>Requirements:</strong></p>
+
+<ul>
+
+<li>Normally distributed data</li>
+
+<li>Large sample sizes</li>
+
+<li>Population variances are known</li>
+
+</ul>
+
+</div>
+
+<p class="fragment framed border-success" data-fragment-index="5" style="grid-column:1/3;"><strong>$H_0$:</strong> The means of the two groups are equal, $H_0: \mu_1 = \mu_2$.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Product Weight Comparison</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+A quality control team is tasked with comparing the <span class="strong">average weights</span> of products produced by two different manufacturing machines (Machine A and Machine B).
+
+The goal is to determine whether there is a <span class="em">significant difference</span> in the average product weight between the two machines.
+
+</p>
+
+<p class="left-justify">
+
+We have collected <span class="em">100 samples</span> from Machine A and <span class="em">120 samples</span> from Machine B.
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+<span class="strong">Research Question:</span> Is there a significant difference in the average product weight between Machine A and Machine B?
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+<span class="strong">Null Hypothesis ($H_0$):</span> The average product weight is the same for both machines.
+
+<br/>
+
+<span class="strong">Alternative Hypothesis ($H_1$):</span> There is a significant difference in the average product weight between the two machines.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Product Weight Data</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+<span class="strong">Machine A:</span> <br>
+
+Mean Weight: 100.15 g <br>
+
+Standard Deviation: 9.91 g <br>
+
+Sample Size: 100
+
+</p>
+
+<p class="left-justify">
+
+<span class="strong">Machine B:</span> <br>
+
+Mean Weight: 101.65 g <br>
+
+Standard Deviation: 9.85 g <br>
+
+Sample Size: 120
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/product_weight_boxplot.svg" style="width:100%;" class="fragment" data-fragment-index="2">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Hypothesis Testing: Z-Statistic</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+<span class="strong">Z-Statistic Formula:</span>
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="smallest no-hang">
+
+$$ Z = \frac{\bar{X}_A - \bar{X}_B}{SE_{\Delta X}} $$
+
+$$ SE_{\Delta X} = s_{\text{pooled}} \sqrt{\frac{1}{n_1} + \frac{1}{n_2}} $$
+
+$$ s_{\text{pooled}} = \sqrt{\frac{(n_1 - 1) s_1^2 + (n_2 - 1) s_2^2}{n_1 + n_2 - 2}} = 9.88 $$
+
+</div>
+
+<p class="fragment" data-fragment-index="1">
+
+Plugging in values:
+
+</p>
+
+<div class="fragment" data-fragment-index="2">
+
+$$ Z = \frac{100.15 - 101.65}{1.35} = -1.11 $$
+
+</div>
+
+<p class="fragment" data-fragment-index="3">
+
+The observed <span class="strong">Z-statistic</span> is -1.11.
+
+</p>
+
+</div>
+
+</div>
+
+<div>
+
+<img src="lib/img/product_weight_null_dist.svg" style="width:100%;" class="fragment" data-fragment-index="4">
+
+</div>
+
+<div style="grid-column:1/3;">
+
+<p class="fragment small em framed bg-warning-alpha-02" data-fragment-index="4">
+
+The sample mean difference is <span class="strong">not statistically significant</span> based on the Z-test.
+
+Therefore, we <span class="strong">fail to reject the null hypothesis</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Confidence Interval Analysis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+Let's compute the 95% confidence interval for the difference in means:
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+$$ CI_{\Delta X} = \Delta \bar{X} \pm Z_{\alpha/2} \cdot SE_{\Delta X} $$
+
+$$ CI_{\Delta X} = -1.5 \pm 1.96 \cdot 1.35 = (-4.14, 1.14) $$
+
+</div>
+
+</div>
+
+<p class="fragment question" data-fragment-index="1">
+
+Does the confidence interval of the sampling distribution of differences in means include 0
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/product_weight_sampling_dist.svg" style="width:100%;" class="fragment" data-fragment-index="2">
+
+</div>
+
+<div style="grid-column:1/3;">
+
+<p class="fragment" data-fragment-index="3">
+
+The confidence interval <span class="em">includes</span> 0, thus the difference between the sample means is <span class="em success">not statistically significant</span> at the $\alpha = 0.05$ level.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-color="#f79a52" id="section-title-7">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-7">
+              <div class="section-number">
+                <span class="large-number">
+                  7
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  T-Test
+                </h2>
+                <h3>
+                  Two Samples
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-7.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+</section> <!-- End section title -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Two-Sample T-Test (Welch's)</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column: 1/3;">
+
+<p class="fragment" data-fragment-index="0"><strong>Purpose:</strong> Test if the means of two independent samples differ (with unknown and unequal variances).</p>
+
+</div>
+
+<div class="small">
+
+<p class="fragment" data-fragment-index="1"><strong>Use:</strong> Applied when sample sizes are small and variances are unequal between groups.</p>
+
+<p class="fragment" data-fragment-index="3"><strong>Test Statistic:</strong></p>
+
+<p class="fragment" data-fragment-index="3">$T = \frac{\overline{X}_1 - \overline{X}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$</p>
+
+<p class="fragment" data-fragment-index="4">Degrees of freedom: $df = \frac{\left(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}\right)^2}{\frac{\left(\frac{s_1^2}{n_1}\right)^2}{n_1-1} + \frac{\left(\frac{s_2^2}{n_2}\right)^2}{n_2-1}}$</p>
+
+</div>
+
+<div class="fragment framed border-info" data-fragment-index="2">
+
+<p><strong>Requirements:</strong></p>
+
+<ul>
+
+<li>Normally distributed data</li>
+
+<li>Unknown and unequal population variances</li>
+
+</ul>
+
+</div>
+
+<p class="fragment framed border-success" data-fragment-index="5" style="grid-column:1/3;"><strong>$H_0$:</strong> The means of the two groups are equal, $H_0: \mu_1 = \mu_2$.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Stress Tolerance in Composite Materials</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+An engineering team is testing the <span class="strong">stress tolerance</span> of two different composite materials (Material A and Material B).
+
+The goal is to determine whether there is a <span class="em">significant difference</span> in the average stress tolerance between the two materials.
+
+</p>
+
+<p class="left-justify">
+
+We have collected <span class="em">50 samples</span> from Material A and <span class="em">30 samples</span> from Material B.
+
+</p>
+
+<p class="fragment" data-fragment-index="1">
+
+<span class="strong">Research Question:</span> Is there a significant difference in the average stress tolerance between Material A and Material B?
+
+</p>
+
+<p class="fragment" data-fragment-index="2">
+
+<span class="strong">Null Hypothesis ($H_0$):</span> There is no difference in the average stress tolerance between Material A and Material B.
+
+<br/>
+
+<span class="strong">Alternative Hypothesis ($H_1$):</span> There is a significant difference in the average stress tolerance between the two materials.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Stress Tolerance Data</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+<span class="strong">Material A:</span> <br>
+
+Mean Stress: 301.65 MPa <br>
+
+Standard Deviation: 8.62 MPa <br>
+
+Sample Size: 50
+
+</p>
+
+<p class="left-justify">
+
+<span class="strong">Material B:</span> <br>
+
+Mean Stress: 313.29 MPa <br>
+
+Standard Deviation: 23.65 MPa <br>
+
+Sample Size: 30
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/stress_composite_boxplot.svg" style="width:100%;" class="fragment" data-fragment-index="2">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Hypothesis Testing: T-Statistic</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+<span class="strong">T-Statistic Formula:</span>
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="smallest no-hang">
+
+$$ T = \frac{\bar{X}_A - \bar{X}_B}{SE_{\Delta X}} $$
+
+$$ SE_{\Delta X} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} $$
+
+$$ SE_{\Delta X} = 4.486 $$
+
+</div>
+
+<p class="fragment" data-fragment-index="1">
+
+Plugging in values:
+
+</p>
+
+<div class="fragment" data-fragment-index="2">
+
+$$ T = \frac{301.65 - 313.29}{4.49} = -2.60 $$
+
+</div>
+
+<p class="fragment" data-fragment-index="3">
+
+The observed <span class="strong">T-statistic</span> is -2.60.
+
+</p>
+
+</div>
+
+</div>
+
+<div>
+
+<img src="lib/img/stress_composite_null_dist.svg" style="width:100%;" class="fragment" data-fragment-index="4">
+
+</div>
+
+<div style="grid-column:1/3;">
+
+<p class="fragment small em framed bg-warning-alpha-02" data-fragment-index="4">
+
+The sample mean difference is <span class="strong">statistically significant</span> based on the T-test.
+
+Therefore, we <span class="strong">reject the null hypothesis</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Confidence Interval Analysis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.2fr 1fr;grid-template-rows:1fr;gap:5px;">
+
+<div>
+
+<p class="left-justify">
+
+Let's compute the 95% confidence interval for the difference in means:
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+$$ CI_{\Delta X} = \Delta \bar{X} \pm t_{\alpha/2, df} \cdot SE_{\Delta X} $$
+
+$$ CI_{\Delta X} = -11.64 \pm 2.03 \cdot 4.49 = (-20.76, -2.52) $$
+
+</div>
+
+</div>
+
+<p class="fragment question" data-fragment-index="1">
+
+Does the confidence interval of the sampling distribution of differences in means exclude 0
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/stress_composite_sampling_dist.svg" style="width:100%;" class="fragment" data-fragment-index="2">
+
+</div>
+
+<div style="grid-column:1/3;">
+
+<p class="fragment" data-fragment-index="3">
+
+The confidence interval <span class="em">excludes</span> 0, thus the difference between the sample means is <span class="em success">statistically significant</span> at the $\alpha = 0.05$ level.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-color="#88c9c1" id="section-title-8">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-8">
+              <div class="section-number">
+                <span class="large-number">
+                  8
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  T-Test
+                </h2>
+                <h3>
+                  Paired Data
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-8.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+</section> <!-- End section title -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Paired T-Test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column: 1/3;">
+
+<p class="fragment" data-fragment-index="0"><strong>Purpose:</strong> Test if the means of two related samples (e.g., before and after) differ.</p>
+
+</div>
+
+<div class="small">
+
+<p class="fragment" data-fragment-index="1"><strong>Use:</strong> Applied when the same subjects are measured twice under different conditions.</p>
+
+<p class="fragment" data-fragment-index="3"><strong>Test Statistic:</strong></p>
+
+<p class="fragment" data-fragment-index="3">$T = \frac{\overline{D}}{\frac{s_D}{\sqrt{n}}}$</p>
+
+<p class="fragment" data-fragment-index="4">Degrees of freedom: $df = n - 1$</p>
+
+</div>
+
+<div class="fragment framed border-info" data-fragment-index="2">
+
+<p><strong>Requirements:</strong></p>
+
+<ul>
+
+<li>Normally distributed data</li>
+
+<li>Observations are paired or matched</li>
+
+</ul>
+
+</div>
+
+<p class="fragment framed border-success" data-fragment-index="5" style="grid-column:1/3;"><strong>$H_0$:</strong> The mean difference between paired observations is zero, $H_0: \mu_D = 0$.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 12
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2024</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ME3040_splash.png",
+text: "Welcome to ME3040!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>
