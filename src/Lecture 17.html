@@ -74,21 +74,135 @@ style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
 
 >
 
-<div class="border-bottom fragment" data-fragment-index="1">
-
-<p><i class="target"></i> Recap ANOVA</p>
-
-</div>
-
-<div class="border-bottom fragment" data-fragment-index="2">
-
-<p><i class="target"></i> Post-hoc Testing</p>
-
-</div>
-
 <div class="border-bottom fragment" data-fragment-index="3">
 
-<p><i class="target"></i> Repeated Measures ANOVA</p>
+<p><i class="target"></i> Linear modeling with "fixed effects"</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="4">
+
+<p><i class="target"></i> F-statistic</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/multigroup_2.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Multiple Explanatory Variables
+                </h2>
+                <h3>
+                  When Category Is A Predictor
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240,240,240,0.7) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240,240,240,0.7) !important;
+
+}
+
+</style>
+
+
+
+<aside class="notes">
+
+<p>
+
+We spent a lot of time on linear regression, and frankly, we aren't done with them yet.
+
+</p>
+
+<p>
+
+Now, we need to introduce another concept to build upon our linear models.
+
+To do so, we need to step back a little to the idea of categorical variables
+
+being predictors, rather than the continuous variables we just discussed.
+
+</p>
+
+</aside>
+
+
+
+</section>
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Multiple Explanatory Categories</h2>
+
+</div>
+
+<div class="content">
+
+<p>
+
+Previously, we explored inference about the difference in central tendencies of 2 groups.
+
+</p>
+
+<div class="full-width flex-row">
+
+<div class="half-width flex-column">
+
+<div>
+
+<p>
+
+How do we perform hypothesis testing for a <span class="danger">difference in central tendency across more than two categories</span>?
+
+</p>
+
+<p class="em">
+
+Could a similar approach to 2-groups work for multiple categorical variables be applied?
+
+</p>
+
+<p class="fragment framed full-width border-danger danger strong">
+
+It's not that simple!
+
+</p>
+
+</div>
+
+</div>
+
+<div class="half-width flex-column">
+
+<img src="lib/img/multiple-means-ex.svg" width=100%>
 
 </div>
 
@@ -100,7 +214,1414 @@ style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
 
 <aside class="notes">
 
-<p>Let's recap some of the concepts of ANOVA.</p>
+<p>STOP. Can anyone tell me why I am not allowed to just perform a bunch of 2-group t-tests? Answer on next slide.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- ANOVA INTRO: WHAT IS VARIABILITY -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Consider The Categorical Relationships</h2>
+
+</div>
+
+<div class="content" style="font-size:80%;">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="width:80%">
+
+<svg width="100%" viewBox="0 0 864 288" data-id="anova-fig">
+
+<use style="opacity:0;visibility:hidden;" xlink:href="lib/img/anova-all-spreads.svg#axes_9"></use>
+
+<use style="opacity:0;visibility:hidden;" xlink:href="lib/img/anova-all-spreads.svg#axes_10"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_2"></use>
+
+</svg>
+
+</div>
+
+<p>
+
+We must consider the variability of the data and how
+
+<span class="em">they relate</span> to their <span class="pop">own group</span>
+
+as well as <span class="pink">all the other groups</span>.
+
+</p>
+
+<p class="strong">
+
+In which panel are the differences between groups most apparent?
+
+</p>
+
+<p data-id="pop-note" style="display:none;">
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+While the <span class="u">variability</span> between groups in the two panels
+
+are similar, the increased <span class="u">variability</span> of the data
+
+within the groups (right panel) makes it harder to differentiate the different
+
+groups.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+The above panels show 3 groups where
+
+the corresponding groups in either panel has the same mean.
+
+</p>
+
+</aside>
+
+</section>
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Consider The Categorical Relationships</h2>
+
+</div>
+
+<div class="content" style="font-size:80%;">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="width:80%">
+
+<svg width="100%" viewBox="0 0 864 288" data-id="anova-fig">
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_9"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_10"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_2"></use>
+
+</svg>
+
+</div>
+
+<p>
+
+We must consider the variability of the data and how
+
+<span class="em">they relate</span> to their <span class="pop">own group</span>
+
+as well as <span class="pink">all the other groups</span>.
+
+</p>
+
+<p class="strong">
+
+In which panel are the differences between groups most apparent?
+
+</p>
+
+<p data-id="pop-note">
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+While the <span class="u">variability</span> between groups in the two panels
+
+are similar, the increased <span class="u">variability</span> of the data
+
+within the groups (right panel) makes it harder to differentiate the different
+
+groups.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Consider The Categorical Relationships</h2>
+
+</div>
+
+<div class="content" style="font-size:80%;">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="width:80%">
+
+<svg width="100%" viewBox="0 0 864 288" data-id="anova-fig">
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_9"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_10"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_2"></use>
+
+</svg>
+
+</div>
+
+<p data-id="desc-text">
+
+An assessment of the difference in means between several groups depends on <span class="u">two kinds of variability</span>:
+
+<ol>
+
+<li>
+
+<span class="strong">How different the group means are <span class="em">between</span> each other</span>
+
+</li>
+
+<li>
+
+<span class="strong">How different each datum is to the mean <span class="em">within</span> its group</span>
+
+</li>
+
+</ol>
+
+</p>
+
+<p data-id="pop-note">
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+<span class="danger u">Just knowing the sample means for the groups is not enough</span>.
+
+If the values within each sample are very close to each other, we can detect a small
+
+difference in means as significant (as in the left panel). If there is more
+
+variability in the samples (as in the right panel), we need the group means to be farther apart.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Variabiilty Differences -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Different Variabilities Differ</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="framed bg-pink-light black box-width">
+
+Why analyze variability to test for a difference between multiple means?
+
+</p>
+
+<p>
+
+If the null hypothesis is true (no difference between the sample means), the samples ALL come from the same underlying population.
+
+</p>
+
+<p class="em fragment" style="font-size:90%">
+
+If we select samples of size eight from a population where the mean is 38, how likely is it to see sample means as different as 30.75, 34.0, and 49.25?
+
+</p>
+
+<ol class="fragment" style="font-size:80%">
+
+<li>
+
+We know that variability in sample means (sampling distribution) depends not only on the <span class="strong">sample size</span> but also on the <span class="strong">variability in the population</span>.
+
+</li>
+
+<li>
+
+Furthermore, while we can easily find the difference between any pair of group means, we want a <span class="strong">single measure</span> that reflects how far apart the means are for all groups (<i class="fas fa-arrow-right danger"></i> better chance to avoid <span class="danger">type 1 error</span>).
+
+</li>
+
+</ol>
+
+<p class="fragment">
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+We address both of these issues by measuring <span class="strong">different aspects of the variability in the data</span>.
+
+</p>
+
+<p class="em fragment">
+
+Let's investigate the different aspects of variability in data.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Multi-group Variability 1 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Multiple-Groups Variabilities</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="box-width">
+
+<svg width="100%" viewBox="0 0 864 288">
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/anova-all-spreads.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/anova-all-spreads.svg#axes_4"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/anova-all-spreads.svg#axes_5"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/anova-all-spreads.svg#axes_6"></use>
+
+<use class="fragment" data-fragment-index=3 xlink:href="lib/img/anova-all-spreads.svg#axes_11"></use>
+
+<use class="fragment" data-fragment-index=3 xlink:href="lib/img/anova-all-spreads.svg#axes_12"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_7"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_8"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-all-spreads.svg#axes_2"></use>
+
+</svg>
+
+</div>
+
+<div class="q3-width" style="font-size:90%;">
+
+<p class="fragment">
+
+<i class="fas fa-arrow-circle-right"></i>
+
+We want a single measure that reflects how far apart the means are for all groups, without the need to calculate the difference between all the pairs of group means (as the number of groups increases, the number of pairs would increase even more).
+
+</p>
+
+<p class="fragment">
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+We could calculate how far each group mean is from the <span class="pop">"Grand mean"</span> (the overall combined mean) instead.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Multi-group Variability 2 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Multiple-Groups Variabilities</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="box-width">
+
+<svg width="90%" viewBox="0 0 720 288">
+
+<use xlink:href="lib/img/anova-all-variabilities.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-all-variabilities.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/anova-all-variabilities.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/anova-all-variabilities.svg#axes_4"></use>
+
+<use class="fragment" data-fragment-index=3 xlink:href="lib/img/anova-all-variabilities.svg#axes_5"></use>
+
+</svg>
+
+</div>
+
+<div class="full-width" style="font-size:90%;gap:1vmin;">
+
+<div class="grid-generic fragment" data-fragment-index="1" style="grid-template-columns:1fr 1.5fr;grid-template-rows:1fr;gap:1vmin;">
+
+<div style="justify-self:end;text-align:right;">
+
+<p class="u em danger right">
+
+Variability between groups:
+
+</p>
+
+</div>
+
+<div style="justify-self:start;text-align:left;">
+
+<p>
+
+distance from each group means to the <span class="pop">Grand Mean</span>.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic fragment" data-fragment-index="2" style="grid-template-columns:1fr 1.5fr;grid-template-rows:1fr;gap:1vmin;">
+
+<div style="justify-self:end;text-align:right;">
+
+<p class="u em info right">
+
+Variability within groups:
+
+</p>
+
+</div>
+
+<div style="justify-self:start;text-align:left;">
+
+<p>
+
+distance from each data point to the <span class="strong">Sample Mean</span>.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic fragment" data-fragment-index="3" style="grid-template-columns:1fr 1.5fr;grid-template-rows:1fr;gap:1vmin;">
+
+<div style="justify-self:end;text-align:right;">
+
+<p class="u em warning right">
+
+Total variability:
+
+</p>
+
+</div>
+
+<div style="justify-self:start;text-align:left;">
+
+<p>
+
+distance from each data point to the <span class="pop">Grand Mean</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Multi-group Variability 3 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Multiple-Groups Variabilities</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="box-width">
+
+<svg width="90%" viewBox="0 0 720 288">
+
+<use xlink:href="lib/img/anova-all-variabilities.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-all-variabilities.svg#axes_2"></use>
+
+<use xlink:href="lib/img/anova-all-variabilities.svg#axes_3"></use>
+
+<use xlink:href="lib/img/anova-all-variabilities.svg#axes_4"></use>
+
+<use xlink:href="lib/img/anova-all-variabilities.svg#axes_5"></use>
+
+</svg>
+
+</div>
+
+<p>
+
+<i class="fa fa-arrow-circle-right"></i>
+
+Intuitively, for the same <span class="warning">total variability</span>, the
+
+<span class="strong">greater the <span class="u-danger">variability between groups</span>
+
+will be compared with the <span class="u-info">variability within groups</span></span>,
+
+the more likely the groups will be <span class="u">different</span> from one to another.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ANOVA -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Analysis Of Variance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="quoted no-margin-top" style="font-size:80%;">
+
+An <span class="strong">AN</span>alysis <span class="strong">O</span>f
+
+<span class="strong">VA</span>riance (ANOVA) is a comparison between the
+
+<span class="em">variability between groups</span> to the
+
+<span class="em">variability within groups</span>. The statistic of interest
+
+that reflects this comparison between the two types of variability when
+
+performing an ANOVA is the <span class="strong u em">F-statistic</span>.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Total Variability
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-danger" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Between Groups Variability
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Within Groups Variability
+
+</p>
+
+</div>
+
+</div>
+
+<p style="text-align:left;">
+
+Each of these variabilities relies on the
+
+<span class="u">calculation of the sums of squares</span>
+
+(<span class="strong">$SS$</span>) deviations.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Total Variance $SS_{\mathrm{Total}}$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-danger" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Between Groups Variance $SS_{\mathrm{Groups}}$ (a.k.a $SS_{\mathrm{Between}}$)
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+"Error" Variance $SS_{\mathrm{Error}}$ (a.k.a. $SS_{\mathrm{Within}}$)
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{i=1}^{n}(x_{i}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-danger" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2$$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- F - Statistic -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The $\operatorname{F}$-statistic</h2>
+
+</div>
+
+<div class="content" style="justify-content:start;">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>
+
+The $F$-statistic is a <span class="strong">ratio</span> of the
+
+<span class="u-danger">variability between groups</span> and the
+
+<span class="u-info">variability withing groups</span>,
+
+but <span class="strong">uses the mean variability</span> instead of the
+
+total variability for each component.
+
+</p>
+
+<p>
+
+$F=\frac{\class{danger}{\textrm{Mean variability between groups}}}{\class{info}{\textrm{Mean variability within groups}}}$
+
+</p>
+
+<p>
+
+$F=\frac{\class{danger}{\textrm{Mean SS}_{Group}}}{\class{info}{\textrm{Mean SS}_{Error}}}=
+
+\frac{\class{danger}{\frac{\textrm{SS}_{Group}}{(k-1)}} }{\class{info}{\frac{\textrm{SS}_{Error}}{(n-k)}}}$
+
+</p>
+
+<p>
+
+<span class="u em">Notes</span>
+
+</p>
+
+<ul class="smaller push-left" >
+
+<li>
+
+$k$: number of groups
+
+</li>
+
+<li>
+
+$n$: number of data points
+
+</li>
+
+<li>
+
+$(k-1)$ and $(n-k)$ are the respective degrees of freedom for the variability between and within groups (degree of freedom for the total variability is $(n-1)$).
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- F-statistic 2 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The $\operatorname{F}$-statistic</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1f;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:5px;">
+
+<div style="text-align:center;justify-self:center;">
+
+<p>
+
+$
+
+F=\frac{
+
+\class{danger}{\frac{\textrm{SS}_{Group}}{(k-1)}}
+
+}{
+
+\class{info}{\frac{\textrm{SS}_{Error}}{(n-k)}}
+
+}=\frac{
+
+\class{danger}{\frac{\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2}{(k-1)}}
+
+}{
+
+\class{info}{\frac{
+
+\class{info}{\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2}
+
+}{
+
+(n-k)
+
+}}
+
+}
+
+$
+
+</p>
+
+</div>
+
+<div style="text-align:left;justify-self:center;">
+
+<p class="smaller">
+
+$\bar{x}_g$: the mean of each group <br>
+
+$n_g$: sample size for each group <br>
+
+$\hat{x}$: Grand mean
+
+</p>
+
+</div>
+
+</div>
+
+<p class="fragment" style="font-size:80%">
+
+Recall the formula for computing a standard deviation is:
+
+$s=\sqrt{\frac{\class{success}{\sum(x_{i}-\bar{x})^2}}{n-1}}$.
+
+</p>
+
+<p class="fragment" style="font-size:80%;text-align:justify">
+
+With a little algebra, we can turn this into an easy formula for computing the sum of squared deviations from the group mean within any group ($\textrm{SS}_{Error}$) using <span class="success">$(n_g-1)s_g^2$</span> where $n_g$ is the sample size and $s_g$ is the standard deviation from the sample in the $g^{th}$ group.
+
+</p>
+
+<div class="fragment grid-generic" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:5px;font-size:80%;width:80%;">
+
+<div style="align-self:center;">
+
+<p>We can then rewrite:</p>
+
+</div>
+
+<div class="framed border-pop no-hang">
+
+$$F=\frac{\frac{\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2}{(k-1)}}{\frac{\sum_{g=1}^{k}(n_g-1)s_g^2}{(n-k)}}$$
+
+</div>
+
+</div>
+
+<div class="fragment" style="font-size:70%">
+
+<p>
+
+<span class="u em">Notes:</span>
+
+</p>
+
+<ul>
+
+<li>
+
+This is like standardizing the difference in means between each group and the <span class="strong">"Grand mean"</span> with their respective <span class="pop">variance ($s^2$)</span>.
+
+</li>
+
+<li>
+
+The $F$-statistic is a <span class="em pop">standardized</span> statistic, what else have we seen recently that is like this?
+
+</li>
+
+<li class="fragment">
+
+Similar to the standard errors of the $\hat{\beta}$ coefficients!
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+So the F statistic is a ratio of the SE of the Group to the SE of the Residuals.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- ANOVA Interactive -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Analysis Of Variance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:5px;">
+
+<div class="grid-generic" style="grid-template-columns:5fr 6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div style="align-content:center;display:grid;height:100%">
+
+<p>
+
+$F=\frac{\class{danger}{\textrm{Mean SS}_{Group}}}{\class{info}{\textrm{Mean SS}_{Error}}}$
+
+</p>
+
+</div>
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{i=1}^{n}(x_{i}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-danger" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2$$
+
+</p>
+
+</div>
+
+</div>
+
+<!-- <div class="fig-container box-width"  data-file="lib/interactive/anova-variability.html" style="height:60vh;"></div> -->
+
+<vizzy data-src="lib/interactive/anova-variability.html" style="height:60vh;display:grid;align-items: start;justify-items: center;grid-template-columns: 1fr 2.3fr 1fr;" data-style="grid-column: 2/3;"></vizzy>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- F-distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The $\mathbb{F}$-Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<p>
+
+The <span class="pop">Null Distribution</span> for the $f$-statistic that is
+
+described by the parameters for <span class="info">within group ($n-k$)</span>
+
+and <span class="danger">between group ($k-1$)</span> <span class="warning">degrees of freedom</span>.
+
+</p>
+
+<img src="lib/img/f-distribution.svg" width="50%">
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- F-distribution -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The $\mathbb{F}$-Distribution</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>
+
+The <span class="strong">Null Distribution</span> for the $f$-statistic that is
+
+described by the parameters for<br /><span class="info">within group ($n-k$)</span>
+
+and <span class="danger">between group ($k-1$)</span> <span class="warning">degrees of freedom</span>.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:1vmin;">
+
+<div class="q3-width framed border-danger no-margin-bottom" style="display:grid;align-items:center;justify-items:center;height:90%">
+
+<p class="q3-width">
+
+A p-value is obtained by computing the area
+
+under the curve for $\mathbb{F}\geq f_{observed}$.
+
+</p>
+
+<img src="lib/img/ftable_01.gif" class="no-margin q3-width fragment" style="margin-bottom:20px;overflow:hidden;object-fit:cover;">
+
+</div>
+
+<div class="full-width">
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/ants-sandwich-theory-f.svg#axes_1"></use>
+
+<use xlink:href="lib/img/ants-sandwich-theory-f.svg#axes_2"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- F-Statistic in Linear Regression -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>F-Statistic in Linear Regression</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;">
+
+<p class="small">
+
+The F-statistic is used to determine the overall significance of the regression model, testing the null hypothesis that all regression coefficients are equal to zero versus at least one differs.
+
+</p>
+
+</div>
+
+<div>
+
+<p class="small">
+
+For linear regression, the F-statistic is calculated as:
+
+</p>
+
+<p class="small">
+
+$$ F = \frac{MSR}{MSE} $$
+
+</p>
+
+</div>
+
+<div>
+
+<p class="left-justify no-hang small">
+
+Where:
+
+</p>
+
+<ul class="small">
+
+<li>\(MSR\) (Mean Square Regression) = \(\frac{SSR}{DFR}\) and \(DFR = 1\) for simple linear regression</li>
+
+<li>\(MSE\) (Mean Square Error) = \(\frac{SSE}{DFE}\) with \(DFE = n - p - 1\)</li>
+
+<li>\(SSR\) (Sum of Squares for Regression) = \(SST - SSE\)</li>
+
+<li>\(SST\) (Total Sum of Squares) = \(\sum(y_i - \bar{y})^2\)</li>
+
+<li>\(SSE\) (Error Sum of Squares) = \(\sum(y_i - \hat{y}_i)^2\)</li>
+
+</ul>
+
+</div>
+
+<div class="framed border-success fragment" style="grid-column: 1/3;">
+
+<p>
+
+The F-statistic allows us to assess whether our model provides a better fit to the data than a model with no predictors (only an intercept).
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+The F-statistic in simple linear regression helps to test the overall significance of the model. It's a way to see if our predictive model is better than an average value model.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- F-Statistic in Linear Regression -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>F-Statistic in Linear Regression</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column: 1/3;">
+
+<p class="small">
+
+Let's calculate the F-statistic for a simple linear regression model using a hypothetical dataset related to mechanical engineering material testing.
+
+</p>
+
+</div>
+
+<div>
+
+<ul>
+
+<li>\(SST = 60\)</li>
+
+<li>\(SSE = 45\)</li>
+
+<li>\(n = 25\)</li>
+
+<li>\(p = 1\)</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<p class="small fragment">
+
+First, calculate \(SSR\) and then \(MSE\) and \(MSR\):
+
+</p>
+
+<p class="small fragment">
+
+\(SSR = SST - SSE = 60 - 45 = 15\)
+
+</p>
+
+<p class="small fragment">
+
+\(MSE = \frac{SSE}{n - p - 1} = \frac{45}{23} \approx 1.96\)
+
+</p>
+
+<p class="small fragment">
+
+\(MSR = \frac{SSR}{DFR} = \frac{15}{1} = 15\)
+
+</p>
+
+</div>
+
+<div style="grid-column: 1/3;" class="fragment">
+
+<p class="small">
+
+Finally, the F-statistic is calculated as:
+
+</p>
+
+<p class="small">
+
+\(F = \frac{MSR}{MSE} = \frac{15}{1.96} \approx 7.65\)
+
+</p>
+
+<p class="small fragment">
+
+Since \(F = 7.65\) is slightly larger than the critical value of \(F(1, 23) \approx 4.28\), we reject the null hypothesis, but the model's significance is only moderate.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+In this example, the F-statistic of 7.65 is moderately above the critical value, suggesting that the predictor is likely significant but with limited strength. This can happen in mechanical engineering when testing material properties where a weak relationship exists.
+
+</p>
+
+<p>
+
+The F-statistic is used to assess the overall goodness of fit in a regression model, particularly when comparing how well the model with predictors fits the data compared to a model with only an intercept (i.e., no predictors). Use the F-statistic when:
+
+<ul>
+
+<li>You want to test the overall significance of your regression model.</li>
+
+<li>You're comparing a full model (with predictors) to a reduced model (no predictors or only an intercept).</li>
+
+<li>Evaluating if the inclusion of predictors improves the model's fit.</li>
+
+</ul>
+
+</p>
+
+<p>
+
+When interpreting the F-statistic:
+
+<ul>
+
+<li>A high F-statistic suggests that the model fits significantly better than a model with no predictors.</li>
+
+<li>A borderline F-statistic (like this example) might indicate some model utility, but additional evidence or a larger dataset might be needed to confirm the relationship.</li>
+
+<li>A low F-statistic means that the predictors do not significantly improve the fit of the model, leading to retention of the null hypothesis.</li>
+
+</ul>
+
+</p>
 
 </aside>
 
