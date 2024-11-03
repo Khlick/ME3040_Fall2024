@@ -50,7 +50,7 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
-        height: 100%;
+        height: calc(100vh - 20px);
         align-items: start;
         justify-items: center;
       }
@@ -59,7 +59,7 @@
         height: 100%;
       }
       .tick text {
-        font-size: 12pt;
+        font-size: 16pt;
       }
 
       .tick line,
@@ -82,7 +82,7 @@
       }
 
       .legend text {
-        font-size: 12px;
+        font-size: 14px;
         fill: #333;
       }
       circle.mean-circle {
@@ -92,8 +92,15 @@
 
       .stddev-line {
         stroke: #411;
-        stroke-width: 2;
+        stroke-width: 2px;
       }
+
+      .interaction-line {
+        stroke-width: 5px; /* Set desired thickness */
+        stroke: gray;
+        stroke-dasharray: 4, 2;
+      }
+      
     </style>
   </head>
   <body>
@@ -162,10 +169,12 @@
           activate: () => {
             currentView = 3;
             updateView();
+            toggleInteractions();
           },
           reverse: () => {
             currentView = 0;
             updateView();
+            toggleInteractions();
           },
           index: 4,
         },

@@ -32,7 +32,10 @@ let yExtent, yScale, xScale,
   nMain, nSecondary, nTotal, 
   colFxn,
   cat1Values, cat2Values,
-  meansDisplayed=false;
+  meansDisplayed = false;
+
+// Flag for interaction lines display
+let interactionsDisplayed = false;
 /**
  * Generates a color scale based on the categories of CAT2, with brightness adjustments based on CAT1.
  * 
@@ -260,6 +263,7 @@ function updateView(){
   simulation.alpha(0.8).restart();
   updateLegend(legendFlag);
   if (meansDisplayed) drawMeans();
+  if (interactionsDisplayed) drawInteractions();
 }
 
 function updateLegend(isCat2OnXAxis) {
@@ -317,14 +321,27 @@ function updateLegend(isCat2OnXAxis) {
 
 function toggleMeans() {
   if (meansDisplayed) {
-    meanPoints.selectAll(".mean-circle, .stddev-line").remove();
+    meanPoints.selectAll(".mean-circle, .stddev-line, .interaction-line").remove();
     meansDisplayed = false;
   } else {
-
-    drawMeans()
+    drawMeans();
     meansDisplayed = true;
+    if (interactionsDisplayed) {
+      drawInteractions();
+    }
   }
 }
+
+function toggleInteractions() {
+  interactionsDisplayed = !interactionsDisplayed;
+  
+  if (interactionsDisplayed && meansDisplayed) {
+    drawInteractions();
+  } else {
+    meanPoints.selectAll(".interaction-line").remove();
+  }
+}
+
 
 function drawMeans() {
   meanPoints.selectAll(".mean-circle")
@@ -368,5 +385,42 @@ function drawMeans() {
       exit => exit.call(
         exit => exit.transition().duration(100).style("opacity", 0).remove()
       )
+    );
+}
+
+function drawInteractions() {
+  // Only proceed if both meansDisplayed and interactionsDisplayed are true
+  if (!meansDisplayed || !interactionsDisplayed) return;
+
+  // Determine the pairs of indices we need to connect in `groupedStats`
+  const interactionPairs = [];
+  for (let i = 0; i < groupedStats.length / 2; i++) {
+    let rIndex = ~~(groupedStats.length / 2) + i;
+    if (groupedStats[i]) {
+      interactionPairs.push({
+        start: groupedStats[i][groupedStats[i].length - 1],   // Last element, contains center and mean
+        end: groupedStats[rIndex][groupedStats[rIndex].length - 1] // Last element of next pair
+      });
+    }
+  }
+
+  // Draw interaction lines for each pair in `interactionPairs`
+  meanPoints.selectAll(".interaction-line")
+    .data(interactionPairs)
+    .join(
+      enter => enter.append("line")
+        .attr("class", "interaction-line")
+        .attr("x1", d => xScale(d.start.center))
+        .attr("y1", d => yScale(d.start.mean))
+        .attr("x2", d => xScale(d.end.center))
+        .attr("y2", d => yScale(d.end.mean))
+        .style("opacity", 0)
+        .call(enter => enter.transition().duration(400).style("opacity", 0.8)),
+      update => update.call(update => update.transition().duration(200)
+        .attr("x1", d => xScale(d.start.center))
+        .attr("y1", d => yScale(d.start.mean))
+        .attr("x2", d => xScale(d.end.center))
+        .attr("y2", d => yScale(d.end.mean))),
+      exit => exit.call(exit => exit.transition().duration(100).style("opacity", 0).remove())
     );
 }

@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Lecture 19
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/hybrid.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/power_1.png" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Analysis Of Variance 3
+              </h2>
+              <h3>
+                Anova Does Even More
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                October 30, 2024
+              </p>
+              <p class="byinfo">
+                CSULA: ME3040 Fall 2024
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify big"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
+
+>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p><i class="target"></i> Repeated-Measures ANOVA</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="target"></i> Two-Way ANOVA Introduction</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Let's recap some of the concepts of ANOVA.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/rmanova-intro-1.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Repeated Measures Anova
+                </h2>
+                <h3>
+                  How Subject-Variance Affects The Result
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240,240,240,0.7) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240,240,240,0.7) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Now we get into some more complicated procedures.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- One-way recap -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>One-Way ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p>
+
+Comparing multiple quantitative groups (multiple means)
+
+</p>
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+<span class="u-danger">One-way ANOVA</span>
+
+</p>
+
+<ul class="smaller down-5">
+
+<li>
+
+ANOVA is short for <span class="strong">AN</span>alysis <span class="strong">O</span>f <span class="strong">VA</span>riance.
+
+</li>
+
+<li>
+
+The "One" refers to the number of independent <span class="em">factors</span>.
+
+</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_2"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_6"></use>
+
+</svg>
+
+</div>
+
+<div class="framed border-info" style="grid-column:1/3;" data-id="framed-div">
+
+<p class="em muted u strong">
+
+ANOVA Terminology:
+
+</p>
+
+<ul class="small">
+
+<li>
+
+The independent variables are called <span class="strong">factors</span> (e.g.: Noise)
+
+</li>
+
+<li>
+
+The different categories inside a factor are called <span class="strong">levels</span> (e.g.: None, Low, High, etc ...).
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- One-way recap -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>One-Way ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p>
+
+ANOVA relies on the study of the <span class="strong">different aspects of
+
+variability in a dataset</span> to compare two or more quantitative groups
+
+with each other.
+
+</p>
+
+<p class="center down-4">
+
+$F=\frac{\textrm{Mean SS}_{Group}}{\textrm{Mean SS}_{Error}}=\frac{
+
+\frac{\textrm{SS}_{Group}}{(k-1)}
+
+}{
+
+\frac{\textrm{SS}_{Error}}{(n-k)}
+
+}$
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_2"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_6"></use>
+
+</svg>
+
+</div>
+
+<div class="left-justify" style="grid-column:1/3;" data-id="framed-div">
+
+<ul class="small">
+
+<li>
+
+Between group variability, <span class="strong">$SS_{Groups}$</span> : variability due to
+
+the difference in means <br> (<span class="em">How far each mean is from the
+
+<span class="orange">Grand mean</span>?</span>).
+
+</li>
+
+<li>
+
+Within group variability, <span class="strong">$SS_{Error}$</span> : variability due to
+
+the difference in values within each group. (<span class="em">How far each data point
+
+is from its respective <span class="pop">group mean</span>?</span>)
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- One-way recap -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>One-Way ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/anova-family-on-noise-data-one-way.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data-one-way.svg#axes_2"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data-one-way.svg#axes_3"></use>
+
+</svg>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_2"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_6"></use>
+
+</svg>
+
+</div>
+
+<div style="grid-column:1/3;" data-id="framed-div">
+
+<p class="left-justify">
+
+The $F$-statistic is just like any other statistic of interest, we can assess
+
+a p-value or confidence intervals.
+
+</p>
+
+<p class="left-justify">
+
+<i class="fas fa-arrow-circle-right"></i>
+
+Need to follow up with <span class="em">post hoc</span> tests.
+
+</p>
+
+<p class="small warning fragment">
+
+Don't forget to correct for multiple-testing errors!
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ANOVA Family -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:2px;">
+
+<div class="grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-success" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Total Variability
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Variability Between Groups
+
+</p>
+
+</div>
+
+<div>
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Variability Of "Errors" or "Effects"
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-success" style="height:100%;display:grid;align-content:center;">
+
+<p >
+
+$$\sum_{i=1}^{n}(x_{i}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div style="height:100%;display:grid;align-content:center;">
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div style="height:100%;display:grid;align-content:center;">
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2$$
+
+</p>
+
+</div>
+
+</div>
+
+<p class="fragment full-width bg-black inverted border-left-5x border-right-5x border-info" style="font-size:90%;">
+
+Measuring the same <span class="em">subject</span> over <span class="em">time</span> or <span class="em">condition?</span><br>
+
+Use the <span class="em strong danger">Repeated Measures</span> version:
+
+</p>
+
+<div class="fragment grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-success" style="height:100%;display:grid;align-content:center;">
+
+<p >
+
+$$\sum_{i=1}^{n}(x_{i}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div style="height:100%;display:grid;align-content:center;">
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2$$
+
+</p>
+
+</div>
+
+<div style="height:100%;display:grid;align-content:center;">
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="fragment framed border-pop small no-hang" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+$$\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2 - \class{pop}{\sum_{s=1}^{S}k_s(\bar{x}_s-\hat{x})^2}$$
+
+</p>
+
+</div>
+
+</div>
+
+<div class="fragment framed border-muted">
+
+<p style="font-size:50%">
+
+$\hat{x}$: Grand Mean; $\bar{x}_g$: Group Mean; $\bar{x}_s$: Subject Mean; $n$: Total number of measurements; $n_g$: Number in $g^{\text{th}}$ group; $k_s$: Number of conditions or time-points in $s^{\text{th}}$ subject.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<ul>
+
+<li>\( \hat{x} \): Grand Mean</li>
+
+<li>\( \bar{x}_g \): Group Mean</li>
+
+<li>\( \bar{x}_s \): Subject Mean</li>
+
+<li>\( n \): Total number of measurements</li>
+
+<li>\( n_g \): Number in \( g^{\text{th}} \) group</li>
+
+<li>\( k_s \): Number of conditions or time-points in \( s^{\text{th}} \) subject</li>
+
+</ul>
+
+</aside>
+
+</section>
+
+
+
+<!-- Understanding the SS terms -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Interpretation the $SS$ Terms</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width smallest" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:2px;">
+
+<!-- top left column -->
+
+<div class="no-top-margin fragment framed border-muted smaller" data-fragment-index="1">
+
+<p class="muted left-justify">
+
+Statistic:
+
+</p>
+
+<p>
+
+$$\mathcal{F}=\frac{\color{orange}{SS_{between}}}{\color{lightblue}
+
+{SS_{Within}}}=\frac{\color{orange}{\partial^2(fit,null)}}
+
+{\color{lightblue}{\partial^2(fit,data)}}$$
+
+</p>
+
+<p class="muted left-justify fragment" data-fragment-index="5">Effect Size:</p>
+
+<p class="fragment" data-fragment-index="5">
+
+$$R^2=\frac{\color{orange}{\partial^2(fit,null)}}{\color{seagreen}{\partial^2(data,null)}}$$
+
+</p>
+
+</div>
+
+
+
+<!-- top right column -->
+
+<div class="no-top-margin fragment framed border-muted smaller" data-fragment-index="6">
+
+<p class="muted left-justify">
+
+Statistic:
+
+</p>
+
+<p class="fragment" data-fragment-index="7">
+
+$$\mathcal{F}=\frac{\color{orange}{\partial^2(fit,null)}}{\color{lightblue}{\partial^2(fit,\color{purple}{reduced})}}$$
+
+</p>
+
+<p class="muted left-justify fragment" data-fragment-index="8">Effect Size:</p>
+
+<p class="fragment" data-fragment-index="8">
+
+$$\eta^2_{p}=\frac{\color{orange}{\partial^2(fit,null)}}{\color{purple}{\partial^2(reduced,null)}}=\frac{SS_{Between}}{SS_{Total}}$$
+
+</p>
+
+</div>
+
+
+
+<!-- Bottom Left -->
+
+<div class="no-top-margin fragment" data-fragment-index="1">
+
+<svg version="1.1" viewBox="-50 150 576 305" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+
+<style type="text/css">
+
+*{stroke-linecap:butt;stroke-linejoin:round;}
+
+</style>
+
+</defs>
+
+<use xlink:href="lib/img/AOV_SS.svg#axes_1"></use>
+
+<use xlink:href="lib/img/AOV_SS.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index="4" xlink:href="lib/img/AOV_SS.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index="3" xlink:href="lib/img/AOV_SS.svg#axes_4"></use>
+
+<use class="fragment" data-fragment-index="2" xlink:href="lib/img/AOV_SS.svg#axes_5"></use>
+
+</svg>
+
+</div>
+
+
+
+<!-- Bottom Right -->
+
+<div class="no-top-margin fragment" data-fragment-index="6">
+
+<svg version="1.1" viewBox="-50 150 576 305" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+
+<style type="text/css">
+
+*{stroke-linecap:butt;stroke-linejoin:round;}
+
+</style>
+
+</defs>
+
+<use xlink:href="lib/img/AOV_SS_RM.svg#axes_1"></use>
+
+<use xlink:href="lib/img/AOV_SS_RM.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index="6" xlink:href="lib/img/AOV_SS_RM.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index="6" xlink:href="lib/img/AOV_SS_RM.svg#axes_4"></use>
+
+<use class="fragment" data-fragment-index="6" xlink:href="lib/img/AOV_SS_RM.svg#axes_5"></use>
+
+<use class="fragment" data-fragment-index="7" xlink:href="lib/img/AOV_SS_RM.svg#axes_6"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+F = SSB/SSW.
+
+
+
+So then, when F is large, then $\partial^2(fit,null) > \partial^2(fit,data)$ and
+
+when F is small (less than 1) then $\partial^2(fit,null) < \partial^2(fit,data)$.
+
+
+
+And the same case can be said about the reduced, we are just correcting the _data_
+
+term for "mixed" effects.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Repeated-Measures Lead-in 1 -->
+
+
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Repeated Measures ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div data-id="info-box">
+
+<p>
+
+Repeated measures design uses the <span class="strong">same subjects with every condition</span> of the research, including the control.
+
+</p>
+
+<p class="smaller">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+In this design, data for a particular dependent variable (factor) are collected more than once (different levels) on the same observational units.
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/anova-repeated-measures.svg">
+
+</div>
+
+<div class="small" style="grid-column:1/3;" data-id="details-box">
+
+<p class='u em'>
+
+Investigating <span class="strong">changes</span> in mean scores over three or more time points:
+
+</p>
+
+<p class="smaller">
+
+You want to study the effect of a 6-month exercise training program on blood pressure and want to measure blood pressure at 3 separate time points (pre-, midway and post-exercise intervention), which would allow you to develop a time-course for any exercise effect.
+
+</p>
+
+<p class='u em down-2'>
+
+Investigating differences in mean scores under three or more <span class="strong">different conditions</span>:
+
+</p>
+
+<p class="smaller">
+
+You might get the same subjects to eat different types of cake (chocolate, caramel and lemon) and rate each one for taste, rather than having different people taste each different cake.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Repeated-Measures Lead-in 2 -->
+
+
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Repeated Measures ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div data-id="info-box">
+
+<p>
+
+<span class="em muted u">Note:</span>
+
+The repeated measures ANOVA will usually gives you more statistical power since the within-group variation, which is a source of measurement errors, will be identified and excluded from the analysis.
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/anova-repeated-measures.svg">
+
+</div>
+
+<div class="small" style="grid-column:1/3;" data-id="details-box">
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+Performing a repeated measures ANOVA allows to account for <span class="danger">individual differences in baselines</span> of the participants of the study.
+
+</p>
+
+<p class="smaller em">
+
+Consider a drug trial, in which participants have individual differences that impact the detectable effect of the drug (e.g.: blood pressure, age, gender).
+
+</p>
+
+<ul class="smaller">
+
+<li>
+
+The typical drug trial splits all participants into a control and the treatment group and measures the effect of the drug in month 1-18.
+
+</li>
+
+<li>
+
+The repeated measures ANOVA can correct for the individual differences or baselines and analyzes the effect of the drug while excluding the influence of different baseline levels of health when the trial began.
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Memory Performance And Noise 1 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Effect Of Noise On Memory</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1.5fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="em u">
+
+Example:
+
+</p>
+
+<p>
+
+We have measured the performance scores for a memorization task of a group of subjects in different conditions of noise.
+
+</p>
+
+<p class="fragment" data-fragment-index=1>
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+<span class="strong">Same subjects over all conditions</span>
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/anova-family-on-noise-data.svg#axes_3"></use>
+
+<use class="fragment" xlink:href="lib/img/anova-family-on-noise-data.svg#axes_4"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_2"></use>
+
+</svg>
+
+</div>
+
+<div class="small" style="grid-column:1/3;">
+
+<p class="fragment">
+
+Applying a repeated measure ANOVA to analyze the data will allow us to account for individual inner ability for memorization, and isolate the effect of the different levels of the factor.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Remove Subject Variability 1 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Accounting For Subject-Variability</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left-justify">
+
+<p class="em u">
+
+One way ANOVA:
+
+</p>
+
+<p>
+
+$SS_{Total}=\sum_{i=1}^{n}(x_{i}-\hat{x})^2$
+
+</p>
+
+<p class="smaller">
+
+$SS_{Groups}=\sum_{g=1}^{k}n_{g}(\bar{x}_{g}-\hat{x})^2$
+
+</p>
+
+<p class="smaller">
+
+$SS_{Within}=\sum_{g=1}^{k}\sum_{i=1}^{n_g}(x_{gi}-\bar{x}_{g})^2$
+
+</p>
+
+<p class="em u down-8 fragment" data-fragment-index=2>
+
+Repeated measures ANOVA:
+
+</p>
+
+<p class="smaller fragment pop" data-fragment-index=2>
+
+$SS_{Subject}=\sum_{s=1}^{S}k_s(\bar{x}_s-\hat{x})^2$
+
+</p>
+
+<p class="smaller fragment" data-fragment-index=2>
+
+$SS_{Error} = SS_{Within}-SS_{Subject}$
+
+</p>
+
+<p class="smaller fragment" data-fragment-index=2>
+
+$k$: number of levels for the factor
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="16 5 510 311">
+
+<use xlink:href="lib/img/anova-variabilities.svg#independent"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/anova-variabilities.svg#dependent"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/anova-variabilities.svg#labels"></use>
+
+<use class="fragment" data-fragment-index=3 xlink:href="lib/img/anova-variabilities.svg#cross"></use>
+
+</svg>
+
+</div>
+
+<div class="small" style="grid-column: 1/3;">
+
+<p class="fragment" data-fragment-index=3>
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+Now, we're not interested in how the scores differ between subjects. We therefore "correct" for this variability.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Remove Subject Variability 2 -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Accounting For Subject-Variability</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="q3-width" style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:start;justify-items:center;">
+
+<div class="full-width" style="grid-column:1/3;grid-row:1/3;justify-content:center;">
+
+<svg width="100%" viewBox="0 0 576 288">
+
+<use xlink:href="lib/img/anova-family-on-noise-ss-subjects.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-ss-subjects.svg#axes_2"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-ss-subjects.svg#axes_3"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-ss-subjects.svg#axes_4"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-ss-subjects.svg#axes_5"></use>
+
+</svg>
+
+</div>
+
+<div style="grid-row:2/3;grid-column:2/3;justify-self:end;align-self:center;justify-content:end;align-content:end;">
+
+$F=\frac{\textrm{Mean SS}_{Group}}{\textrm{Mean SS}_{Error}}=
+
+\frac{\frac{\textrm{SS}_{Group}}{(k-1)}}{\frac{\textrm{SS}_{Error}}{\class{danger}{(s-1)(k-1)}}}$
+
+</div>
+
+</div>
+
+<p class="smaller fragment left-justify">
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+Note the degrees of freedom go from $(n - k)$ to $(s - 1)(k - 1)$ for our <span class="success">Mean Squared Error</span> term.
+
+</p>
+
+<p class="smaller fragment left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+Like One-Way ANOVA, if we get a significant F-statistic, we follow up with <span class="em">post hoc</span> testing.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<aside class="notes">
+
+<p>
+
+Where s is our number of subjects and k is our number of factor levels.
+
+</p>
+
+<p>
+
+This is as far as we take the repeated measures ANOVA. Here, post hoc is the same
+
+as previously, we test effects of noise at each time point.
+
+</p>
+
+</aside>
+
+
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/multigroup_5.png" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Factor Analysis
+                </h2>
+                <h3>
+                  Two-Way Anova
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240,240,240,0.7) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240,240,240,0.7) !important;
+
+}
+
+</style>
+
+</section>
+
+
+
+
+
+<!-- ANOVA Does Even More -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>ANOVA Does Even More</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic full-width" style="grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr auto;gap:6px;">
+
+<!-- top left column -->
+
+<div class="no-top-margin framed border-muted" style="height:100%;">
+
+<h4>One-Way ANOVA</h4>
+
+<p class="smallest">
+
+One-Way ANOVA considers multiple groups belonging to a single categorical
+
+family called a <span class="info-muted">factor level</span>, i.e. sandwiches,
+
+treatment types, etc.
+
+</p>
+
+<p class="smallest">
+
+$$\mathcal{F}=\frac{\color{orange}{SS_{between}}}{\color{lightblue}{SS_{Within}}}$$
+
+</p>
+
+</div>
+
+
+
+<!-- top right column -->
+
+<div class="col-50 no-top-margin framed border-orange" style="height:100%;">
+
+<h4>One-Way Repeated Measures ANOVA</h4>
+
+<p class="smallest">
+
+Just as we discussed with <span class="orange">before $\sim$ after</span>
+
+in two-group NHST, ANOVA has special methods for dealing with repeatedly
+
+measuring from a single subject. It takes the form of:
+
+</p>
+
+<p class="smallest">
+
+$$\mathcal{F}=\frac{\color{orange}{SS_{between}}}{\color{lightblue}{(SS_{Within}-
+
+SS_{random})}}=\frac{SS_{between.timepoints}}{SS_{fixed}}$$
+
+</p>
+
+</div>
+
+
+
+<!-- bottom left column -->
+
+<div class="col-50 no-top-margin framed border-info" style="height:100%;">
+
+<h4>N-Way ANOVA</h4>
+
+<p class="smallest">We aren't limited to one level (plus time) and can model multiple factors,
+
+though it starts getting complicated because we have new
+
+<span class="info-muted">kinds</span> of terms to discuss called
+
+<span class="orange">interactions</span>. Note that each new factor
+
+level will get its own $\mathcal{F}$-statistic.</p>
+
+<p class="smallest">$$\mathcal{F}=\frac{\{ SS_{b.group1},\, SS_{b.group2},\,
+
+\ldots ,\, SS_{b.groupN},\, \{ SS_{\color{orange}{interactions}}\} \} }
+
+{SS_{Within}}$$
+
+</p>
+
+</div>
+
+
+
+<!-- bottom right column -->
+
+<div class="col-50 no-top-margin framed border-pink" style="height:100%;">
+
+<h4>N-Way Repeated Measures ANOVA</h4>
+
+<p class="smallest">Just like in the One-Way approach, we now have to consider the effects of
+
+time and remove the <span class="info-muted">random</span> effects, i.e.
+
+the <span class="info-muted">within subject</span> variation.</p>
+
+<p class="smallest">$$\mathcal{F}=\frac{\{ SS_{b.time},\, SS_{b.group2},\,
+
+\ldots ,\, SS_{b.groupN},\, \{ SS_{\color{orange}{interactions}}\} \} }
+
+{SS_{Within}-SS_{random}}$$
+
+</p>
+
+</div>
+
+
+
+<!-- What are factors -->
+
+<div style="grid-column:1/3;" class="box-width">
+
+<p class="full-width em smaller">
+
+Note: As we add more and more <span class="info">factors</span>, we stop calling it ANOVA
+
+and just say "Factor Analysis", and it starts taking on a new shape.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Multiple Factor -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Two-Way ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div data-id="d-info">
+
+<p class="smaller">
+
+A two-way ANOVA allows us to investigate the (individual & combined) effects of <span class="strong">two factors</span> (explanatory/independent variables) on a quantitative variable (response).
+
+</p>
+
+<p class="fragment em smaller down-2 muted" data-fragment-index=0>
+
+In our memorization performance and noise level experiment, we could for example investigate if gender (or the combine effect of gender and noise) also affects our response variable.
+
+</p>
+
+<p class="smaller fragment" data-fragment-index=3>
+
+The results from a two way ANOVA will give information about the <span class="strong">main effect</span> and the <span class="strong">interaction effect</span>:
+
+</p>
+
+</div>
+
+<div class="full-width">
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_1"></use>
+
+<use class="fragment fade-out" data-fragment-index=2 xlink:href="lib/img/anova-family-on-noise-data.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/anova-family-on-noise-data.svg#axes_5"></use>
+
+</svg>
+
+</div>
+
+<div class="fragment" data-fragment-index="3" style="grid-column: 1/3;" data-id="d-extend">
+
+<ul class="smaller push-left fragment" data-fragment-index=3>
+
+<li>
+
+Main effect of factor 1 (e.g.: noise ... this factor has 4 levels)
+
+</li>
+
+<li>
+
+Main effect of factor 2 (e.g.: gender ... this factor has 2 levels)
+
+</li>
+
+<li>
+
+Effect due to the combination/interaction of factor 1 and factor 2 (e.g.: does the effect of the noise depends on the gender too)
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Multiple Factor -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Two-Way ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div data-id="d-info">
+
+<p>
+
+We can think of two-way ANOVA as a nesting of one-way ANOVAs. <br>That is, we end up with, essentially, three one-way ANOVAs:
+
+</p>
+
+<ul class="smaller">
+
+<li>
+
+one for each factor
+
+</li>
+
+<li>
+
+and one for the combined factors
+
+</li>
+
+</ul>
+
+<p>
+
+<i class="fas fa-arrow-circle-right muted"></i>
+
+The computation of the $SS$ terms for each factor and the error terms are virtually similar than for a one-way ANOVA.
+
+</p>
+
+</div>
+
+<div class="full-width">
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_1"></use>
+
+<use xlink:href="lib/img/anova-family-on-noise-data.svg#axes_5"></use>
+
+</svg>
+
+</div>
+
+<div class="fragment" data-fragment-index="3" style="grid-column: 1/3;" data-id="d-extend">
+
+<p class="smallest">
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+The <span class="strong">interaction variability</span> refers to the degree to which the combined effect of two independent variables on the dependent variable differs from what would be expected based on their individual effects alone.
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:6fr 1fr 6fr 1fr 6fr 1fr 6fr 1fr 6fr;grid-template-rows:1fr;gap:5px;">
+
+<div class="framed border-warning" style="height:100%;display:grid;align-content:center;">
+
+<p >
+
+Total Variability
+
+</p>
+
+</div>
+
+<div style="height:100%;display:grid;align-content:center;">
+
+$$\phantom{ }=\phantom{ }$$
+
+</div>
+
+<div class="framed border-danger" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Factor A Variability
+
+</p>
+
+</div>
+
+<div style="height:100%;display:grid;align-content:center;">
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-info" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Factor B Variability
+
+</p>
+
+</div>
+
+<div style="height:100%;display:grid;align-content:center;">
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-pop" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Variability Of $A\star B$
+
+</p>
+
+</div>
+
+<div style="height:100%;display:grid;align-content:center;">
+
+$$\phantom{ }+\phantom{ }$$
+
+</div>
+
+<div class="framed border-muted" style="height:100%;display:grid;align-content:center;">
+
+<p>
+
+Variability Due To Error
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>But what is the "Interaction"?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Interactions -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Assessing The Interactions</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="em u left-justify">
+
+Understanding the pattern in an interaction plot:
+
+</p>
+
+<p class="smaller left-justify">
+
+An interaction is usually described in terms of the simple <span class="u strong">main effects</span> that make it up. A "main effect" is the effect of one of your independent variables on the dependent variable, ignoring the effects of all other independent variables.
+
+</p>
+
+<img src="lib/img/anova-interaction-patterns.svg" class="q3-width">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Noise Interactions -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Assessing The Interactions (Noise)</h2>
+
+</div>
+
+<div class="content" style="display:grid;">
+
+<div class="grid-generic box-width" style="display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;justify-content:center;justify-self:center;justify-items:center;">
+
+<div class="full-width">
+
+<img src="lib/img/anova-noise-data-interaction-f1.svg" width="100%">
+
+</div>
+
+<div class="full-width">
+
+<img src="lib/img/anova-noise-data-interaction-f2.svg" width="100%">
+
+</div>
+
+<div style="grid-column:1/3;" class="full-width left-justify">
+
+<p>
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+Depending on the number of levels in each of your factors, the interaction plots might be more or less easy to interpret ...
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-color="rgb(255,255,255)" id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Anova Concepts
+                </h2>
+                <h3>
+                  In Class Discussion
+                </h3>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+
+<p>We are going to take just a few moments to discuss some important concepts.</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Impact of Variance -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Impact of Variance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="question">How does the assumption of homogeneity of variances impact the interpretation of ANOVA results?</p>
+
+<p class="fragment em info" data-fragment-index="1">Discuss what might happen if this assumption is violated, and how might such a violation affect the validity of the ANOVA test conclusions?</p>
+
+</div>
+
+<div class="framed border-success fragment smaller" data-fragment-index="2">
+
+<p>
+
+Homogeneity of variances (equal variances) across groups is essential for the validity of ANOVA because it ensures the F-ratio remains an accurate measure of group differences. When variances are equal, the pooled variance estimate provides a fair comparison between group means. If this assumption is violated, particularly in cases of unequal sample sizes, ANOVA becomes prone to type I and type II errors. Specifically, the test may falsely detect differences when none exist or fail to detect real differences, especially if variances are higher in groups with smaller sample sizes. Violations can also lead to biased estimates, making the ANOVA conclusions unreliable.
+
+</p>
+
+<p class="fragment em" data-fragment-index="3">
+
+Note: In the case of an <span class="strong">unbalanced</span> design (or unequal variances), you can use Welch's ANOVA, or another <span class="info">non-parametric</span> test like the Kruskal-Wallis test or my favorite: <span class="success">bootstrapping</span>!
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>The F-statistic in ANOVA depends on the assumption of equal variances among groups, known as homogeneity of variances. If the assumption is met, the F-distribution under the null hypothesis accurately represents what we expect under no treatment effect. However, when variances differ significantly across groups, especially if sample sizes vary, it can skew the F-statistic and lead to incorrect conclusions.</p>
+
+<p>In terms of error rates, unequal variances can inflate the type I error rate, where we incorrectly reject the null hypothesis, or type II error rate, where we fail to detect a true effect. This violation introduces bias, as groups with higher variance but smaller sample sizes disproportionately affect the results.</p>
+
+<p>To address variance inequality, we can use alternative approaches like Welch’s ANOVA, which adjusts for unequal variances. Another approach is transforming the data (e.g., using logarithmic or square root transformations) to stabilize variances across groups before running a traditional ANOVA. Additionally, we might consider non-parametric alternatives if the assumption cannot be met, as these tests do not rely on equal variances.</p>
+
+<p>Purpose: By exploring the assumption of homogeneity of variances, students gain insight into why ANOVA requires careful consideration of data characteristics and how to proceed if the assumption fails. This concept also encourages critical thinking about model assumptions and the practical steps for addressing real-world data issues.</p>
+
+</aside>
+
+
+
+</section>
+
+
+
+<!-- Understanding the F-Statistic -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Understanding the F-Statistic</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="question smaller">How does the F-statistic used in ANOVA compare conceptually to the t and z statistics used in other types of hypothesis testing</p>
+
+<p class="fragment em info smaller" data-fragment-index="1">Consider how each of these statistics relates to their respective null and sampling distributions, and what they indicate about the data relative to the null hypothesis.</p>
+
+</div>
+
+<div class="grid-generic smaller" style="grid-template-columns:1fr 1fr 1fr;grid-auto-rows:auto;gap:3vmin;">
+
+<div class="framed border-success fragment smaller" data-fragment-index="2" style="height:100%;">
+
+<p>F-statistic</p>
+
+<ul>
+
+<li><strong>Conceptual Use:</strong> Used to compare the variances between groups to determine if the means are significantly different across three or more groups.</li>
+
+<li><strong>Distribution:</strong> Follows an F-distribution, derived from two chi-squared distributions, dependent on two types of degrees of freedom: between and within groups.</li>
+
+<li><strong>Indication About Data:</strong> A high F-value suggests significant variability between groups compared to within, indicating that not all group means are equal, contrary to the null hypothesis of equal means.</li>
+
+</ul>
+
+</div>
+
+<div class="framed border-success fragment smaller" data-fragment-index="3" style="height:100%;">
+
+<p>t-statistic</p>
+
+<ul>
+
+<li><strong>Conceptual Use:</strong> Used to compare the means between two groups, particularly when the sample sizes are small and the population standard deviation is unknown. Suitable for either two independent samples or two related samples.</li>
+
+<li><strong>Distribution:</strong> Follows a t-distribution, appropriate when the population standard deviation is estimated from the data. The shape of the t-distribution is dependent on the sample size through its degrees of freedom.</li>
+
+<li><strong>Indication About Data:</strong> A high t-value suggests a significant difference between the group means, implying a rejection of the null hypothesis if it states the means should be equal.</li>
+
+</ul>
+
+</div>
+
+<div class="framed border-success fragment smaller" data-fragment-index="4" style="height:100%;">
+
+<p>z-statistic</p>
+
+<ul>
+
+<li><strong>Conceptual Use:</strong> Used for hypothesis testing when the population variance is known and the sample size is large. It is typically used to test the difference between a sample mean and a population mean or between two population means when the variances are known.</li>
+
+<li><strong>Distribution:</strong> Follows a normal distribution, under the assumption of normal data distribution or sufficient sample size for the Central Limit Theorem to apply.</li>
+
+<li><strong>Indication About Data:</strong> A high z-value indicates that the sample mean is significantly different from the population mean under the null hypothesis, assuming a normal distribution.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Purpose: This question aims to deepen understanding of the F-statistic by comparing it with other more familiar statistics like t and z. It encourages students to think about the roles these statistics play in determining the probability of observing the given data under the null hypothesis.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Choosing Between One-Way and Repeated Measures ANOVA -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Choosing Between One-Way and Repeated Measures ANOVA</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="question">Under what circumstances might you choose to use repeated measures ANOVA instead of one-way ANOVA</p>
+
+<p class="fragment em info" data-fragment-index="1">Consider the types of research questions that each method is best suited to address and the data characteristics required for each.</p>
+
+</div>
+
+<div class="framed border-success fragment smaller" data-fragment-index="2">
+
+<p>
+
+Repeated measures ANOVA is more appropriate when the same subjects are measured multiple times under different conditions. This method accounts for within-subject variability and is more powerful for detecting differences when conditions affect the same subjects. One-way ANOVA is used when different subjects are measured under similar conditions but only once.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Purpose: This question helps students differentiate when to use one-way ANOVA versus repeated measures ANOVA. It prompts them to consider the structure of the dataset, the specific hypotheses being tested, and the appropriate statistical approach based on the research design (e.g., within-subjects vs. between-subjects).</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 19
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2024</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+zoom: "None",
+zscale: "100%",
+CommonHTML: {
+scale: 90,
+minScaleAdjust: 55,
+linebreaks: {
+automatic: true,
+},
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.5,
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ME3040_splash.png",
+text: "Welcome to ME3040!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>
