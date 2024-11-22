@@ -1,0 +1,3153 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Lecture 23
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/hybrid.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/fishers-tea-bg.png" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Categorical Comparisons
+              </h2>
+              <h3>
+                And Statistical Power
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                November 18, 2024
+              </p>
+              <p class="byinfo">
+                CSULA: ME3040 Fall 2024
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify big"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
+
+>
+
+<div class="border-bottom fragment" data-fragment-index="1">
+
+<p><i class="target"></i> Recap $\chi^2$ and Fisher's Exact Test</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="target"></i> Statistical Power</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p></p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-color="rgb(255,255,255)" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  $\chi^2$ Recap
+                </h2>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Recap $\chi^2$ -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Recap $\chi^2$</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:3vh;">
+
+<div>
+
+<table class="small center-justify full-grid-table">
+
+<col width=50%>
+
+<col width=50%>
+
+<tbody>
+
+<tr>
+
+<td class="bg-info-light">$\chi^2$ for goodness of fit</td>
+
+<td class="bg-danger-light">$\chi^2$ test of independence</td>
+
+</tr>
+
+<tr>
+
+<td>Test hypothesis about shape of discrete distribution </td>
+
+<td>Test hypothesis about relationship of categorical variables</td>
+
+</tr>
+
+<tr class="border-bottom">
+
+<td>Are the frequencies I observe for my categorical variable consistent with my theory? </td>
+
+<td>Are the two categorical variables associated with one another in the population?</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="small">
+
+<i class="fas fa-arrow-circle-right"></i>
+
+Goodness-of-fit test and test of independence are in fact the <span class="strong">same approach</span> (how different are my data from the theoretical distribution?)</span>.
+
+</p>
+
+<p class="small">
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+$\chi^2$ is just another <span class="pop">statistic of interest</span>, and the null randomization distribution can be <span class="pop">easily simulated</span>.
+
+</p>
+
+<p class="smaller">
+
+<i class="fas fa-arrow-circle-right warning-dark"></i>
+
+The theoretical approach to determine the $\chi^2$ distribution requires the use of the <span class="warning-dark">correct number of degrees of freedom</span> of the contingency table you are studying. Remember that you would also need a <span class="strong">count>10 for all the cells</span> as <span class="warning-dark">validity condition</span> of the theoretical approach.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- $\chi^2$: Expected Counts -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>$\chi^2$: Expected Counts</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="framed border-info smaller" style="height:100%;">
+
+<p>
+
+Recall that $\chi^2$ is the relative squared distance between the observed and expected counts in a contingency table.
+
+</p>
+
+$$\chi^2 = \sum_{i}\sum_{j}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}$$
+
+</div>
+
+<div class="no-hang smaller fragment" style="height:100%;" data-fragment-index="1">
+
+<p>For a given contingency table:</p>
+
+<table class="latex-style-table-row-labels" style="width:50%;">
+
+<tr><th></th><th>Yes</th><th>No</th></tr>
+
+<tr><td>Male</td><td>70</td><td>40</td></tr>
+
+<tr><td>Female</td><td>50</td><td>55</td></tr>
+
+</table>
+
+</div>
+
+<div class="no-hang smaller" style="grid-column:1/3;">
+
+<p class="small fragment" data-fragment-index="2">
+
+We can compute the expected count for each cell using the $n_{group}\cdot p(\text{outcome})$ approach:
+
+</p>
+
+<table border="1" class="smaller latex-style-table-row-labels box-width fragment" data-fragment-index="3">
+
+<thead>
+
+<tr style="text-align: right;">
+
+<th></th>
+
+<th>Yes</th>
+
+<th>No</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr style="text-align: justify;">
+
+<th>Male</th>
+
+<td class="fragment" data-fragment-index="4">$E(Y|M) = n_M \cdot p(Y) = 110 \times \frac{120}{215} = 61.4$</td>
+
+<td class="fragment" data-fragment-index="6">$E(N|M) = n_M \cdot p(N) = 110 \times \frac{95}{215} = 48.6$</td>
+
+</tr>
+
+<tr style="text-align: justify;">
+
+<th>Female</th>
+
+<td class="fragment" data-fragment-index="5">$E(Y|F) = n_F \cdot p(Y) = 105 \times \frac{120}{215} = 58.6$</td>
+
+<td class="fragment" data-fragment-index="7">$E(N|F) = n_F \cdot p(N) = 105 \times \frac{95}{215} = 46.4$</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="small fragment" data-fragment-index="8">
+
+<p>
+
+Which can be neatly performed using the <span class="as-code">outer</span> product,
+
+$\phantom{} \otimes\phantom{}$, such that
+
+$E(\, \text{Condition}|\, \text{Group}) = \overrightarrow{n_G}\otimes \overrightarrow{p_C}$,
+
+which becomes:
+
+</p>
+
+</div>
+
+<div class="small fragment" data-fragment-index="8">
+
+$$\begin{bmatrix}
+
+E(Y|M) & E(N|M) \\ E(Y|F) & E(N|F) \end{bmatrix} =
+
+\begin{bmatrix}n_M \\ n_F\end{bmatrix} \bigotimes\, ( p(Y)\, p(N))
+
+$$
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- $\chi^2:$ Calculation -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>$\chi^2$: Calculation</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="height:100%;align-items:center;" class="smallest no-hang">
+
+<p>Given $\, O=\begin{pmatrix}70 & 40\\ 50 & 55\end{pmatrix}$ and $\, E=\begin{pmatrix}61 & 49 \\59 & 46\end{pmatrix}$</p>
+
+</div>
+
+<div style="height:100%;" class="fragment smallest no-hang" data-fragment-index="0">
+
+<p class="left-justify">
+
+Then,
+
+</p>
+
+$$
+
+\chi^{2}=\sum
+
+\frac{
+
+\left[ \begin{pmatrix}
+
+\class{info}{70} & \class{info}{40}\\
+
+\class{orange}{50} & \class{orange}{55}
+
+\end{pmatrix} -
+
+\begin{pmatrix}
+
+61 & 49\\
+
+59 & 46
+
+\end{pmatrix}\right]^{2}
+
+}{
+
+\begin{pmatrix}
+
+61 & 49\\
+
+59 & 46
+
+\end{pmatrix}
+
+}
+
+$$
+
+</div>
+
+<div class="smaller no-hang">
+
+<p class="fragment" data-fragment-index="2">
+
+Conceptually, we can split each component into its own $\chi^2$ calculation, such that
+
+the total $\chi^2$ is the sum of the constituents:
+
+<span class="fragment" data-fragment-index="2">$\chi^2=\phantom{ }$
+
+<span class="fragment" data-fragment-index="3">${\class{info}\chi^{\class{info}2}_{\class{info}{Male}}}$</span>
+
+<span class="fragment" data-fragment-index="4">$\phantom{ }+{\class{orange}\chi^{\class{orange}2}_{\class{orange}{Female}}}$.</span></span>
+
+</p>
+
+<div class="fragment small" data-fragment-index="7">
+
+$$\begin{aligned}
+
+\chi^2 &= \left[ \frac{(\class{info}{70}-61)^{2}}{61} + \frac{(\class{info}{40}-49)^{2}}{49} \right]_{\class{info}{Male}} \\
+
+&+ \left[ \frac{(\class{orange}{50}-59)^{2}}{59} + \frac{(\class{orange}{55}-46)^{2}}{46} \right]_{\class{orange}{Female}} \\
+
+\therefore \chi^2 &= \left[ \frac{81}{61} + \frac{81}{49} \right]_{\class{info}{Male}} + \left[ \frac{81}{59} + \frac{81}{46} \right]_{\class{orange}{Female}} \\
+
+\phantom{ } &= \class{info}{2.98} + \class{orange}{3.13} \\
+
+\phantom{ } &= 6.11
+
+\end{aligned}
+
+$$
+
+</div>
+
+</div>
+
+<div style="height:100%;justify-items:center;">
+
+<!-- chi2 plot -->
+
+<svg width="75%" viewBox="0 0 302 288" style="justify-self:center;">
+
+<use xlink:href="lib/img/chi2-components.svg#axes_1" class="fragment" data-fragment-index="1"></use>
+
+<use xlink:href="lib/img/chi2-components.svg#axes_2" class="fragment" data-fragment-index="5"></use>
+
+<use xlink:href="lib/img/chi2-components.svg#axes_3" class="fragment" data-fragment-index="6"></use>
+
+<use xlink:href="lib/img/chi2-components.svg#axes_4" class="fragment" data-fragment-index="8"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We can plot the Yes-No pairs for the observed, expected counts. The resulting squares are unscaled square areas.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- What If Counts Are Very Few? -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What If Counts Are Very Few?</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic"
+
+style="grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 1vmin"
+
+>
+
+<div>
+
+<p class="big purple-underline center">
+
+$\chi^2$ requires the following conditions:
+
+</p>
+
+<ul>
+
+<li>
+
+When any elements are zero, $\chi^2$ is not possible (think about
+
+the process).
+
+</li>
+
+<li>
+
+When any value is $\phantom{}< 10$, the Gaussian assumptions in
+
+$\chi^2$ fails.
+
+</li>
+
+<li>
+
+$\chi^2$ is generally defined with
+
+<span class="em">free marginals</span>.
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="fragment">
+
+<p class="big purple-underline center">
+
+For example, let's look at this small table:
+
+</p>
+
+<table border="1" class="latex-style-table-row-labels half-width">
+
+<thead>
+
+<tr style="text-align: right">
+
+<th></th>
+
+<th>Diabetes</th>
+
+<th>No Diabetes</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<th>Male</th>
+
+<td>5</td>
+
+<td>1</td>
+
+</tr>
+
+<tr>
+
+<th>Female</th>
+
+<td>1</td>
+
+<td>4</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div style="grid-column: 1/3" class="no-hang fragment">
+
+<p>
+
+If we demand that row and table totals (<em>marginals</em>) remain
+
+constant, then there are a finite number of possible tables. In this
+
+case, there are 6:
+
+</p>
+
+<div class="smallest">
+
+$${\displaystyle {\begin{pmatrix}6&0\\0&5\end{pmatrix}},\quad
+
+{\begin{pmatrix}5&1\\1&4\end{pmatrix}},\quad
+
+{\begin{pmatrix}4&2\\2&3\end{pmatrix}},\quad
+
+{\begin{pmatrix}3&3\\3&2\end{pmatrix}},\quad
+
+{\begin{pmatrix}2&4\\4&1\end{pmatrix}},\quad
+
+{\begin{pmatrix}1&5\\5&0\end{pmatrix}}.} $$
+
+</div>
+
+<p>
+
+Thus, there are only 6 possible $\chi^2$ values:
+
+$0.11,0.78,2.4,4.41,7.64, 11.00$.
+
+</p>
+
+<p class="sided-no-bg border-danger fragment">
+
+Which makes it hard to interpret the $\chi^2$ distribution!
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Free Marginals in Chi-Squared Analysis -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Free Marginals in Chi-Squared Analysis</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; gap: 1vmin"
+
+>
+
+<p class="left-justify sided-no-bg border-info">
+
+In chi-squared analysis, <em>free marginals</em> refer to contingency
+
+tables where row and column totals are not pre-determined but observed
+
+from the data. This setup is common in observational studies where the
+
+researcher does not control how data falls into categories.
+
+</p>
+
+<p class="left-justify sided-no-bg border-warning">
+
+The chi-squared test assesses whether there's an association between
+
+row and column variables, assuming that the observed frequencies in
+
+the table arise purely due to the underlying relationship between
+
+these variables.
+
+</p>
+
+<p>Expected frequencies are calculated as:</p>
+
+<p>
+
+$$E_{ij} = \frac{(Row\ Total_i \times Column\ Total_j)}{Grand\
+
+Total}$$
+
+</p>
+
+<p class="left-justify sided-no-bg border-danger">
+
+Here, each expected count \(E_{ij}\) is based on the proportionate
+
+contribution of the corresponding row and column totals to the grand
+
+total, reflecting the independence assumption of the test.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+Emphasize the difference between free and fixed marginals. Highlight the
+
+independence assumption and its implications for the validity of the
+
+chi-squared test results in observational studies.
+
+</aside>
+
+</section>
+
+
+
+<!-- Background of Fisher's Exact Test -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Background of Fisher's Exact Test</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; gap: 1vmin"
+
+>
+
+<p class="left-justify framed border-info">
+
+Fisher's Exact Test was developed from an intriguing real-life
+
+scenario involving Muriel Bristol, a scientist at the Rothamsted
+
+Experiment Station. Bristol claimed she could discern whether milk or
+
+tea was poured first into a cup.
+
+</p>
+
+<p class="fragment left-justify sided-no-bg border-pop" data-fragment-index="1">
+
+To test her assertion, Ronald Fisher devised a simple experiment:
+
+eight cups of tea were prepared, four with milk poured first and four
+
+with tea poured first. The marginals-four cups for each method-were
+
+<span class="em fragment highlight-pop" data-fragment-index="2">fixed</span>.
+
+</p>
+
+<p class="fragment left-justify sided-no-bg border-muted" data-fragment-index="3">
+
+Bristol was then asked to taste each cup and identify the preparation
+
+method for four of them. This setup created an ideal scenario for
+
+using Fisher's Exact Test to determine if Bristol's claims were
+
+statistically significant, given the fixed margins and small sample
+
+size.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+Stress the importance of the context in which Fisher's Exact Test was
+
+developed. Discuss its relevance to small sample sizes and fixed marginals.
+
+Mention that this anecdote illustrates how statistical methods can be
+
+applied to solve practical, everyday problems.
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- Fisher's Exact Test -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Fisher's Exact Test</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;" class="smaller">
+
+<p>
+
+<p>By fixing the marginals, Fisher could then determine the probability of getting the <span class="em">exact</span> table observed.</p>
+
+</p>
+
+</div>
+
+<div class="left-justify">
+
+<p class="fragment" data-fragment-index="1">He did this by combinatorics: </p>
+
+<p class="fragment smallest" data-fragment-index="1">
+
+$${\displaystyle {\begin{pmatrix}a_1&a_2\\b_1&b_2\end{pmatrix}}}$$
+
+</p>
+
+<p class="fragment smallest" data-fragment-index="2">
+
+$${\displaystyle p_{\text{table}} = \frac{ \binom{a_1+a_2}{a_1} \binom{b_1+b_2}{b_1} }{ \binom{a_1+a_2+b_1+b_2}{a_1+b_1} } }$$
+
+</p>
+
+<div class="fragment" data-fragment-index="3">
+
+<p>
+
+This gets pretty messy when expanded to factorial form:
+
+</p>
+
+<div class="smallest">
+
+$${\displaystyle \frac{ (a_1+a_2)!\, (b_1+b_2)!\, (a_1+b_1)!\, (a_2+b_2)!\,  }{ a_1!\,a_2!\,b_1!\,b_2!\,(a_1+a_2+b_1+b_2)! }}$$
+
+</div>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="3">
+
+<p class="tiny">
+
+$${\displaystyle {\begin{pmatrix}0&1\\1&1\\2&2\\3&6\\4&24\\5&120\\6&720\\7&5,040\\8&40,320\\9&362,880\\10&3,628,800\\11&39,916,800\\12&479,001,600\\13&6,227,020,800\\14&87,178,291,200\end{pmatrix}}}$$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+But this gets crazy as the numbers get large, which can be seen even by just looking at the table of the first 15 factorials:
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Fisher's Exact Test: Tea Experiment -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Fisher's Exact Test: Tea Experiment</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;">
+
+<p class="smaller">
+
+Bristol was presented with 8 cups of tea, 4 with milk poured first and 4 with tea poured first, and asked to identify the preparation method for each cup.
+
+</p>
+
+</div>
+
+<div>
+
+<div>
+
+<table border="1" class="latex-style-table-row-labels half-width">
+
+<thead>
+
+<tr style="text-align: right">
+
+<th></th>
+
+<th class="smaller">Milk 1st (Actual)</th>
+
+<th class="smaller">Tea 1st (Actual)</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<th class="smaller">Milk 1st (Guessed)</th>
+
+<td>4</td>
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<th class="smaller">Tea 1st (Guessed)</th>
+
+<td>0</td>
+
+<td>4</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="smallest">${\displaystyle p=\frac{(4+0)!\,(0+4)!\,(4+0)!\,(0+4)!}{4!\,0!\,0!\,4!\,(4+0+0+4)!}}= 0.0142857$</p>
+
+</div>
+
+<div class="small">
+
+<p class="strong">And all the probabilities (sorted):</p>
+
+<p class="tiny no-hang">$\{ 0.0142857,\quad 0.0857143,\quad 0.2285714,\quad 0.2285714\}$</p>
+
+<p class="smaller">Since she correctly identified all 8 cups, she had a probability of $0.0142857$ of getting it right <span class="em">by chance</span>.</p>
+
+<p class="fragment">Is this <span class="em">proof</span> of her ability?</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>A p-value of 0.014 is strong evidence against the null hypothesis that she was guessing, but Fisher emphasized this didn't prove her ability but demonstrated the framework for statistical inference.</p>
+
+<p>Again, no standard approach to the post-hoc, but it wasn't needed here.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Fisher's Exact Test: Diabetes -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Fisher's Exact Test: Diabetes</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/3;">
+
+<p class="small">
+
+Looking back at the diabetes table, we can see that the probability of the observed table is $0.08$.
+
+</p>
+
+</div>
+
+<div>
+
+<div>
+
+<table border="1" class="latex-style-table-row-labels half-width">
+
+<thead>
+
+<tr style="text-align: right">
+
+<th></th>
+
+<th>Diabetes</th>
+
+<th>No Diabetes</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<th>Male</th>
+
+<td>5</td>
+
+<td>1</td>
+
+</tr>
+
+<tr>
+
+<th>Female</th>
+
+<td>1</td>
+
+<td>4</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="smallest">${\displaystyle p_{diabetes}=\frac{ (5+1)!\, (1+4)!\, (5+1)!\, (1+4)!\,  }{ 5!\,1!\,1!\,4!\,(5+1+1+4)! }}= 0.0649351$</p>
+
+</div>
+
+<div class="small">
+
+<p class="strong">And all the probabilities (sorted):</p>
+
+<p class="tiny no-hang">$\{ 0.0021645,\quad 0.012987,\quad 0.0649351,\quad 0.0162338,\quad 0.324675,\quad 0.4329\}$</p>
+
+<p class="smaller">So we sum the extreme probabilities: $p = \sum\{ 0.0649351,\quad 0.0021645,\quad 0.012987 \}=$ <span class="red">0.08</span></p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Again, no standard approach to the post-hoc, but it wasn't needed here.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/power_2.png" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Understanding Error
+                </h2>
+                <h3>
+                  Power And Uncertainty
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240,240,240,0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240,240,240,0.6) !important;
+
+}
+
+</style>
+
+</section>
+
+
+
+<!-- Introduction to Power -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Types Of Inference</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div class="full-width"> <!-- LEFT -->
+
+<div class="full-width framed border-danger bg-danger-light">
+
+<h4 class="danger-dark">
+
+Hypothesis testing ($\alpha$ level)
+
+</h4>
+
+</div>
+
+<div class="full-width">
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+Hypothesis tests and p-values are most useful when you want to <span class="danger">test hypotheses about population parameters</span>.
+
+</p>
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+p-values quantify the <span class="danger">strength of evidence against the null hypothesis</span>.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="full-width"> <!-- RIGHT -->
+
+<div class="framed border-info bg-info-light">
+
+<h4 class="info-dark">
+
+$\alpha$ confidence intervals
+
+</h4>
+
+</div>
+
+<div class="full-width">
+
+<p>
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+Confidence intervals are most useful when you want to <span class="info">estimate population parameters</span>.
+
+</p>
+
+<p>
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+Confidence intervals give you a <span class="info">range of plausible values</span> for your parameter.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="full-width" style="grid-column:1/3;">
+
+<p class="em">
+
+Note: Usually <span class="danger">$\alpha$=0.05</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Sir Ronald Fisher introduced the concept of the 0.05 level as a cut-off point for statistical significance, but he did not intend for it to become as definitive and universally applied as it has become in contemporary research. Fisher suggested that a p-value of 0.05 was a convenient threshold to consider a result sufficiently rare under the null hypothesis, thereby justifying its rejection.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- The History of the Alpha Level in Hypothesis Testing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The History of the Alpha Level in Hypothesis Testing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="left-justify small fragment" data-fragment-index="1">
+
+The alpha level of 0.05, a standard threshold for statistical significance, was popularized by Ronald A. Fisher in the 1920s. Originally suggested as a convenient cut-off for rejecting the null hypothesis, it implied a result would only occur by chance about 1 in 20 times under the null hypothesis.
+
+</p>
+
+<div class="note-script fragment box-width" data-fragment-index="3">
+
+<p>
+
+It is convenient to take this point as a limit in judging whether a deviation is to be considered significant or not.
+
+</p>
+
+<p class="right-justify">-Sir Ronald Fisher</p>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<p class="left-justify small">
+
+Despite its arbitrary nature, the 0.05 level became widely adopted due to its balance between Type I and Type II errors. Over time, it has become the conventional standard across various scientific disciplines.
+
+</p>
+
+<p class="left-justify small">
+
+Recent debates challenge this standard, suggesting adjustments or alternative approaches like confidence intervals or Bayesian statistics to better reflect the complexity of scientific evidence.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Discuss the origin and adoption of the 0.05 significance level. Highlight the ongoing debate about its appropriateness and the potential impact on research quality and reproducibility. Encourage students to think critically about the tools and conventions in statistical testing.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+
+
+<!-- Which test to perform? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Which Type Should We Use?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic no-hang" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:3vmin;">
+
+<div class="full-width">
+
+<p>
+
+Which type should apply to the following questions?
+
+</p>
+
+</div>
+
+<div class="full-width left-justify">
+
+<p class="danger smaller">
+
+<i class="fas fa-arrow-circle-right"></i>
+
+a hypothesis test?
+
+</p>
+
+<p class="info smaller">
+
+<i class="fas fa-arrow-circle-right"></i>
+
+a confidence interval?
+
+</p>
+
+<p class="pop smaller">
+
+<i class="fas fa-arrow-circle-right"></i>
+
+or is not relevant for statistical inference?
+
+</p>
+
+</div>
+
+<div class="full-width grid-generic" style="grid-column:1/3;grid-template-columns:1fr auto;grid-auto-rows:auto;gap:2vmin;">
+
+<p class="quoted full-width">
+
+How much do college students sleep, on average?
+
+</p>
+
+<p class="full-width">
+
+<i class="fragment info fas fa-arrow-circle-left" data-fragment-index=1></i>
+
+</p>
+
+<p class="quoted full-width">
+
+Do college students sleep more than the recommended 8 hours a night, on average?
+
+</p>
+
+<p class="full-width">
+
+<i class="fragment danger fas fa-arrow-circle-left" data-fragment-index=2></i>
+
+<i class="fragment info fas fa-arrow-circle-left" data-fragment-index=2></i>
+
+</p>
+
+<p class="quoted full-width">
+
+What proportion of college students in the sleep study sample slept at least 8 hours?
+
+</p>
+
+<p class="full-width">
+
+<i class="fragment pop fas fa-arrow-circle-left" data-fragment-index=3></i>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Pitfalls -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h4>Formal Hypothesis Testing</h4>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:5vmin;">
+
+<p class="sided border-danger">
+
+Hypothesis testing is very powerful, as it helps shed light on <span class="danger">whether an observed effect could be real</span> or just due to random chance.
+
+</p>
+
+<p class="sided border-pop">
+
+However, statistical significance <span class="u-pop">is not foolproof</span>, and <span class="pop">it is possible to make the wrong decision</span>, rejecting a true null hypothesis or not rejecting a false null hypothesis.
+
+</p>
+
+<div>
+
+<p class="question">
+
+What common pitfalls are associated with formal hypothesis testing
+
+</p>
+
+<p class="question">
+
+What factors influence the chances of these errors occurring
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- P-Values -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Frequentism And The p-value</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Scientists are obsessed with p-values, but...</p>
+
+<div style="grid-row:2/3;grid-column:1/2;justify-items:center;">
+
+<video data-autoplay src="lib/video/all.mp4" controls class="box-width"></video>
+
+</div>
+
+<div
+
+class="fragment rotation-325 huge bg-danger-light framed border-danger border-2x"
+
+style="font-family: 'Playfair Display', serif;grid-row:2/3;grid-column:1/2;width:fit-content;justify-self:center;align-self:center;">
+
+No one has a clue!
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>What is frequentism?</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Mating Choice In Fruit Flies -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small">
+
+Let's look at a study in <span class="em">Drosophila melanogaster</span> (common fruit flies).
+
+</p>
+
+<p class="fragment small" data-fragment-index="1">
+
+Scientist sought to understand if having the choice of a mate would have an effect on "fitness" of offspring.
+
+</p>
+
+<div class="box-width fragment" data-fragment-index="1">
+
+<img src="lib/img/fruit-flies-mating-choice.svg" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Original Paper -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small" style="grid-column:1/3;">
+
+Paper published in <span class="em">Nature</span> with p-value < 0.01.
+
+</p>
+
+<div>
+
+<img src="lib/img/fruit-flies-nature1980-title.png" class="framed" width=100%>
+
+</div>
+
+<div>
+
+<img src="lib/img/fruit-flies-nature1980-table2.png" class="framed" width=100%>
+
+<div class="smaller fragment">
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+Concluded, based on the data, that mate choice improves offspring fitness (This went against conventional wisdom).
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Penn State Replication 1 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 0.7fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small center bg-danger-light black" style="grid-column:1/3;">
+
+<i class="fas fa-user-md"></i> Researchers at Penn State tried to replicate the results&hellip;
+
+</p>
+
+<div data-id="content-box">
+
+<p class="em u">Penn State's Study</p>
+
+<p class="left-justify small">
+
+600 female fruit flies, <span class="pop">randomly divided</span>:
+
+</p>
+
+<ul class="smaller left-justify">
+
+<li>
+
+300 placed in a cage with 900 males (<span class="pop strong">mate choice</span>)
+
+</li>
+
+<li>
+
+300 placed in individual vials with only one male each (<span class="pop strong">no mate choice</span>)
+
+</li>
+
+</ul>
+
+<p class="small" style="margin-top: 10px;">
+
+After mating, females were separated from the males and put in egg-laying chambers.
+
+</p>
+
+<div class="smaller down-3 framed border-info left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+200 larvae from each chamber were taken and placed in a cage with 200 mutant flies (for competition).
+
+<span class="info strong">Offspring survival rate</span> was measured.
+
+</div>
+
+</div>
+
+<div>
+
+<img src="lib/img/fruit-flies-genetics1984-protocol.png" class="framed" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Penn State Replication 2 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 0.7fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small center bg-danger-light black" style="grid-column:1/3;">
+
+<i class="fas fa-user-md"></i> Researchers at Penn State tried to replicate the results&hellip;
+
+</p>
+
+<div data-id="content-box">
+
+<p class="em u">Penn State's Study</p>
+
+<p class="small left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+Experiment repeated 10 times per day for 5 consecutive days.
+
+</p>
+
+<p class="small left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+A total of 50 runs, 10000 larvae tested in each group.
+
+</p>
+
+<table class="smaller down-5 center">
+
+<tbody>
+
+<tr>
+
+<td rowspan=2 class="border-right">Larvae <br>survived?</td>
+
+<td colspan=2 class="border-nobottom border-right">
+
+Mate choice?</td>
+
+<td class="border-nobottom"></td>
+
+</tr>
+
+<tr>
+
+<td>Yes</td>
+
+<td class="border-right">No</td>
+
+<td>Total</td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom border-right">
+
+Yes</td>
+
+<td class="border-nobottom">6067</td>
+
+<td class="border-nobottom border-right">5976</td>
+
+<td class="border-nobottom">12043</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">No</td>
+
+<td>3933</td>
+
+<td class="border-right">4024</td>
+
+<td>7957</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">Total</td>
+
+<td>10000</td>
+
+<td class="border-right">10000</td>
+
+<td>20000</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<p class="sided border-danger down-5">
+
+<span class="u em">Difference in survival rate:</span>
+
+$d=\hat{p}_\textrm{choice}-\hat{p}_\textrm{no choice}$ <br>
+
+$d=0.6067-0.5976=0.009$
+
+</p>
+
+<p class="framed border-danger fragment">
+
+One-tail p-value = 0.102
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/fruit-flies-genetics1984-protocol.png" class="framed" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Conflicting Results? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<p class="strong" style="grid-column:1/3;">
+
+In the case of mate choice and offspring survival, we saw 2 studies with different outcomes:
+
+</p>
+
+<div class="framed border-success" style="height:100%;">
+
+<p>
+
+One study found significant results,
+
+</p>
+
+<p>
+
+and they reported $p < 0.01$.
+
+</p>
+
+</div>
+
+<div class="framed border-danger" style="height:100%;">
+
+<p>
+
+One study found insignificant results,
+
+</p>
+
+<p>
+
+and they reported $p=0.102$.
+
+</p>
+
+</div>
+
+<p class="danger huge" style="grid-column:1/3;">Conflicting results?</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+How can this be? It turns out that while we focus a lot on the p-value
+
+(and the alpha, or type 1, error rate), there's more to the "error-story".
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Types Of Errors -->
+
+<style>
+
+#er-table td {
+
+text-align: center; /* Centers content horizontally */
+
+vertical-align: middle; /* Centers content vertically */
+
+font-size: 120%;
+
+}
+
+</style>
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Types Of Significance Testing Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div data-id="stay-put" class="box-width" style="grid-column:1/3;align-self:start;justify-self:center;">
+
+<p class="left-justify u em">
+
+Errors can, and do, happen!
+
+</p>
+
+<ul class="small left-justify">
+
+<li>A <span class="danger">Type I</span> error is rejecting a true null (false positive)</li>
+
+<li>A <span class="danger">Type II</span> error is not rejecting a false null (false negative)</li>
+
+</ul>
+
+</div>
+
+<div data-id="do-change" style="grid-column:1/3;">
+
+<table id="er-table">
+
+<tbody>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-nobottom"></td>
+
+<td colspan=2><span class="strong">Decision</span></td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-right"></td>
+
+<td class="border-right bg-warning-light">Reject H$_0$</td>
+
+<td class="border-right bg-info-light">Do not reject H$_0$</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td rowspan=2 class="border-nobottom border-right">
+
+<span class="strong">Truth</span>
+
+</td>
+
+<td class="border-right bg-info-light">
+
+H$_0$ true
+
+</td>
+
+<td class="border-right">
+
+<span class="danger"><i class="fas fa-exclamation-triangle"></i> Type I</span> error
+
+</td>
+
+<td class="border-right">
+
+<i class="far fa-smile fa-2x"></i>
+
+</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td class="border-right border-bottom bg-warning-light">H$_0$ false</td>
+
+<td class="border-right border-bottom"><i class="far fa-smile fa-2x"></i></td>
+
+<td class="border-right border-bottom"><span class="danger"><i class="fas fa-exclamation-triangle"></i> Type II</span> error</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Types Of Significance Testing Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div data-id="stay-put" class="box-width" style="align-self:start;justify-self:center;">
+
+<p class="left-justify u em">
+
+Errors can, and do, happen!
+
+</p>
+
+<ul class="small left-justify">
+
+<li>A <span class="danger">Type I</span> error is rejecting a true null (false positive)</li>
+
+<li>A <span class="danger">Type II</span> error is not rejecting a false null (false negative)</li>
+
+</ul>
+
+</div>
+
+<div data-id="do-change" class="q3-width" style="align-self:start;justify-self:center;">
+
+<img src="lib/img/type1-type2-error.svg" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- So what are the options? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>What Kind Of Error Was Made?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div class="bg-warning-light">
+
+<p>
+
+<span class="em u">Option #1:</span> <br>
+
+The original study (p-value < 0.01) made a <span class="strong">Type I error</span>, and H$_0$ is really true.
+
+</p>
+
+</div>
+
+<div class="bg-info-light">
+
+<p>
+
+<span class="em u">Option #2:</span> <br>
+
+The second study (p-value = 0.102) made a <span class="strong">Type II error</span>, and H$_a$ is really true.
+
+</p>
+
+</div>
+
+<div class="bg-danger-light">
+
+<p>
+
+<span class="em u">Option #3:</span> <br>
+
+<span class="strong">No errors</span> were made; different experimental settings yield different results.
+
+</p>
+
+</div>
+
+<p class="quoted big full-width" style="grid-column: 1/4;">
+
+What is the probability of making a Type I or Type II error?
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type 1 Probability -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability of Type I Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:2vmin;justify-self:center;">
+
+<div>
+
+<p class="em u">
+
+If the null hypothesis is true:
+
+</p>
+
+<ul class="smaller">
+
+<li>5% of statistics will be in the most extreme 5%</li>
+
+<li>5% of statistics will give p-values less than 0.05</li>
+
+<li>5% of statistics will lead to rejecting $H_0$ at $\alpha=0.05$</li>
+
+</ul>
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+If $\alpha=0.05$, there is a 5% chance of a Type I error
+
+</p>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="40 0 390 288">
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_2"></use>
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<p class="em u">
+
+If the null hypothesis is true:
+
+</p>
+
+<ul class="smaller">
+
+<li>1% of statistics will be in the most extreme 1%</li>
+
+<li>1% of statistics will give p-values less than 0.01</li>
+
+<li>1% of statistics will lead to rejecting $H_0$ at $\alpha=0.01$</li>
+
+</ul>
+
+<p>
+
+<i class="fas fa-arrow-circle-right pop"></i>
+
+If $\alpha=0.01$, there is a 1% chance of a Type I error
+
+</p>
+
+</div>
+
+<div class="fragment" data-fragment-index="1">
+
+<svg width="100%" viewBox="40 0 390 288">
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_3"></use>
+
+<use xlink:href="lib/img/error-type1-probability.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<p class="bg-danger-light black fragment" style="grid-column: 1/3;" data-fragment-index="2">
+
+For each test, the probability of making a Type I error <span class="strong">is $\alpha$</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type 2 Probability: n -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability of Type II Errors</h2>
+
+</div>
+
+<div class="content no-hang">
+
+<p class="bg-warning-light question">
+
+How can we reduce the probability of making a Type II Error
+
+</p>
+
+<p class="black smaller">
+
+That is, how could we increase the probability of rejecting the null when the
+
+null hypothesis is rejectable, i.e., <span class="em">false</span>?
+
+</p>
+
+<div class="row">
+
+<div class="col-50">
+
+<p class="u-info fragment left-justify" data-fragment-index=1>
+
+<span class="circled-bg-info">1</span>
+
+Increase the sample size
+
+</p>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index=2>
+
+<p class="fragment" data-fragment-index=2>
+
+Larger sample sizes <span class="strong">decrease the variability of the sampling distribution</span>.
+
+</p>
+
+<ul>
+
+<li class="fragment" data-fragment-index=3>
+
+With <span class="pop">small sample sizes</span>, even
+
+<span class="u-pop">large differences or effects may not be statistically
+
+significant</span>, and Type II errors are common.
+
+</li>
+
+<li class="fragment" data-fragment-index=4>
+
+But with <span class="pop">large sample sizes</span>, even a
+
+<span class="u-pop">very small difference or effect can be
+
+statistically significant</span>
+
+</li>
+
+</ul>
+
+<p class="fragment" data-fragment-index=5>
+
+<i class="fas fa-arrow-circle-right success"></i>
+
+Increased $n$ reduces chances of Type II errors
+
+<span class="fragment" data-fragment-index=6><i class="fas fa-arrow-right"></i> increases
+
+<span class="strong u">statistical power</span>.</span>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Why do we care about the sampling distribution?
+
+</p>
+
+<p>
+
+Think about comparing Means, if the sampling distribution of 2 means are heavily overlapped,
+
+what's the liklihood that we'll be able to tell they are different or from different populations?
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Type 2 Probability: n diagram -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Sample Size Impacts Detectability</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:auto 1fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div class="left-justify">
+
+<p>
+
+<span class="u em">Set 1:</span><br>
+
+Mean: 16 <br>
+
+SD: 5 <br>
+
+</p>
+
+<p class="down-3">
+
+<span class="u em">Set 2:</span><br>
+
+Mean: 20 <br>
+
+SD: 5 <br>
+
+</p>
+
+<p class="down-3">
+
+<span class="u em">Statistic:</span><br>
+
+<span class="success">$\bar{x}_2-\bar{x}_1=4$</span>
+
+</p>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:3.5fr 5fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div>
+
+<svg width="100%" viewBox="0 0 288 288" style="margin-top: 0;">
+
+<use xlink:href="lib/img/pvalue-sample-size-increase.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/pvalue-sample-size-increase.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/pvalue-sample-size-increase.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+<div>
+
+<svg width="100%" viewBox="0 0 380 288" style="margin-top: 0;">
+
+<use xlink:href="lib/img/pvalue-sample-size-increase-sampling-dist.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=1 xlink:href="lib/img/pvalue-sample-size-increase-sampling-dist.svg#axes_2"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/pvalue-sample-size-increase-sampling-dist.svg#axes_3"></use>
+
+<use xlink:href="lib/img/pvalue-sample-size-increase-sampling-dist.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+<div style="display:flex;flex-direction:row;gap:5vmin;grid-column:1/3;grid-row:2/3;">
+
+<div class="bg-info-light black full-width">
+
+<p>
+
+(n=9)<br>$p=0.1109$
+
+</p>
+
+</div>
+
+<div class="bg-warning-light black fragment full-width" data-fragment-index=1>
+
+<p>
+
+(n=15)<br>$p=0.0376$
+
+</p>
+
+</div>
+
+<div class="bg-danger-light black fragment full-width" data-fragment-index=2>
+
+<p>
+
+(n=21)<br>$p=0.0132$
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Type 2 Probability: significance -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Probability of Type II Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+
+
+<p class="bg-warning-light question">
+
+How can we reduce the probability of making a Type II Error
+
+</p>
+
+<p class="black smaller">
+
+That is, how could we increase the probability of rejecting the null when the
+
+null hypothesis is rejectable, i.e., <span class="em">false</span>?
+
+</p>
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="u-info left-justify">
+
+<span class="circled-bg-info">1</span>
+
+Increase the sample size
+
+</p>
+
+</div>
+
+<div>
+
+<p class="left-justify fragment u-pink" data-fragment-index=1>
+
+<span class="circled-bg-pink">2</span>
+
+Increase the significance level
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic box-width" style="grid-template-columns:7fr 3fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div data-fragment-index=1>
+
+<svg width="100%" viewBox="0 0 432 288">
+
+<use xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_1"></use>
+
+<use class="fragment" data-fragment-index=2 xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_2"></use>
+
+<use xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_3"></use>
+
+<use class="fragment" data-fragment-index=4 xlink:href="lib/img/error-type1-type2-power-trade-off.svg#axes_4"></use>
+
+</svg>
+
+</div>
+
+<div class="fragment" data-fragment-index=3 style="align-content: center;height:100%;">
+
+<p class="smaller info">
+
+Increase $\alpha$ to reduce the chance of Type II error.
+
+</p>
+
+<p class="smaller danger">
+
+Decrease $\alpha$ to reduce the chance of Type I error.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Significance Level And Errors -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Significance Level and Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small">
+
+While we wish to avoid both types of errors, in practice we must accept some trade-off between them:
+
+</p>
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="fragment small" data-fragment-index="0">
+
+<p class="strong">
+
+If we set <span class="pop">$\alpha$ too low</span>:
+
+</p>
+
+<ul>
+
+<li class="warning">It becomes more difficult to reject $H_0$ (conservative).</li>
+
+<li class="success">This decreases the probability of a Type I error (false positive).</li>
+
+<li class="danger">But increases the probability of a Type II error (false negative).</li>
+
+</ul>
+
+</div>
+
+<div class="fragment small" data-fragment-index="1">
+
+<p class="strong">
+
+If we set <span class="info">$\alpha$ too high</span>:
+
+</p>
+
+<ul>
+
+<li class="warning">It becomes easier to reject $H_0$ (liberal).</li>
+
+<li class="success">This decreases the probability of a Type II error (false negative).</li>
+
+<li class="danger">But increases the probability of a Type I error (false positive).</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<table id="er-table-small">
+
+<tbody>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-nobottom"></td>
+
+<td colspan=2><span class="strong">Decision</span></td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-right"></td>
+
+<td class="border-right bg-warning-light">Reject $H_0$</td>
+
+<td class="border-right bg-info-light">Do not reject $H_0$</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td rowspan=2 class="border-nobottom border-right">
+
+<span class="strong">Truth</span>
+
+</td>
+
+<td class="border-right bg-info-light">
+
+$H_0$ true
+
+</td>
+
+<td class="border-right">
+
+<p class="danger">$\alpha$: Type I Error</p>
+
+<p class="fragment smallest">Probability of false positive.</p>
+
+</td>
+
+<td class="border-right">
+
+<p class="success">$1-\alpha$: Correct Decision</p>
+
+<p class="fragment smallest">Probability of true negative.</p>
+
+</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td class="border-right border-bottom bg-warning-light">$H_0$ false</td>
+
+<td class="border-right border-bottom">
+
+<p class="success">$1-\beta$: Statistical Power</p>
+
+<p class="fragment smallest">Probability of true positive.</p>
+
+</td>
+
+<td class="border-right border-bottom">
+
+<p class="danger">$\beta$: Type II Error</p>
+
+<p class="fragment smallest">Probability of false negative.</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- Interactive Power Visualization -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Power And Significance Level</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="full-width" style="height:100%;">
+
+<table id="er-table-small">
+
+<tbody>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-nobottom"></td>
+
+<td colspan=2><span class="strong">Decision</span></td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom"></td>
+
+<td class="border-right"></td>
+
+<td class="border-right bg-warning-light">Reject H$_0$</td>
+
+<td class="border-right bg-info-light">Do not reject H$_0$</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td rowspan=2 class="border-nobottom border-right">
+
+<span class="strong">Truth</span>
+
+</td>
+
+<td class="border-right bg-info-light">
+
+H$_0$ true
+
+</td>
+
+<td class="border-right">
+
+<p class="danger">$\alpha$: Type I Error</p>
+
+<p class="smallest">Probability of <span class="em">false positive</span>.</p>
+
+</td>
+
+<td class="border-right">
+
+<p class="success">$1-\alpha$</p>
+
+<p class="smallest">Probability of <span class="em">true negative</span>.</p>
+
+</td>
+
+</tr>
+
+<tr class="border-nobottom">
+
+<td class="border-right border-bottom bg-warning-light">H$_0$ false</td>
+
+<td class="border-right border-bottom">
+
+<p class="success">$1-\beta$: Statistical Power</p>
+
+<p class="smallest">Probability of <span class="em">true positive</span>.</p>
+
+</td>
+
+<td class="border-right border-bottom">
+
+<p class="danger">$\beta$: Type II Error</p>
+
+<p class="smallest">Probability of <span class="em">false negative</span>.</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="fig-container full-width" style="height:42vh;" data-file="lib/interactive/errors-power.html"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- Understanding Significance Level -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Understanding The Significance Level</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<p class="em">
+
+The significance level $\alpha$, represents the <span class="success strong">tolerable probability of making a Type I error</span>.
+
+</p>
+
+<p class="down-3">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+<span class="info">If the consequences of a Type I error are severe</span> (for example, approving a new drug that is potentially dangerous) we might use a very small $\alpha$ (perhaps even $\alpha=0.005$).
+
+</p>
+
+<p class="down-3">
+
+<i class="fa fa-arrow-circle-right danger"></i>
+
+<span class="danger">If the consequences of a Type II error are severe</span> (for example, failing to diagnose a treatable disease), we would want to make it easier to reject $\mathrm{H}_0$, so
+
+we might use a relatively large $\alpha$.
+
+</p>
+
+<div class="grid-generic framed border-muted" style="grid-template-columns:1fr 9fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="height:100%;align-content:center;">
+
+<p class="muted">
+
+Key idea <br>
+
+<i class="fas fa-lightbulb"></i>
+
+</p>
+
+</div>
+
+<p class="just-justify">
+
+Remember that there is always a trade-off between the two types of errors, so people usually use the common significance levels of <span class="pop">5%</span>, 10% or 1% (but where the perfect balance lies is a complicated question and the increasing subject of debate).
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 23
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2024</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+linebreaks: {
+automatic: true,
+},
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ME3040_splash.png",
+text: "Welcome to ME3040!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>

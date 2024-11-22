@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Lecture 24
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/hybrid.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/publication-bias.png" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Publication Bias
+              </h2>
+              <h3>
+                Problems In Reporting
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                November 20, 2024
+              </p>
+              <p class="byinfo">
+                CSULA: ME3040 Fall 2024
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Today's Objectives</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify big"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
+
+>
+
+<div class="border-bottom">
+
+<p><i class="target"></i> Multiple Testing Problem</p>
+
+</div>
+
+<div class="border-bottom">
+
+<p><i class="target"></i> Publication Bias</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p></p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/multiple-testing_1.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  The Problem With Multiple Testing
+                </h2>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240,240,240,0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240,240,240,0.6) !important;
+
+}
+
+</style>
+
+</section>
+
+
+
+<!-- The problem with multiple testing -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Multiple Testing Problem</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div class="grid-generic bordered border-orange bg-orange-light black"
+
+style="grid-template-columns:1fr auto 2fr;grid-auto-rows:auto;gap:5vmin;grid-column:1/3;">
+
+<div>
+
+<p>
+
+The chance of a Type I error is $\alpha$
+
+</p>
+
+</div>
+
+<div>
+
+<i class="fas fa-arrow-right"></i>
+
+</div>
+
+<div>
+
+<p>
+
+$\alpha$ of all tests with true null hypotheses will yield <span class="strong">significant results just by chance</span>
+
+</p>
+
+</div>
+
+</div>
+
+<div class="left-justify" style="grid-column:1/3;">
+
+<p class="down-1 smaller">
+
+<span class="em u muted">ex:</span> If 100 tests are done with $\alpha=0.05$ and nothing is really going on (the null hypothesis is really true), 5% of them will yield significant results (reject the null), just by chance.
+
+</p>
+
+<p>
+
+<i class="fas fa-arrow-circle-right danger"></i> This is known as the <span class="danger">problem of multiple testing</span>
+
+</p>
+
+</div>
+
+<div class="fragment framed bg-success-light black" style="height:100%;">
+
+<p>
+
+<span class="em u">Consider a topic that is being investigated by research teams all over the world:</span>
+
+<br>
+
+Using $\alpha=0.05$, <span class="strong">5% of teams are going to find something significant, even if the null hypothesis is true</span>.
+
+</p>
+
+</div>
+
+<div class="fragment flex framed bg-pop-light black" style="height:100%;">
+
+<p>
+
+<span class="em u">Consider a research team or company doing many hypothesis tests:</span>
+
+<br>
+
+Using $\alpha=0.05$, <span class="strong">5% of the tests are going to be
+
+significant, even if the null hypotheses are all true</span>. (multiple hypothesis tests)
+
+</p>
+
+</div>
+
+<div class="small" style="grid-column:1/3;">
+
+<p class="fragment down-2">
+
+<i class="fas fa-arrow-circle-right orange"></i>
+
+When multiple tests are conducted, if the null hypotheses are all true,
+
+<span class="orange">the proportion of all the tests that will yield
+
+statistically significant results just by random chance is about
+
+$\alpha$</span>, the significance level.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- Original Paper -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small" style="grid-column:1/3;">
+
+Paper published in <span class="em">Nature</span> with $\text{p-value}< 0.01$.
+
+</p>
+
+<div>
+
+<img src="lib/img/fruit-flies-nature1980-title.png" class="framed" width=100%>
+
+</div>
+
+<div>
+
+<img src="lib/img/fruit-flies-nature1980-table2.png" class="framed" width=100%>
+
+<div class="smaller fragment">
+
+<i class="fas fa-arrow-circle-right danger"></i>
+
+Concluded, based on the data, that mate choice improves offspring fitness (This went against conventional wisdom).
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Penn State Replication 1 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 0.7fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small center bg-danger-light black" style="grid-column:1/3;">
+
+<i class="fas fa-user-md"></i> Researchers at Penn State tried to replicate the results&hellip;
+
+</p>
+
+<div data-id="content-box">
+
+<p class="em u">Penn State's Study</p>
+
+<p class="left-justify small">
+
+600 female fruit flies, <span class="pop">randomly divided</span>:
+
+</p>
+
+<ul class="smaller left-justify">
+
+<li>
+
+300 placed in a cage with 900 males (<span class="pop strong">mate choice</span>)
+
+</li>
+
+<li>
+
+300 placed in individual vials with only one male each (<span class="pop strong">no mate choice</span>)
+
+</li>
+
+</ul>
+
+<p class="small" style="margin-top: 10px;">
+
+After mating, females were separated from the males and put in egg-laying chambers.
+
+</p>
+
+<div class="smaller down-3 framed border-info left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+200 larvae from each chamber were taken and placed in a cage with 200 mutant flies (for competition).
+
+<span class="info strong">Offspring survival rate</span> was measured.
+
+</div>
+
+</div>
+
+<div>
+
+<img src="lib/img/fruit-flies-genetics1984-protocol.png" class="framed" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Penn State Replication 2 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>How Do We Know About Errors?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 0.7fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small center bg-danger-light black" style="grid-column:1/3;">
+
+<i class="fas fa-user-md"></i> Researchers at Penn State tried to replicate the results&hellip;
+
+</p>
+
+<div data-id="content-box">
+
+<p class="em u">Penn State's Study</p>
+
+<p class="small left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+Experiment repeated 10 times per day for 5 consecutive days.
+
+</p>
+
+<p class="small left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+A total of 50 runs, 10000 larvae tested in each group.
+
+</p>
+
+<table class="smaller down-5 center">
+
+<tbody>
+
+<tr>
+
+<td rowspan=2 class="border-right">Larvae <br>survived?</td>
+
+<td colspan=2 class="border-nobottom border-right">
+
+Mate choice?</td>
+
+<td class="border-nobottom"></td>
+
+</tr>
+
+<tr>
+
+<td>Yes</td>
+
+<td class="border-right">No</td>
+
+<td>Total</td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom border-right">
+
+Yes</td>
+
+<td class="border-nobottom">6067</td>
+
+<td class="border-nobottom border-right">5976</td>
+
+<td class="border-nobottom">12043</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">No</td>
+
+<td>3933</td>
+
+<td class="border-right">4024</td>
+
+<td>7957</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">Total</td>
+
+<td>10000</td>
+
+<td class="border-right">10000</td>
+
+<td>20000</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<p class="sided border-danger down-5">
+
+<span class="u em">Difference in survival rate:</span>
+
+$d=\hat{p}_\textrm{choice}-\hat{p}_\textrm{no choice}$ <br>
+
+$d=0.6067-0.5976=0.009$
+
+</p>
+
+<p class="framed border-danger fragment">
+
+One-tail p-value = 0.102
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/fruit-flies-genetics1984-protocol.png" class="framed" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Multiple replication -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Multiple Testing Problem</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="em u">Penn State's Study</p>
+
+<p class="small left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+Experiment repeated 10 times per day for 5 consecutive days.
+
+</p>
+
+<p class="small left-justify">
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+A total of 50 runs, 10000 larvae tested in each group.
+
+</p>
+
+</div>
+
+<div>
+
+<table class="small">
+
+<tbody>
+
+<tr>
+
+<td rowspan=2 class="border-right">Larvae <br>survived?</td>
+
+<td colspan=2 class="border-nobottom border-right">
+
+Mate choice?</td>
+
+<td class="border-nobottom"></td>
+
+</tr>
+
+<tr>
+
+<td>Yes</td>
+
+<td class="border-right">No</td>
+
+<td>Total</td>
+
+</tr>
+
+<tr>
+
+<td class="border-nobottom border-right">
+
+Yes</td>
+
+<td class="border-nobottom">6067</td>
+
+<td class="border-nobottom border-right">5976</td>
+
+<td class="border-nobottom">12043</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">No</td>
+
+<td>3933</td>
+
+<td class="border-right">4024</td>
+
+<td>7957</td>
+
+</tr>
+
+<tr>
+
+<td class="border-right">Total</td>
+
+<td>10000</td>
+
+<td class="border-right">10000</td>
+
+<td>20000</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<p class="em u" style="grid-column:1/3;">
+
+What if we had calculated the p-value for each run?
+
+</p>
+
+<div class="grid-generic fragment" data-fragment-index=0 style="grid-column:1/3;grid-template-columns:15fr 85fr;">
+
+<div>
+
+<p style="font-size: 0.6em" class="em u">
+
+50 <br>p-values
+
+</p>
+
+</div>
+
+<div class="smallest">
+
+<table>
+
+<tbody>
+
+<tr>
+
+<td>0.9570</td>
+
+<td>0.8498</td>
+
+<td>0.1376</td>
+
+<td>0.5407</td>
+
+<td>0.7640</td>
+
+<td>0.9845</td>
+
+<td>0.3334</td>
+
+<td>0.8437</td>
+
+<td>0.2080</td>
+
+<td>0.8912</td>
+
+</tr>
+
+<tr>
+
+<td>0.8879</td>
+
+<td>0.6615</td>
+
+<td>0.6695</td>
+
+<td>0.8764</td>
+
+<td class="fragment highlight-bg-info"
+
+data-fragment-index=1>1.0000</td>
+
+<td>0.0064</td>
+
+<td>0.9982</td>
+
+<td>0.7671</td>
+
+<td>0.9512</td>
+
+<td>0.2730</td>
+
+</tr>
+
+<tr>
+
+<td>0.5812</td>
+
+<td>0.1088</td>
+
+<td>0.0181</td>
+
+<td>0.0013</td>
+
+<td>0.6242</td>
+
+<td>0.0131</td>
+
+<td>0.7882</td>
+
+<td>0.0777</td>
+
+<td class="fragment highlight-bg-info"  data-fragment-index=1>0.0001</td>
+
+<td>0.9641</td>
+
+</tr>
+
+<tr>
+
+<td>0.8851</td>
+
+<td>0.1280</td>
+
+<td>0.3421</td>
+
+<td>0.1805</td>
+
+<td>0.1121</td>
+
+<td>0.6562</td>
+
+<td>0.0133</td>
+
+<td>0.3082</td>
+
+<td>0.6923</td>
+
+<td>0.1925</td>
+
+</tr>
+
+<tr>
+
+<td>0.4207</td>
+
+<td>0.0607</td>
+
+<td>0.3059</td>
+
+<td>0.2383</td>
+
+<td>0.2391</td>
+
+<td>0.1584</td>
+
+<td>0.1735</td>
+
+<td>0.0319</td>
+
+<td>0.0171</td>
+
+<td>0.1082</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<p class="quoted fragment" data-fragment-index=2 style="grid-column:1/3;">
+
+What if we just reported the run that yielded a p-value of 0.0001?
+
+<br>
+
+Is that ethical?
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/publication-bias.png" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Publication Bias
+                </h2>
+                <h3>
+                  Where Negative Results Perish
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240,240,240,0.5) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240,240,240,0.5) !important;
+
+}
+
+</style>
+
+</section>
+
+
+
+<!-- Definition -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Publication Bias</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:1fr;gap:1vmin;">
+
+<p class="quoted">
+
+Publication bias refers to the fact that <span class="strong">usually only the significant results get published</span>.
+
+</p>
+
+<p>
+
+<i class="fa fa-arrow-circle-right danger"></i>
+
+The one study that turns out significant gets published, and no one knows about all the insignificant results (also known as the <span class="danger">file drawer problem</span>)
+
+</p>
+
+<div class="bordered border-pop">
+
+Publication bias, <span class="u">combined with the problem of multiple testing</span> can yield very misleading results.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Cartoon 1 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Jelly-Beans Cause Acne!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:center;display:grid;" data-id="img-base">
+
+<img width="960px" src="lib/img/xkcd-jelly-beans-1.png">
+
+</div>
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:center;display:grid;" data-id="img-overlay">
+
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Cartoon 2 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Jelly-Beans Cause Acne!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:start;display:grid;" data-id="img-base">
+
+<img width="960px" src="lib/img/xkcd-jelly-beans-2.png">
+
+</div>
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:center;display:grid;height:100%;" data-id="img-overlay">
+
+<svg width="960" height="700" viewBox="0 0 960 700">
+
+<rect x="10" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: purple;"/>
+
+<rect x="195" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: brown;"/>
+
+<rect x="380" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: pink;"/>
+
+<rect x="565" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: blue;"/>
+
+<rect x="750" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: teal;"/>
+
+<rect x="10" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: salmon;"/>
+
+<rect x="195" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: red;"/>
+
+<rect x="380" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: turquoise;"/>
+
+<rect x="565" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: magenta;"/>
+
+<rect x="750" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: yellow;"/>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Cartoon 3 -->
+
+<section data-auto-animate>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Jelly-Beans Cause Acne!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:start;display:grid;" data-id="img-base">
+
+<img width="960px" src="lib/img/xkcd-jelly-beans-3.png">
+
+</div>
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:center;display:grid;height:100%;" data-id="img-overlay">
+
+<svg width="960" height="700" viewBox="0 0 960 700">
+
+<rect x="10" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: grey;"/>
+
+<rect x="195" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: tan;"/>
+
+<rect x="380" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: cyan;"/>
+
+<rect x="565" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: green;"/>
+
+<rect x="750" y="310" width="30" height="15" style="stroke: black; stroke-width: 1; fill: #E0B0FF;"/>
+
+<rect x="10" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: beige;"/>
+
+<rect x="195" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: #C8A2C8;"/>
+
+<rect x="380" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: black;"/>
+
+<rect x="565" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: #FFE5B4;"/>
+
+<rect x="750" y="650" width="30" height="15" style="stroke: black; stroke-width: 1; fill: orange;"/>
+
+<rect class="fragment" x="550" y="20" width="180" height="320" style="fill: none; stroke-width:8;stroke:green" />
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Cartoon 4 -->
+
+<section data-auto-animate>
+
+<style>
+
+@keyframes bounceGrowRotate {
+
+0%, 100% {
+
+transform: translateY(0) scale(1) rotate(0deg);
+
+}
+
+20%, 80% {
+
+transform: translateY(-5px) scale(1.03) rotate(-2deg);
+
+}
+
+50% {
+
+transform: translateY(-10px) scale(1.05) rotate(2deg);
+
+}
+
+}
+
+
+
+img.bouncy {
+
+animation: bounceGrowRotate 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+
+}
+
+
+
+</style>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Jelly-Beans Cause Acne!</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="grid-column:1/2;grid-row:1/2;justify-content:center;align-content:start;display:grid;" data-id="img-base">
+
+<img class="bouncy" width="960px" src="lib/img/xkcd-jelly-beans-4.png">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- This should scare you! -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Multiple Testing and Publication Bias</h2>
+
+</div>
+
+<div class="content" style="gap:10vmin;">
+
+<ol>
+
+<li>
+
+$\alpha$ of all tests with true null hypotheses will yield <span class="strong">significant results just by chance</span>
+
+</li>
+
+<li>
+
+The one that <span class="u-pop">happens to be significant</span> is the one that <span class="pop">gets published</span>
+
+</li>
+
+</ol>
+
+<div class="framed border-danger fragment bigger">
+
+<span class="danger strong">THIS SHOULD SCARE YOU!</span><br>
+
+<span class="smallest">and make you more suspicious when you get/see a stunning result</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Your P-value -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Your P-Value Is What It Is</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:2fr 1fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div>
+
+<p class="smaller">
+
+If your p-value is higher than 0.05, you should call it
+
+"non-significant" and write it up as such.
+
+</p>
+
+<p class="smaller">
+
+The problem for many authors is that this just isn't the answer they were
+
+looking for: <span class="u-danger strong">publishing so-called
+
+<span class="em">negative results</span> is harder than
+
+<span class="em">positive results</span></span>.
+
+</p>
+
+<ul class="smallest">
+
+<li>a borderline significant trend (p=0.09)</li>
+
+<li>a clear tendency to significance (p=0.052)</li>
+
+<li>a favorable statistical trend (p=0.09)</li>
+
+<li>almost but not quite significant (p=0.06)</li>
+
+<li>an evident trend (p=0.13)</li>
+
+<li>just tangentially significant (p=0.056)</li>
+
+<li>approached our criterion of significance (p>0.08)</li>
+
+<li>at the limit of significance (p=0.054)</li>
+
+<li>barely failed to attain statistical significance (p=0.067)</li>
+
+<li>close to the limit of significance (p=0.17)</li>
+
+<li>fell just short of statistical significance (p=0.12)</li>
+
+<li>just missed being statistically significant (p=0.06)</li>
+
+<li>significant at the .07 level</li>
+
+</ul>
+
+<p class="small">
+
+<i class="fas fa-arrow-up"></i> true quotes from published scientific papers ...
+
+</p>
+
+</div>
+
+<div>
+
+<img src="lib/img/xkcd-p-values.png">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Reproducibility Crisis -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>The Reproducibility Crisis</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div class="grid-generic" style="grid-template-columns:1fr 2fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="height:100%;">
+
+<img src="lib/img/plos-one-replication-biomedical.png" class="framed" width=100%>
+
+</div>
+
+<div style="height:100%;">
+
+<p class="quoted small">
+
+Newspapers never covered initial studies reporting null findings
+
+and rarely reported subsequent null observations. Only 48.7% of the
+
+156 studies reported by newspapers were confirmed by the corresponding
+
+meta-analyses.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:3fr 6fr;grid-auto-rows:auto;gap:2vmin;">
+
+<div style="height:100%;">
+
+<img src="lib/img/nature-pvalue-statistical-errors.png" class="fragment framed" data-fragment-index=1 width=100%>
+
+</div>
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:2vmin;height:100%;">
+
+<p class="quoted fragment smaller" data-fragment-index=1>
+
+The p-value was never meant to be used the way
+
+it's used today
+
+</p>
+
+<div style="justify-content: center;height:100%;align-content:center;">
+
+<img src="lib/img/plos-medicine-why-research-false.png" class="fragment framed down-6" data-fragment-index=2 width=100%>
+
+</div>
+
+<p class="quoted fragment smaller" data-fragment-index=2>
+
+It can be proven that most claimed research findings are false.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Food Cancer -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Everything We Eat Causes AND Prevents Cancer</h3>
+
+<p class="em">Note the sarcasm</p>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic box-width" style="grid-template-columns:6.5fr 4fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<svg width="100%" viewBox="0 0 432 360">
+
+<use xlink:href="lib/img/food-cancer-relative-risk.svg#axes_1"></use>
+
+</svg>
+
+</div>
+
+<div>
+
+<p class="sided">
+
+Each <i class="fas fa-circle info smaller"></i> is one medical study
+
+</p>
+
+<p class="smallest">
+
+Schoenfeld J. and Ioannidis JPA (2013). '<span class="em">Is
+
+everything we eat associated with cancer? A systematic cookbook
+
+review</span>'. Am J Clin Nutr 97:1 127-134
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- It Can All Be Confusing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>It Can All Be Confusing</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:repeat(4,1fr);grid-auto-rows:auto;gap:3vmin;">
+
+<p class="sided border-pop left-justify" style="grid-column: 1/5;">
+
+A single study is rarely the final answer.
+
+<br>
+
+And yet for science reporters, new studies are irresistible - a bold new finding makes a great headline.
+
+</p>
+
+<div class="fragment" data-fragment-index="1">
+
+<p>
+
+Apr 2014
+
+</p>
+
+<img src="lib/img/fruits-health-good7.jpeg" class="framed" width=100%>
+
+</div>
+
+<div class="fragment" data-fragment-index="2">
+
+<p>
+
+Jul 2014
+
+</p>
+
+<img src="lib/img/fruits-health-no-effect.jpeg" class="framed" width=100%>
+
+</div>
+
+<div class="fragment" data-fragment-index="3">
+
+<p>
+
+Nov 2016
+
+</p>
+
+<img src="lib/img/fruits-health-unrealistic.jpeg" class="framed" width=100%>
+
+</div>
+
+<div class="fragment" data-fragment-index="4">
+
+<p>
+
+Feb 2017
+
+</p>
+
+<img src="lib/img/fruits-health-good10.jpeg" class="framed" width=100%>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Is it hopeless? -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Is The Situation Hopeless?</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div>
+
+<p class="framed bg-info-light black">
+
+<span class="em u">Point #1:</span> <br>
+
+Errors (e.g: false positive) are possible
+
+</p>
+
+</div>
+
+<div>
+
+<p class="framed bg-danger-light black">
+
+<span class="em u">Point #2:</span> <br>
+
+Multiple testing and publication bias are a huge problem
+
+</p>
+
+</div>
+
+<div style="grid-column:1/3;">
+
+<p class="u em">
+
+What can you do?<br>
+
+</p>
+
+<ul>
+
+<li>Recognize (and be <span class="strong">skeptical</span>) when a claim is one of many tests</li>
+
+<li>Look for <span class="strong pop">replication</span> of results</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Replication -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Replication</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="quoted">
+
+Replication (or reproducibility) of a study in
+
+<span class="strong">another setting</span> or by
+
+<span class="strong">another researcher</span> is extremely important!
+
+</p>
+
+</div>
+
+
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:10vmin;">
+
+<div class="framed">
+
+<p class="smaller">
+
+<i class="fa fa-arrow-circle-right"></i> Studies that have been replicated with similar conclusions gain credibility
+
+</p>
+
+</div>
+
+<div class="framed">
+
+<p class="smaller">
+
+<i class="fa fa-arrow-circle-right"></i> Studies that have been replicated with different conclusions lose credibility
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<div>
+
+<p class="bg-pink-light black smaller">
+
+Replication helps guard against false positive errors AND helps with generalizability
+
+</p>
+
+</div>
+
+
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr 1fr;grid-auto-rows:auto;gap:5vmin;">
+
+<div>
+
+<img src="lib/img/cartoon-multiple-testing-1.png" class="framed">
+
+</div>
+
+<div>
+
+<img src="lib/img/cartoon-multiple-testing-2.png" class="framed">
+
+</div>
+
+<div>
+
+<img src="lib/img/cartoon-multiple-testing-3.png" class="framed">
+
+</div>
+
+</div>
+
+<p class="em smallest right-justify">
+
+J.B. Landers (CAUSEweb.org)
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Statistical vs Practical Significance -->
+
+
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Statistical Vs. Practical Significance</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:2vmin;">
+
+<p>
+
+Suppose a weight loss program recruits <span class="orange">10,000 people</span> for a randomized experiment.
+
+</p>
+
+<p>
+
+<i class="fas fa-arrow-circle-right orange"></i>
+
+Because of the huge sample size, even a very small difference in average
+
+weight loss of 0.5lbs could be found to be
+
+<span class="orange">statistically significant</span>
+
+(lot of statistical power from the big sample size).
+
+</p>
+
+<p class="framed border-info down-3 center">
+
+Suppose the experiment lasted for a year. <br>
+
+Is a loss of $\frac{1}{2}$ a pound <span class="info">practically</span> significant?
+
+</p>
+
+<p class="fragment down-2" data-fragment-index=1>
+
+<i class="fas fa-arrow-circle-right info"></i>
+
+A <span class="strong">statistically significant result is not always practically significant</span>, especially with large sample sizes.
+
+</p>
+
+<p class="quoted fragment down-3 center" data-fragment-index=1>
+
+What do we do then?
+
+</p>
+
+<p class="bordered border-success fragment">
+
+What is really important here, is not just the p-value indicating statistical
+
+significance, but <span class="success strong">the actual value of the effect</span>
+
+of your treatment, e.g., $\bar{x}_2-\bar{x}_1=4$.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Summary -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Summary</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="sided border-pop">
+
+Conclusions based off p-values are not perfect
+
+</p>
+
+<p class="sided border-orange">
+
+Type I and Type II errors can happen
+
+</p>
+
+<p class="sided border-orange">
+
+$\alpha$ of all tests will be significant just by chance and often, only the significant results get published
+
+</p>
+
+<p class="sided border-danger">
+
+Replication of results is important
+
+</p>
+
+<p class="sided border-info">
+
+Larger sample sizes make it easier to get significant results (more statistical <span class="strong">power</span>)
+
+</p>
+
+<div class="framed border-danger full-width">
+
+<p>
+
+<i class="fa fa-arrow-circle-right danger"></i>
+
+Reporting the <span class="strong">effect size and its associated confidence intervals</span> along with the p-value
+
+gives you an estimate of the true value of the effect under investigation.
+
+</p>
+
+<p>
+
+This is the <span class="danger">practical importance</span> of your result.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 24
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2024</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+linebreaks: {
+automatic: true,
+},
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ME3040_splash.png",
+text: "Welcome to ME3040!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>

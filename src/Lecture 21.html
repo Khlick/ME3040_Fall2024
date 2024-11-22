@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <title>
       Lecture 21
@@ -9,8 +10,8 @@
     <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
     <link href="./src/css/reset.css" rel="stylesheet"/>
     <link href="./src/css/reveal.css" rel="stylesheet"/>
-    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
     <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
     <!-- highlight.js theme -->
     <link href="./src/theme/hybrid.css" id="highlight-theme" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -76,11 +77,17 @@ style="grid-template-columns: 1fr; grid-auto-rows: auto; row-gap: 5vmin"
 
 <div class="border-bottom fragment" data-fragment-index="1">
 
-<p><i class="target"></i> Comparing Two Categories</p>
+<p><i class="target"></i> Recap on methods up to now</p>
 
 </div>
 
 <div class="border-bottom fragment" data-fragment-index="2">
+
+<p><i class="target"></i> Comparing Two Categories</p>
+
+</div>
+
+<div class="border-bottom fragment" data-fragment-index="3">
 
 <p><i class="target"></i> Introduction to $\chi^2$</p>
 
@@ -486,6 +493,12 @@ Model of association (linear regression)
 
 </p>
 
+<p class="small">
+
+Differences between multiple groups (ANOVA)
+
+</p>
+
 </div>
 
 </div>
@@ -531,6 +544,12 @@ Estimate of true correlation
 <p class="small">
 
 Estimate of true parameters for association model
+
+</p>
+
+<p>
+
+Estimate of variance contributions ($\eta^2,\,\eta^2_p$)
 
 </p>
 
@@ -2452,6 +2471,275 @@ Because post hoc tests are run to confirm where the differences occurred between
 
 </section>
         </section>
+        <section>
+          <!-- Chi-Squared Definitions -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Definitions: $\chi^2$</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic full-width left-justify"
+
+style="
+
+grid-template-columns: 2.5fr 7.5fr;
+
+grid-auto-rows: auto;
+
+row-gap: 1vmin;
+
+column-gap: 0;
+
+"
+
+>
+
+<!-- Term 1 -->
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="1"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Chi-Squared Test</p>
+
+</div>
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="1"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+A statistical test used to determine if there is a significant
+
+difference between the expected frequencies and the observed
+
+frequencies in one or more categories.
+
+</p>
+
+</div>
+
+<!-- Term 2 -->
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="2"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Expected Frequency</p>
+
+</div>
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="2"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+The frequency expected in a category if the null hypothesis is true,
+
+calculated as the total sample size multiplied by the expected
+
+proportion under the null hypothesis.
+
+</p>
+
+</div>
+
+<!-- Term 3 -->
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="3"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Observed Frequency</p>
+
+</div>
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="3"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>The actual frequency observed in the sample for a category.</p>
+
+</div>
+
+<!-- Term 4 -->
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="4"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Chi-Squared Statistic</p>
+
+</div>
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="4"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+A measure of the discrepancy between the observed and expected
+
+frequencies, calculated using the formula: \( \chi^2 = \sum
+
+\frac{{(Observed - Expected)^2}}{Expected} \).
+
+</p>
+
+</div>
+
+<!-- Term 5 -->
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="5"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Degrees of Freedom</p>
+
+</div>
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="5"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+In the context of the chi-squared test, the number of degrees of
+
+freedom is the number of categories minus one.
+
+</p>
+
+</div>
+
+<!-- Term 6 -->
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="6"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p><i class="fa-solid fa-file-contract"></i> Goodness of Fit</p>
+
+</div>
+
+<div
+
+class="fragment small border-bottom"
+
+data-fragment-index="6"
+
+style="height: 100%; align-items: center"
+
+>
+
+<p>
+
+A type of chi-squared test that assesses how well the observed
+
+distribution of data matches with the expected distribution if no
+
+relationship exists in the population.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+This slide covers fundamental terms and definitions in Chi-Squared testing,
+
+suitable for study and reference, aiding students in understanding key
+
+concepts and their applications in statistical analysis.
+
+</aside>
+
+<!-- </section> -->
+        </section>
       </div>
       <footer class="main-footer">
         <span>
@@ -2537,6 +2825,8 @@ inlineMath: [
 ["$", "$"],
 ["\\(", "\\)"],
 ],
+processEscapes: true,
+processEnvironments: true,
 },
 options: {
 skipHtmlTags: [
@@ -2547,18 +2837,15 @@ skipHtmlTags: [
 "pre",
 ],
 },
-zoom: "None",
-zscale: "100%",
-CommonHTML: {
-scale: 90,
-minScaleAdjust: 55,
+chtml: {
+scale: 0.8,
 linebreaks: {
 automatic: true,
 },
 },
 Safe: {
 sizeMin: 0.4,
-sizeMax: 1.5,
+sizeMax: 1.25,
 },
 },
 notes: {

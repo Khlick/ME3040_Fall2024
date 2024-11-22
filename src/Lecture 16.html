@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <title>
       Lecture 16
@@ -9,8 +10,8 @@
     <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
     <link href="./src/css/reset.css" rel="stylesheet"/>
     <link href="./src/css/reveal.css" rel="stylesheet"/>
-    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
     <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
     <!-- highlight.js theme -->
     <link href="./src/theme/hybrid.css" id="highlight-theme" rel="stylesheet"/>
     <!-- Custom CSS -->
@@ -2410,6 +2411,8 @@ inlineMath: [
 ["$", "$"],
 ["\\(", "\\)"],
 ],
+processEscapes: true,
+processEnvironments: true,
 },
 options: {
 skipHtmlTags: [
@@ -2420,18 +2423,15 @@ skipHtmlTags: [
 "pre",
 ],
 },
-zoom: "None",
-zscale: "100%",
-CommonHTML: {
-scale: 90,
-minScaleAdjust: 55,
+chtml: {
+scale: 0.8,
 linebreaks: {
 automatic: true,
 },
 },
 Safe: {
 sizeMin: 0.4,
-sizeMax: 1.5,
+sizeMax: 1.25,
 },
 },
 notes: {
