@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="notranslate" name="google"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>
+      Lecture 25
+    </title>
+    <link href="lib\favicon.png" rel="icon" type="image/x-icon"/>
+    <link href="./src/css/reset.css" rel="stylesheet"/>
+    <link href="./src/css/reveal.css" rel="stylesheet"/>
+    <link href="./src/css/revealpack.css" rel="stylesheet"/>
+    <link href="./src/theme/drG.css" id="theme" rel="stylesheet"/>
+    <!-- highlight.js theme -->
+    <link href="./src/theme/hybrid.css" id="highlight-theme" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <!-- Custom Scripts -->
+    <!-- Print PDF script -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './src/css/print/pdf.css' : './src/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!-- Deck CSS Injections -->
+    <!-- Deck Script Injections -->
+    <!-- Deck Raw Injections -->
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="lib/img/uncertainty-bg.png" data-background-size="cover" id="deck-title-slide">
+          <div class="title-slide background">
+            <div class="headline">
+              <h2 class="r-fit-text">
+                Uncertainty
+              </h2>
+              <h3>
+                Quantification Of Compounds Errors
+              </h3>
+            </div>
+            <div class="sub-header">
+              <p class="by">
+                Khris Griffis, Ph.D.
+              </p>
+            </div>
+            <div class="byline">
+              <p class="byinfo">
+                December 2, 2024
+              </p>
+              <p class="byinfo">
+                CSULA: ME3040 Fall 2024
+              </p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <!-- Slide 1: Objectives and Learning Outcomes -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Objectives and Learning Outcomes</h2>
+
+</div>
+
+<div class="content">
+
+<div
+
+class="grid-generic"
+
+style="grid-template-columns: 1fr; grid-auto-rows: auto; gap: 1vmin"
+
+>
+
+<ul>
+
+<li>
+
+Understand the concepts of systemic and random uncertainties in
+
+engineering measurements.
+
+</li>
+
+<li>
+
+Identify common sources of measurement uncertainty and their impacts.
+
+</li>
+
+<li>
+
+Apply statistical methods to quantify and combine uncertainties.
+
+</li>
+
+<li>
+
+Analyze the implications of uncertainty in practical engineering
+
+scenarios.
+
+</li>
+
+<li>
+
+Prepare for exam questions related to experimental methods and
+
+uncertainty analysis.
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+This slide sets the stage for the lecture, outlining what students will learn
+
+and how it applies to their engineering practice and FE exam preparation.
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/gearbench.png" id="section-title-1">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-1">
+              <div class="section-number">
+                <span class="large-number">
+                  1
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Introduction To Uncertainty
+                </h2>
+                <h3>
+                  Uncertainty In Measurements
+                </h3>
+                <h3>
+                  Overview Of Systemic And Random Uncertainties
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-1.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Slide 2: Importance of Uncertainty Quantification in Engineering -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Importance of Uncertainty Quantification in Engineering</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Uncertainty quantification is crucial in engineering for ensuring the reliability and accuracy of measurements and designs. It allows engineers to:</p>
+
+<ul>
+
+<li>Assess the quality of measurement tools and methods.</li>
+
+<li>Make informed decisions based on the precision and accuracy of data.</li>
+
+<li>Enhance the design and optimization of engineering systems.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Highlight the critical role of uncertainty analysis in all aspects of engineering, emphasizing its impact on decision-making and system design.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Slide 3: Overview of Systemic and Random Uncertainties -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Overview of Systemic and Random Uncertainties</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Understanding the different types of uncertainties is fundamental in their effective management:</p>
+
+<ul>
+
+<li><strong>Systemic Uncertainties:</strong> Often predictable and typically constant or systematic variations, which can be corrected or compensated.</li>
+
+<li><strong>Random Uncertainties:</strong> Arise from unpredictable variations during measurement and are generally treated statistically.</li>
+
+</ul>
+
+<div class="fragment framed border-danger padded">
+
+<p>All uncertainty levels should be calculated to the same confidence level.</p>
+
+<p>We typically would use <span class="success">95% Confidence Intervals</span>.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>This slide introduces the two primary categories of measurement uncertainty, setting the stage for deeper exploration in subsequent slides.</p>
+
+<p>Systemic uncertainties are also called Bias uncertainty.</p>
+
+<p>Random uncertainties are also known as noise, or precision uncertainties.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Slide 4: Uncertainty Propagation Techniques Definitions -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Uncertainty Propagation Techniques Definitions</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:repeat(2, 1fr);grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p class="fragment" data-fragment-index="1"><strong>Maximum Possible Uncertainty:</strong></p>
+
+<p class="fragment" data-fragment-index="3">Assumes that all errors contribute positively to the uncertainty, summing up linearly. Used for worst-case scenario analysis.</p>
+
+<p class="fragment" data-fragment-index="3">Mathematically, for variables \( x_1, x_2, ..., x_n \) with uncertainties \( \Delta x_1, \Delta x_2, ..., \Delta x_n \), it's calculated as:</p>
+
+<p class="fragment" data-fragment-index="4">\[ \Delta Y_{\text{max}} = \sum |\frac{\partial Y}{\partial x_i} \Delta x_i| \]</p>
+
+</div>
+
+<div>
+
+<p class="fragment" data-fragment-index="2"><strong>Root of Sum of Squares (RSS):</strong></p>
+
+<p class="fragment" data-fragment-index="5">Considers the statistical nature of errors, assuming they are independent and random. Provides a statistically probable estimate of combined uncertainty.</p>
+
+<p class="fragment" data-fragment-index="5">Mathematically, it is:</p>
+
+<p class="fragment" data-fragment-index="6">\[ \Delta Y_{\text{RSS}} = \sqrt{\sum \left(\frac{\partial Y}{\partial x_i} \Delta x_i\right)^2} \]</p>
+
+</div>
+
+<div style="grid-column:1/3;">
+
+<p class="em small fragment" data-fragment-index="4">
+
+Note: The partial derivative, $\frac{\partial Y}{\partial x_i}$, is called the <span class="info">sensitivity coefficient</span> of variable $Y$ w.r.t. $x_i$.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+This slide defines the two primary techniques for propagating uncertainties, setting the theoretical foundation for their application in engineering calculations.
+
+</aside>
+
+</section>
+
+
+
+<!-- Slide 5: Calculating Uncertainty in Ohm's Law Using Both Methods -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Calculating Uncertainty: Ohm's Law Example</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.3fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<p>Using Ohm's Law \( V = IR \), where \( R = \frac{V}{I} \):</p>
+
+<ul>
+
+<li>Voltage \( V = 100 \pm 5 \) V</li>
+
+<li>Current \( I = 10 \pm 0.5 \) A</li>
+
+<li>Sensitivity Coefficient for \( V \): \( \frac{\partial R}{\partial V} = \frac{1}{I} \)</li>
+
+<li>Sensitivity Coefficient for \( I \): \( \frac{\partial R}{\partial I} = -\frac{V}{I^2} \)</li>
+
+</ul>
+
+</div>
+
+<div class="fragment smaller no-hang">
+
+<p>Calculating maximum possible and RSS uncertainties:</p>
+
+<ul>
+
+<li>Max Uncertainty $\Delta R_{\text{max}} = \phantom{ }$
+
+\[
+
+\begin{align*}
+
+\Delta R_{\text{max}} &= \left| \frac{\partial R}{\partial V} \Delta V \right| + \left| \frac{\partial R}{\partial I} \Delta I \right| \\
+
+&= \left| \frac{1}{10} \cdot 5 \right| + \left| -\frac{100}{10^2} \cdot 0.5 \right| \\
+
+&= 0.5 + 0.5 = 1 \text{ ohm}
+
+\end{align*}
+
+\]
+
+</li>
+
+<li>RSS Uncertainty $\Delta R_{\text{RSS}} = \phantom{ }$
+
+\[
+
+\begin{align*}
+
+&= \sqrt{\left(\frac{\partial R}{\partial V} \Delta V \right)^2 + \left(\frac{\partial R}{\partial I} \Delta I \right)^2} \\
+
+&= \sqrt{\left(\frac{5}{10}\right)^2 + \left(-\frac{100 \cdot 0.5}{100^2}\right)^2} \\
+
+&= \sqrt{0.25 + 0.25} = 0.5 \text{ ohms}
+
+\end{align*}
+
+\]
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+This slide illustrates the application of both maximum possible uncertainty and RSS methods to calculate the uncertainty in resistance, derived from Ohm's Law.
+
+</p>
+
+<ul>
+
+<li><strong>Maximum Possible Uncertainty:</strong> Indicates the highest possible error in \(R\), providing a conservative estimate for safety-critical applications.</li>
+
+<li><strong>RSS Uncertainty:</strong> Offers a more probable estimate of error, reflecting typical variations expected under normal measurement conditions.</li>
+
+</ul>
+
+</aside>
+
+</section>
+
+
+
+<!-- Slide 6: Estimating Uncertainty in Gauge Fluid Density -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Estimating Uncertainty: Gauge Fluid Density</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Top column: Setup and question -->
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="small no-hang sided-no-bg left-justify border-info">
+
+<p>Calculate the <span class="fragment highlight-danger" data-fragment-index="1">permissible uncertainty</span> in the
+
+<span class="fragment highlight-pop" data-fragment-index="2">density</span>
+
+of a gauge fluid (with a <span class="fragment highlight-pop" data-fragment-index="2">nominal density of $2500 \, \text{kg/m}^3 $</span>)
+
+to maintain a pressure measurement accuracy of
+
+<span class="fragment highlight-info" data-fragment-index="1">0.1% for a maximum pressure of 10 kPa</span> in a well manometer (with
+
+an <span class="fragment highlight-warning" class="fragment" data-fragment-index="2">uncertainty of $\frac{1}{10}\, \text{mm}$</span>).
+
+</p>
+
+</div>
+
+</div>
+
+<!-- Two columns below -->
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<!-- Left column: Initial Calculations -->
+
+<div class="smaller no-hang fragment" data-fragment-index="1">
+
+<p class="fragment left-justify" data-fragment-index="1">
+
+<!-- Formula for Uncertainty Propagation -->
+
+Uncertainty propagation: \[ \class{info}{\Delta P} = \sqrt{\left(\frac{\partial P}{\partial \rho} \class{danger}{\Delta \rho} \right)^2 + \left(\frac{\partial P}{\partial h} \class{warning}{\Delta h} \right)^2} \]
+
+</p>
+
+<p><strong>Given:</strong></p>
+
+<ul>
+
+<li class="fragment" data-fragment-index="2">Formula for pressure: \( P = \class{pop}{\rho} \class{success}{g} \class{pink}{h} \)</li>
+
+<li class="fragment" data-fragment-index="2">Nominal fluid density \( \class{pop}{\rho = 2500} \, \text{kg/m}^3 \)</li>
+
+<li class="fragment" data-fragment-index="2">Gravitational constant \( \class{success}{g = 9.81} \, \text{m/s}^2 \)</li>
+
+<li class="fragment" data-fragment-index="2">Uncertainty in $ h $ ($\class{warning}{\Delta h}$): $\frac{1}{10}\, \text{mm} = \class{warning}{0.0001} \, \text{m} $</li>
+
+<li class="fragment" data-fragment-index="2">Maximum pressure uncertainty \( \class{info}{\Delta P} = 1\% \times (10000) = \class{info}{10} \, \text{Pa} \)</li>
+
+<li class="fragment" data-fragment-index="3">Derive \( \class{pink}{h} \) from \( P \):
+
+\[
+
+\class{pink}{h} = \frac{P}{\class{pop}{\rho} \class{success}{g}} = \frac{10000}{\class{pop}{2500} \times \class{success}{9.81}} \approx \class{pink}{0.408} \, \text{m}
+
+\]
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- Right column: Substitution and Solution -->
+
+<div class="smaller no-hang fragment" data-fragment-index="4">
+
+<p><strong>Substitution and Solution:</strong></p>
+
+<ul>
+
+<!-- Calculating Partial Derivative for rho -->
+
+<li class="fragment" data-fragment-index="4">Partial for $\rho$: <span class="small">$ \frac{\partial P}{\partial \rho} = \class{success}{g}\class{pink}{h} \rightarrow  9.81 \times 0.408 = 4.00488 \, \text{m}^{2}\cdot\text{s}^{-2} $</span></li>
+
+
+
+<!-- Calculating Partial Derivative for h -->
+
+<li class="fragment" data-fragment-index="5">Partial for $h$: <span class="small">$ \frac{\partial P}{\partial h} = \class{success}{g}\class{pop}{\rho} \rightarrow 9.81 \times 2500 = 24525 \, \text{kg}\cdot\text{m}^{-2}\cdot\text{s}^{-2} $</span></li>
+
+
+
+
+
+<li class="fragment" data-fragment-index="6">Solve for \( \Delta \rho \):
+
+\[
+
+\class{danger}{\Delta \rho} = \frac{\sqrt{\Delta P^2 - \left(\frac{\partial P}{\partial h} \Delta h\right)^2}}{\frac{\partial P}{\partial \rho}}
+
+\]
+
+<span class="fragment" data-fragment-index="7">
+
+\[
+
+= \frac{\sqrt{100 - \left(24525 \times \class{warning}{0.0001}\right)^2}}{4.00488}
+
+\]
+
+\[
+
+\approx 2.42 \, \text{kg/m}^3
+
+\]
+
+</span>
+
+</li>
+
+</ul>
+
+</div>
+
+<p style="width:100%;grid-column:1/3;" class="framed border-success fragment smallest" data-fragment-index="8">
+
+The calculated $\Delta\rho = \pm 2.42 \, \text{kg/m}^3$ represents the maximum allowable
+
+uncertainty in the density of the gauge fluid to <span class="em">ensure pressure
+
+measurements remain within the desired accuracy of 0.1% of the maximum reading
+
+</span>.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>What is permissible uncertainty? Well, in the uncertainty propagation formula, it is the delta rho, or uncertainty of the fluid density.</p>
+
+<p>
+
+This calculation highlights the sensitivity of pressure measurements to the accuracy of fluid density in manometric systems. In practical applications, ensuring the accuracy of density measurements is crucial, especially in systems where precise pressure measurements are critical.
+
+</p>
+
+<p>
+
+Engineers and technicians must therefore carefully calibrate and verify the density of the gauge fluids used in precision instruments to adhere to stringent measurement standards. This example underscores the importance of thorough understanding and management of all potential sources of measurement uncertainty in engineering applications to achieve the desired precision and reliability in outcomes.
+
+</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/uncertainty-sources-bg.png" id="section-title-2">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-2">
+              <div class="section-number">
+                <span class="large-number">
+                  2
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Sources Of Uncertainty
+                </h2>
+                <h3>
+                  Random And Systemic Errors
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-2.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Slide 7: Introduction to Sources of Measurement Uncertainty -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Introduction to Sources of Measurement Uncertainty</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Measurement uncertainty can arise from numerous sources during experimental testing and data analysis. Understanding these sources is crucial for accurate measurement and error management:</p>
+
+<ul>
+
+<li class="fragment"><span class="strong">Systematic Errors:</span> Errors that are not taken by chance but are consistent and predictable within the same measurement conditions.
+
+<ul>
+
+<li class="small em">Often due to measurement device calibration errors, environmental conditions, and methodological errors.</li>
+
+</ul>
+
+</li>
+
+<li class="fragment"><span class="strong">Random Errors:</span> Errors that vary in an unpredictable manner over different measurements under the same conditions.
+
+<ul>
+
+<li class="small em">Typically arise from unpredictable fluctuations like sensor noise, operator variability, and inherent material inconsistencies.</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Systemic: Independent of sample size.
+
+</p>
+
+<p>
+
+Random: Depends on sample size.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Slide 8: Common Sources in Engineering Contexts -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Common Sources in Engineering Contexts</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Identifying common sources of errors helps in optimizing measurement techniques and improving accuracy:</p>
+
+<ul>
+
+<li><strong>A/D Conversion Errors:</strong> Variability in analog-to-digital conversion can introduce errors in digital measurement systems.</li>
+
+<li><strong>Sensitivity and Linearity Errors:</strong> Deviations in sensor responses that can mislead measurement interpretations.</li>
+
+<li><strong>Environmental Factors:</strong> Temperature, humidity, and electromagnetic interference that can alter sensor outputs.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+Discuss real-world implications and mitigation strategies for these common error sources, preparing students for practical measurement challenges in their engineering careers.
+
+</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Slide 9: Understanding Random Uncertainties -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Understanding Random Uncertainties</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Random uncertainties fluctuate unpredictably and depend on sample size. They are typically estimated using statistical methods:</p>
+
+<ul>
+
+<li>Standard deviation is key for expressing random uncertainty.</li>
+
+<li>Utilize t-distribution for calculating uncertainties with known degrees of freedom.</li>
+
+<li>Simulation by Monte Carlo Resampling allows for empirical quantification of uncertainty and correction of inherent biases.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Slide 10: Understanding Random Uncertainty -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Understanding Random Uncertainty</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>
+
+<span class="info">Random</span> uncertainty, denoted as
+
+\( \class{info strong}{P_x} \), varies unpredictably with each
+
+measurement and is quantified statistically. According to ASTM (1998),
+
+it's essential to evaluate this alongside <span class="warning">systematic</span>
+
+uncertainty \( \class{warning strong}{B_x} \) under the same confidence level:
+
+</p>
+
+<ul>
+
+<li class="small fragment"><strong>ASTM Definition:</strong> Random uncertainty should be quantified at a confidence level that ensures the actual measurement error is within the estimated uncertainty limits, typically 95% <span class="em">confidence</span>.</li>
+
+<li class="small fragment"><strong>Mathematical Representation:</strong> The total uncertainty \( W_x \) in a measurement \( x \) is given by:
+
+\[ W_x = \left( \class{warning}{B_x}^2 + \class{info}{P_x}^2 \right)^{\frac{1}{2}} \]
+
+</li>
+
+</ul>
+
+<p class="sided border-success left-justify big fragment">
+
+These calculations are essential for accurately accounting for all types of
+
+uncertainties, thereby enhancing the precision and dependability of
+
+measurement results.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>
+
+This formula combines systematic (B_x) and random (P_x) uncertainties to calculate the overall uncertainty.
+
+</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Slide 11: Application of Uncertainty Formulas -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Application of Uncertainty Formulas</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>This understanding of uncertainty quantification is crucial for practical applications where precise measurements are necessary:</p>
+
+<ul>
+
+<li>Implementing these methods in experimental setups helps ensure measurement errors can be predicted and minimized.</li>
+
+<li>It allows engineers and scientists to design experiments and systems that operate within acceptable risk levels.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- Slide 12: Detailed Calculations for Random Uncertainty -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Calculations for Random Uncertainty</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic smallest no-hang" style="grid-template-columns:repeat(2, 1fr);grid-auto-rows:auto;gap:1vmin;">
+
+<div class="fragment no-hang" data-fragment-index="1">
+
+<p><strong>Mean Measurement Uncertainty:</strong></p>
+
+<p>When averaging multiple measurements, the uncertainty of the mean \( \bar{x} \), denoted as \( P_{\bar{x}} \), is reduced by the square root of the number of measurements \( n \):</p>
+
+<p>\[ P_{\bar{x}} = \pm t \frac{S_x}{\sqrt{n}} \]</p>
+
+<p>This formula applies when the measurements are of the same variable under identical conditions, improving precision by increasing the sample size.</p>
+
+</div>
+
+<div class="fragment no-hang" data-fragment-index="3">
+
+<p><strong>Individual Measurement Uncertainty:</strong></p>
+
+<p>For a single measurement where no averaging is involved, the uncertainty \( P_x \) is estimated as:</p>
+
+<div class="no-hang">$$P_x = t \cdot S_x$$</div>
+
+<p>where \( t \) is the value from the t-distribution corresponding to the desired confidence level (typically 95%), and \( S_x \) is the standard deviation of the measurements.</p>
+
+</div>
+
+<div class="fragment no-hang framed border-info" data-fragment-index="2" style="height:100%;">
+
+<p><strong>Mean Measurement Uncertainty Across Multiple Sets:</strong></p>
+
+<p>When deriving the mean value \( \bar{x}_{\text{final}} \) from different batches or groups, each potentially having its own variance and mean, the uncertainty is calculated as:</p>
+
+<div>$$P_{\bar{x}_{\text{final}}} = \frac{S_x}{\sqrt{M}}$$</div>
+
+<p>This method is used when \( M \) represents the number of independent sets of measurements, not just the number of measurements within a single set.</p>
+
+</div>
+
+<div class="fragment no-hang" data-fragment-index="4" style="height:100%;">
+
+<p><strong>Total Uncertainty:</strong></p>
+
+<p class="smaller">The total uncertainty \( W_x \) for any measurement can be calculated with the Root Sum Square (RSS) method, which combines different sources of uncertainties:</p>
+
+<p class="small">For individual measurements:</p>
+
+<div>$$W_x = \sqrt{B_x^2 + P_x^2}$$</div>
+
+<p class="small">For mean measurements:</p>
+
+<div>$$W_{\class{danger}{\bar{x}}} = \sqrt{B_{x}^2 + P_{\class{danger}{\bar{x}}}^2}$$</div>
+
+<p class="smaller em">In both formulas, \( B_x \) represents systematic uncertainties, while \( P_x \) and \( P_{\class{danger}{\bar{x}}} \) represent random uncertainties for individual and mean measurements, respectively. This distinction highlights how systematic and random uncertainties are managed differently depending on the aggregation of data.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Speaker Notes for Slide 12 -->
+
+<aside class="notes">
+
+<p><strong>Mean Measurement Uncertainty:</strong> Explains reduction in uncertainty for mean measurements, emphasizing precision increase with larger sample sizes.</p>
+
+<p><strong>Individual Measurement Uncertainty:</strong> Describes how uncertainty for a single measurement is calculated using the t-distribution, focusing on the impact of measurement variability.</p>
+
+<p><strong>Mean Measurement Uncertainty Across Multiple Sets:</strong> Discusses calculating uncertainty for averages across different groups, highlighting the method's applicability to diverse data sets.</p>
+
+<p><strong>Total Uncertainty Using RSS:</strong> Discusses the RSS method for combining uncertainties, detailing formulas for individual and aggregate data to highlight different management approaches based on data aggregation.</p>
+
+</aside>
+
+</section>
+
+
+
+<!-- Slide 13: Example Setup - Quantifying Random Uncertainties in Chemical Manufacturing -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Uncertainty: Mass Measurements</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="small sided border-info left-justify" style="grid-column:1/3;">
+
+In this example, we analyze the mass measurements taken by load cells in a chemical manufacturing process. The load cells measure the mass of a chemical mixture during a batch production.
+
+</p>
+
+<div class="no-hang small">
+
+<p>
+
+Here are the key details:
+
+</p>
+
+<ul class="small">
+
+<li>Total measurements taken: <strong>10</strong></li>
+
+<li>Average measured mass: <strong>750 kg</strong></li>
+
+<li>Known standard deviation from historical data: <strong>15 kg</strong></li>
+
+<li>
+
+Confidence level for uncertainty: <strong>95%</strong>(t-value = 2.0)
+
+<ul>
+
+<li class="em smaller">
+
+For an unknown but <span class="strong">large</span> number of measurements
+
+for $S_x$, we use $t_{95\%,\nu=60} = 2.0$ as a <span class="danger">common approximation</span>.
+
+</li>
+
+</ul>
+
+</li>
+
+
+
+</ul>
+
+<p class="sided border-danger em left-justify">Assumption: The load cells are precise, introducing no additional random uncertainty into the measurements.</p>
+
+</div>
+
+<div class="fragment">
+
+<p>Objective:</p>
+
+<ol>
+
+<li class="fragment">Calculate the standard deviation and random uncertainty for each individual measurement.
+
+</li>
+
+<li class="fragment">Determine the standard deviation and random uncertainty for the average of the ten measurements.</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Slide 14: Calculating Individual and Mean Measurement Uncertainties -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Uncertainty: Mass Measurements</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:repeat(2, 1fr);grid-auto-rows:auto;gap:1vmin;">
+
+<div class="fragment" data-fragment-index="1">
+
+<p><strong>a) Individual Measurement Uncertainty:</strong></p>
+
+<ul>
+
+<li class="fragment" data-fragment-index="2">Standard deviation per measurement: <strong>15 kg</strong></li>
+
+<li class="fragment" data-fragment-index="3">Random uncertainty (95% confidence level):
+
+\[ P_x = t \cdot S_x = 2.0 \cdot 15 \, \text{kg} = 30 \, \text{kg} \]</li>
+
+</ul>
+
+</div>
+
+<div class="fragment" data-fragment-index="4">
+
+<p><strong>b) Mean Measurement Uncertainty:</strong></p>
+
+<ul>
+
+<li class="fragment" data-fragment-index="5">Standard deviation of the mean (n=10):
+
+\[ S_{\bar{x}} = \frac{S_x}{\sqrt{n}} = \frac{15}{\sqrt{10}} \approx 4.74 \, \text{kg} \]</li>
+
+<li class="fragment" data-fragment-index="6">Random uncertainty of the mean (95% confidence level):
+
+\[ P_{\bar{x}} = t \cdot S_{\bar{x}} = 2.0 \cdot 4.74 \, \text{kg} \approx 9.48 \, \text{kg} \]</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Slide 15: Example Setup and Calculation Part (a) -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Random Uncertainty in Natural Gas Heating Values</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="sided-no-bg border-info">
+
+<p class="left-justify">
+
+In estimating the heating value of natural gas from a gas field,
+
+10 samples are taken and the heating value of each sample is measured
+
+by a calorimeter. The measured values of the heating value, in kJ/kg,
+
+are as follows:
+
+</p>
+
+<p class="as-code smaller">[48530, 48980, 50210, 49860, 48560, 49540, 49270, 48850, 49320, 48680]</p>
+
+</div>
+
+<div class="framed fragment" data-fragment-index="1">
+
+<p class="fragment bg-muted black" data-fragment-index="1">Calculate the random uncertainty at a 95% confidence level, assuming no random uncertainty from the calorimeter:</p>
+
+<ul>
+
+<li class="fragment" data-fragment-index="2" role="fa" data-icon="&#x31;">the random uncertainty of each measurement.</li>
+
+<li class="fragment" data-fragment-index="3" role="fa" data-icon="&#x32;">the random uncertainty of the mean of the measurements.</li>
+
+<li class="fragment" data-fragment-index="4" role="fa" data-icon="&#x33;">the random uncertainty of the mean of the measurements, assuming that S was calculated on the basis of a large sample ($n > 30$); but has the same value as computed in parts, (<i class="fas fa-1"></i>) and (<i class="fas fa-2"></i>).</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Slide 16: Calculation Parts (b) and (c) -->
+
+<section>
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Calculations: Natural Gas Heating Values</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:repeat(3, 1fr);grid-auto-rows:auto;gap:1vmin;">
+
+<div class="grid-generic no-hang small" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;grid-column:1/4;">
+
+<p style="grid-column: 1/3;">
+
+Calculate the mean and standard deviation of the sample.
+
+</p>
+
+<div class="small no-hang">
+
+$$\bar{x} = \frac{\sum x_i}{n} = 49,180 \, \text{kJ/kg}$$
+
+</div>
+
+<div class="small no-hang">
+
+$$S_x = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n-1}} = 566.31 \, \text{kJ/kg}$$
+
+</div>
+
+</div>
+
+<div class="no-hang small framed fragment" data-fragment-index="1" style="height:100%">
+
+<p class="fragment" data-fragment-index="1"><strong><i class="fas fa-1"></i> Individual Measurement Uncertainty:</strong></p>
+
+<p class="fragment" data-fragment-index="1">
+
+Random uncertainty:
+
+</p>
+
+<p class="fragment small" data-fragment-index="1">
+
+$ P_i = t \times S_x $, where <span class="em">\( t \)</span> is the t-value for 95% confidence
+
+level, and <span class="em">\( S_x \)</span> is the standard deviation.
+
+</p>
+
+<p class="fragment em small" data-fragment-index="2">For $n=10$, $\nu=10-1=9$, thus $t_{95\%,\, 9}=2.26$.</p>
+
+<div class="fragment" data-fragment-index="3">$$P_i = 2.26 \times 566.3 = 1280 \, \text{kj/kg}$$</div>
+
+<p class="fragment" data-fragment-index="3"><span class="strong">Random uncertainty in each sample:</span> 1280 kJ/kg.</p>
+
+</div>
+
+<div class="fragment small no-hang framed border-info" data-fragment-index="4" style="height:100%">
+
+<p><strong><i class="fas fa-2"></i> Random Uncertainty of the Mean:</strong></p>
+
+<div>$$P_{\bar{x}} = \frac{t \times S_x}{\sqrt{n}}$$</div>
+
+<p class="fragment" data-fragment-index="5">Substitution and calculation:</p>
+
+<div class="fragment" data-fragment-index="5">$$P_{\bar{x}} = \frac{2.26 \times 566.3}{\sqrt{10}} \approx 405 \, \text{kj/kg}$$</div>
+
+<p class="fragment" data-fragment-index="6"><span class="strong">Random uncertainty of the mean:</span> <span class="info">405 kJ/kg</span>.</p>
+
+</div>
+
+<div class="fragment small no-hang framed border-danger" data-fragment-index="7" style="height:100%">
+
+<p><strong><i class="fas fa-3"></i> Random Uncertainty of the Mean for Large Sample Assumption:</strong></p>
+
+<p>Assuming a large sample size but using the same standard deviation, the t-value is approximated to 2.0:</p>
+
+<div>$$P_{\bar{x}_{\text{final}}} = \frac{t \times S_x}{\sqrt{n}}$$</div>
+
+<p class="fragment" data-fragment-index="8">Substitution and calculation with <span class="em">\( t = 2.0 \)</span> (common approach):</p>
+
+<div class="fragment" data-fragment-index="8">$$P_{\bar{x}_{\text{final}}} = \frac{2.0 \times 566.3}{\sqrt{10}} \approx 359 \, \text{kJ/kg}$$</div>
+
+<p class="fragment" data-fragment-index="9"><span class="strong">Random uncertainty of the mean for large sample:</span> <span class="danger">359 kJ/kg</span>.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Start with mean and standard deviation calculations.</p>
+
+<p>Random uncertainty for each sample: 1280 kJ/kg</p>
+
+<p>Random uncertainty for the mean is calculated by dividing the individual uncertainty by the square root of the number of samples: 405 kJ/kg</p>
+
+<p>For large sample estimation: 359 kj/kg</p>
+
+<p>Go to T TABLE</p>
+
+</aside>
+
+</section>
+
+<!-- t-table insert -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>t-table</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div style="justify-items: center;">
+
+<svg width="70%" viewBox="0 0 420 308">
+
+<use xlink:href="lib/img/ttable_9dof.svg#ttext"></use>
+
+<use xlink:href="lib/img/ttable_9dof.svg#column" class="fragment"></use>
+
+<use xlink:href="lib/img/ttable_9dof.svg#row" class="fragment"></use>
+
+</svg>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>We select our confidence level and find the row for our degrees of freedom.</p>
+
+</aside>
+
+</section>
+
+<!-- </section> -->
+        </section>
+        <section data-background-image="lib/img/uncertainty-elemental-bg.png" id="section-title-3">
+          <div class="grid-wrapper">
+            <div class="section-title-content" id="section-content-3">
+              <div class="section-number">
+                <span class="large-number">
+                  3
+                </span>
+              </div>
+              <div class="headlines">
+                <h2 class="r-fit-text">
+                  Elemental Uncertainty
+                </h2>
+                <h3>
+                  Inherent And Unpredictable Variability
+                </h3>
+              </div>
+            </div>
+          </div>
+          <style>
+
+#section-content-3.section-title-content {
+
+background-color: rgba(240, 240, 240, 0.6) !important;
+
+border-radius: 2rem !important;
+
+box-shadow: 0 0 2rem 2rem rgba(240, 240, 240, 0.6) !important;
+
+}
+
+</style>
+
+<aside class="notes">
+
+<p>Section Notes</p>
+
+</aside>
+
+</section> <!-- End section title -->
+
+
+
+<!-- Slide 17: Introduction to Elemental Random Uncertainty -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Introduction to Elemental Random Uncertainty</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>Understanding the sources and impacts of elemental random uncertainties is crucial in experimental methods. This section introduces key concepts and classifications according to ASME guidelines.</p>
+
+<ul>
+
+<li><strong>What is Elemental Random Uncertainty?</strong> It refers to the variability in measurement results that is inherent and unpredictable, affecting the accuracy of all experimental data.</li>
+
+<li><strong>Importance:</strong> Identifying and quantifying these uncertainties helps in improving the reliability and validity of experimental results.</li>
+
+<li><strong>Approach:</strong> We will discuss how to combine random uncertainties from different system components to provide a comprehensive error analysis.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Slide 18: Types of Elemental Errors -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Types of Elemental Errors</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="left--justify smaller">
+
+<p class="higlight-muted">Elemental errors can be broadly categorized into several types, each affecting the accuracy and precision of measurements in unique ways:</p>
+
+<ul>
+
+<li><strong>Calibration Uncertainties:</strong> Errors stemming from calibration procedures, affecting how accurately instruments measure true values.</li>
+
+<li><strong>Data Acquisition Errors:</strong> Variability introduced during the collection of data, including A/D conversion errors and signal noise.</li>
+
+<li><strong>Data Reduction Errors:</strong> Approximations and assumptions made during data processing that can introduce discrepancies.</li>
+
+<li><strong>Methodological Uncertainties:</strong> Errors inherent in the measurement techniques and procedures used.</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<img src="lib/img/uncertainty-elemental.png" alt="" style="width:100%;">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Note on t-value -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Note on t-value</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div class="framed border-danger" style="height:100%;">
+
+<p>
+
+If the sample size sizes are greater than 30 for all elemental random
+
+uncertainties combined in $S_x=\left[ \sum_{i=1}^mS_i^2\right] ^{\frac{1}{2}}$,
+
+then $t$ is only a function of the confidence level.
+
+</p>
+
+</div>
+
+<div style="height:100%;" class="framed border-success no-hang fragment">
+
+<p>
+
+If <span class="em">any</span> sample has $n < 30$, it is necessary to
+
+find a combined value for the degrees of freedom parameter, $\nu$:
+
+</p>
+
+<p>
+
+ASME (1998) recommends the Welch-Satterthwaite formula:
+
+</p>
+
+<p>
+
+$$V_x=\frac{\left[ \sum_{i=1}^mS_i^2\right] ^2}{\sum_{i=1}^m\left( \frac{S_i^4}{\nu_i}\right) }$$
+
+</p>
+
+<p class="smallest">
+
+where $\nu_i$ is the degrees of freedom of the individual elemental error, $m$ is the number of elemental random uncertainties combined in $S_x=\left[ \sum_{i=1}^mS_i^2\right] ^{\frac{1}{2}}$.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- </section> -->
+        </section>
+        <section>
+          <!-- Slide 19: Combining Elemental Uncertainties -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Combining Elemental Uncertainties</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p>This section explains the process of integrating random uncertainties from various system components to estimate the total system uncertainty:</p>
+
+<ul>
+
+<li><strong>Root Sum Square (RSS) Method:</strong> A statistical method used to combine multiple independent uncertainties to form a comprehensive total uncertainty.</li>
+
+<li><strong>Application:</strong> Essential in complex measurement systems where multiple sources of error exist, RSS provides a way to quantify the combined effect on the system's accuracy.</li>
+
+<li><strong>Formula:</strong> For uncertainties \( \sigma_1, \sigma_2, ..., \sigma_n \),
+
+\[ \text{Total Uncertainty} = \sqrt{\sigma_1^2 + \sigma_2^2 + \ldots + \sigma_n^2} \]</li>
+
+</ul>
+
+<p>Understanding how to properly combine uncertainties ensures that the overall measurement system reliability is accurately assessed and reported.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Example 5 -->
+
+<!-- Slide 20: Example 5 – Calculating Total Uncertainty in a Temperature Measurement System -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h3>Example 5: Temperature Measurement Uncertainty</h3>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="smaller sided border-info">
+
+In the control of a chemical process, temperature is measured by a sensor that, according to the
+
+manufacturer,has a calibration uncertainty of $\pm 0.5^\circ\text{C}$. In $20$
+
+measurements in a test of the temperature sensor's repeatability, an average
+
+value of $150^\circ\text{C}$ with a standard deviation of
+
+$1.5^\circ\text{C}$ was determined.
+
+It is estimated that there can be a spatial variation of
+
+$\pm 2^\circ\text{C}$ and an installation effect of $\pm 1^\circ\text{C}$.
+
+In a separate test of the data-transmission system, it was determined that,
+
+for $10$ measurments the standard deviation was $0.5^\circ\text{C}$.
+
+The control program uses a linear relation between temperature
+
+and voltage, which can introduce an uncertainty of up to
+
+$\pm 1^\circ\text{C}$ in the applicable range.
+
+</p>
+
+<ul class="smaller fragment">
+
+<li><strong>Calibration uncertainty:</strong> $\pm 0.5^\circ\text{C}$</li>
+
+<li><strong>Repeatability from 20 measurements:</strong> Standard deviation = $1.5^\circ\text{C}$</li>
+
+<li><strong>Spatial variation:</strong> $\pm 2^\circ\text{C}$</li>
+
+<li><strong>Installation effects:</strong> $\pm 1^\circ\text{C}$</li>
+
+<li><strong>Data-transmission uncertainty:</strong> Determined from 10 measurements with a standard deviation of $0.5^\circ\text{C}$</li>
+
+</ul>
+
+<p class="fragment">The task is to calculate:</p>
+
+<ol>
+
+<li class="fragment">The total uncertainty for a single temperature measurement at 95% confidence level.</li>
+
+<li class="fragment">The total uncertainty for but <span class="em">assume standard deviation from (1) was calculated with $n>30$.</span></li>
+
+</ol>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- Temperature Measurement Uncertainty -->
+
+<section>
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Temperature Measurement Uncertainty</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr 1.5fr;grid-auto-rows:auto;gap:1vmin;">
+
+<div>
+
+<!-- First Column: Elemental Error and B($^\circC$) -->
+
+<table style="width:100%; border-collapse:collapse;" class="latex-style-table-row-labels center-justify small">
+
+<thead>
+
+<tr>
+
+<th>Elemental Error</th>
+
+<th>$\text{B}(^\circ C)$</th>
+
+<th>$\text{S}(^\circ C)$</th>
+
+<th>$\nu$</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>Calibration</td>
+
+<td>0.5</td>
+
+<td>-</td>
+
+<td>-</td>
+
+</tr>
+
+<tr>
+
+<td>Data Acquisition</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+</tr>
+
+<tr>
+
+<td>&nbsp;&nbsp;&nbsp;Repeatability</td>
+
+<td>-</td>
+
+<td>1.5</td>
+
+<td>19</td>
+
+</tr>
+
+<tr>
+
+<td>&nbsp;&nbsp;&nbsp;Spatial variation</td>
+
+<td>2</td>
+
+<td>-</td>
+
+<td>-</td>
+
+</tr>
+
+<tr>
+
+<td>&nbsp;&nbsp;&nbsp;Installation</td>
+
+<td>1</td>
+
+<td>-</td>
+
+<td>-</td>
+
+</tr>
+
+<tr>
+
+<td>&nbsp;&nbsp;&nbsp;Transmission</td>
+
+<td>-</td>
+
+<td>0.5</td>
+
+<td>9</td>
+
+</tr>
+
+<tr>
+
+<td>Data Reduction</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+</tr>
+
+<tr>
+
+<td>&nbsp;&nbsp;&nbsp;Linearity</td>
+
+<td>1</td>
+
+<td>-</td>
+
+<td>-</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<p class="small em">
+
+Recall $W_x = \left( \class{warning}{B_x}^2 + \class{info}{P_x}^2 \right)^{\frac{1}{2}}$
+
+</p>
+
+</div>
+
+<div class="small no-hang">
+
+<p class="u strong">Calculations</p>
+
+<div class="fragment">
+
+<p><strong>Combined Standard Deviation (\(S_x\)):</strong></p>
+
+<div>$$S_x = \sqrt{1.5^2 + 0.5^2} = 1.58\,^\circ\text{C}$$</div>
+
+</div>
+
+<div class="fragment">
+
+<p><strong>Random Uncertainty (\(P_x\)) with \( t = 2.07 \) for \( \nu = 23 \) at \( \alpha = 0.05 \):</strong></p>
+
+<div>$$P_x = 2.07 \times 1.58 = \class{info}{3.27}\,^\circ\text{C}$$</div>
+
+</div>
+
+<div class="fragment">
+
+<p><strong>Total Uncertainty (\(W_x\)) combining \(P_x\) and a \(B_x\):</strong></p>
+
+<div>$$B_x =\sqrt{B_x^2} = (\sum_{i=1}^k B_i^2)^{1/2} = (0.5^2+2^2+1^2+1^2)^{1/2} = 2.5\, ^\circ C $$</div>
+
+<div>$$W_x = \sqrt{\class{warning}{2.5}^2 + \class{info}{3.27}^2} \approx 4.12\,^\circ\text{C}$$</div>
+
+</div>
+
+<div class="fragment">
+
+<p class="strong">Total Uncertainty when $n > 30$:</p>
+
+<p>Assume $t=2.0$ and thus $ P_x = 2.00 \times 1.58 = \class{info}{3.16}\,^\circ\text{C}$</p>
+
+<div>$$W_x = \sqrt{\class{warning}{2.5}^2 + \class{info}{3.16}^2} \approx 4.03\,^\circ\text{C}$$</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Si are the standard deviations of each elemental uncertainty source.</p>
+
+</aside>
+
+</section>
+        </section>
+        <section>
+          <!-- Slide 21: Wrap-Up and Key Takeaways -->
+
+<!-- <section> -->
+
+<div class="grid-wrapper">
+
+<div class="header">
+
+<h2>Wrap-Up and Key Takeaways</h2>
+
+</div>
+
+<div class="content">
+
+<div class="grid-generic" style="grid-template-columns:1fr;grid-auto-rows:auto;gap:1vmin;">
+
+<p class="sided border-info left-justify">Let's recap the main points:</p>
+
+<ul>
+
+<li><strong>Understanding Elemental Uncertainties:</strong> We explored different types of elemental errors and how they affect the precision and accuracy of measurements.</li>
+
+<li><strong>Methodologies for Combining Uncertainties:</strong> We discussed techniques like the Root Sum Square (RSS) method to combine multiple uncertainties to assess overall system error.</li>
+
+<li><strong>Practical Applications:</strong> Through Example 5, we applied these concepts to a real-world scenario, calculating total uncertainty in temperature measurement.</li>
+
+<li><strong>Importance of Accurate Measurement:</strong> Accurate uncertainty analysis is crucial for improving measurement reliability and making informed engineering decisions.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<aside class="notes">
+
+<p>Thank you for your engagement and participation. Remember, understanding and managing uncertainties is key to achieving high precision in engineering practices. Review the materials, practice the calculations, and prepare any questions for our next session on advanced uncertainty analysis.</p>
+
+</aside>
+
+<!-- </section> -->
+        </section>
+      </div>
+      <footer class="main-footer">
+        <span>
+          Lecture 25
+        </span>
+        <span style="text-align:center;">
+        </span>
+        <span style="text-align:right;">
+          <a href="https:\\khrisgriffis.com" target="_blank" rel="noopener noreferrer">Khris Griffis &#169;2024</a>
+        </span>
+      </footer>
+    </div>
+    <script src="./src/reveal.js">
+    </script>
+    <script src="./src/plugin/notes/notes.js">
+    </script>
+    <script src="./src/plugin/highlight/highlight.js">
+    </script>
+    <script src="./src/plugin/math/math.js">
+    </script>
+    <script src="./src/plugin/reveal-splash/reveal-splash.js">
+    </script>
+    <script src="./src/plugin/vizzy-reveal/vizzy.js">
+    </script>
+    <script>
+      Reveal.initialize({
+autoSlide: 0,
+center: true,
+controls: true,
+controlsBackArrows: "faded",
+controlsLayout: "bottom-right",
+display: "block",
+fragments: true,
+fragmentInURL: true,
+hash: true,
+hideCursorTime: 5000,
+keyboard: true,
+mobileViewDistance: 3,
+mouseWheel: false,
+navigationMode: "linear",
+overview: true,
+pdfMaxPagesPerSlide: 1,
+pdfSeparateFragments: false,
+preloadIframes: null,
+progress: false,
+showNotes: false,
+showSlideNumber: "print",
+sortFragmentsOnSync: true,
+touch: true,
+transition: "fade",
+transitionSpeed: "default",
+viewDistance: 3,
+backgroundTransition: "fade",
+controlsTutorial: false,
+embedded: false,
+help: true,
+hideInactiveCursor: true,
+history: false,
+loop: false,
+previewLinks: false,
+rtl: false,
+shuffle: false,
+slideNumber: false,
+width: 1920,
+height: 1080,
+margin: 0.081,
+minScale: 0.08,
+maxScale: 1.67,
+mathjax3: {
+mathjax: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.7/tex-mml-chtml.js",
+loader: {
+load: [
+"[tex]/html",
+],
+},
+tex: {
+packages: {
+'[+]': [
+"html",
+],
+},
+inlineMath: [
+["$", "$"],
+["\\(", "\\)"],
+],
+processEscapes: true,
+processEnvironments: true,
+},
+options: {
+skipHtmlTags: [
+"script",
+"noscript",
+"style",
+"textarea",
+"pre",
+],
+},
+chtml: {
+scale: 0.8,
+linebreaks: {
+automatic: true,
+},
+},
+Safe: {
+sizeMin: 0.4,
+sizeMax: 1.25,
+},
+},
+notes: {
+
+},
+highlight: {
+
+},
+vizzy: {
+autoRunTransitions: true,
+autoTransitionDelay: 100,
+devMode: false,
+onSlideChangedDelay: 0,
+},
+splash: {
+splashImage: "lib/img/ME3040_splash.png",
+text: "Welcome to ME3040!",
+minimumDisplay: 2,
+},
+plugins: [RevealNotes, RevealHighlight, RevealMath.MathJax3, Splash, Vizzy]
+});
+    </script>
+  </body>
+</html>
